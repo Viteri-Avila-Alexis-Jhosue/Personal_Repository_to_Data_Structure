@@ -36,7 +36,7 @@ float Vector::validateInput() {
 int Vector::validateDimension() {
     int value;
     while (true) {
-        printf("Ingrese el número de dimensiones del vector: ");
+        printf("Ingrese el numero de dimensiones del vector: ");
         if (scanf("%d", &value) == 1 && value > 0) {
             while (getchar() != '\n'); 
             return value;
