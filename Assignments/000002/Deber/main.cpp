@@ -19,14 +19,14 @@ int main() {
     char c = operacion.ingresarChar("Ingrese un caracter:");
     printf("El caracter ingresado es: %c\n", c);
 
-    int i = operacion.ingresarInt("Ingrese un número entero:");
-    printf("El número entero ingresado es: %d\n", i);
+    int i = operacion.ingresarInt("Ingrese un numero entero:");
+    printf("El numero entero ingresado es: %d\n", i);
 
-    float f = operacion.ingresarFloat("Ingrese un número flotante:");
-    printf("El número flotante ingresado es: %f\n", f);
+    float f = operacion.ingresarFloat("Ingrese un numero flotante:");
+    printf("El numero flotante ingresado es: %f\n", f);
 
-    double d = operacion.ingresarDouble("Ingrese un número double:");
-    printf("El número double ingresado es: %lf\n", d);
+    double d = operacion.ingresarDouble("Ingrese un numero double:");
+    printf("El numero double ingresado es: %lf\n", d);
 
     char s[100]; 
     operacion.ingresarString("Ingrese un texto:", s, sizeof(s));
