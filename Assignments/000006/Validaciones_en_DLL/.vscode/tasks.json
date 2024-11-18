@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+			"label": "Build DLL",
+			"type": "shell",
+			"command": "g++",
+			"args": [
+				"-shared",
+				"-o", "output/Validacion.dll",
+				"-DBUILD_DLL",
+				"src/Validacion.cpp",
+				"-Iinclude"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+		
+    ]
+}
