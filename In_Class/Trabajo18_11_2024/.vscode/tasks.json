@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build Project",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${workspaceFolder}/src/main.cpp",
+                "${workspaceFolder}/src/Listas.cpp",
+                "-I", "${workspaceFolder}/include",
+                "-L", "${workspaceFolder}/output",
+                "-lValidacion", // Vincula la librería Validacion.dll
+                "-o",
+                "${workspaceFolder}/output/program.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compiling the entire project using g++"
+        }
+    ]
+}
