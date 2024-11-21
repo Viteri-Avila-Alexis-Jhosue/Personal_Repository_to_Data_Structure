@@ -1,0 +1,25 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+	  {
+		"label": "Build DLL",
+		"type": "shell",
+		"command": "g++",
+		"args": [
+		  "-shared",
+		  "-o",
+		  "output/Validation.dll",
+		  "src/Validation.cpp",
+		  "-I",
+		  "include"
+		],
+		"group": {
+		  "kind": "build",
+		  "isDefault": true
+		},
+		"problemMatcher": ["$gcc"],
+		"detail": "Compiling Validation DLL"
+	  }
+	]
+  }
+  
