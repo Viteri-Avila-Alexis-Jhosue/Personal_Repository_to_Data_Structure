@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++.exe build active file",
+			"command": "C:\\MinGW\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"-I../include",
+				"../src/main.cpp",
+				"../src/Listas.cpp",
+				"../src/Person.cpp",
+				"-L../output",      // Ruta donde está la biblioteca
+				"-lValidation",     // Nombre de la biblioteca (sin la extensión .dll)
+				"-o",
+				"../output/main.exe" // Ruta del ejecutable
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\MinGW\\bin\\g++.exe"
+		}
+	]
+}
