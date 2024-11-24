@@ -1,0 +1,55 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Compilar DLL: Menu.dll",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-shared", 
+                "-o", 
+                "output/Menu.dll", 
+                "src/Menu.cpp",
+                "-I",
+                "include",
+                "-DBUILD_DLL"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compilación de la librería dinámica (DLL) usando g++"
+        },
+        {
+            "type": "cppbuild",
+            "label": "Compilar Programa con DLL",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-o",
+                "output/programa.exe",
+                "src/main.cpp",
+                "-I",
+                "include",
+                "-Loutput",
+                "-lmenu"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Compilación del programa usando la librería dinámica (DLL)"
+        }
+    ]
+}
