@@ -16,8 +16,14 @@ Lista::Lista() {
 }
 
 Lista::~Lista() {
-    // Lógica para eliminar nodos
+    Nodo* temp = cabeza;
+    while (temp) {
+        Nodo* siguiente = temp->getSiguiente();
+        delete temp;
+        temp = siguiente;
+    }
 }
+
 
 void Lista::insertar(int dato) {
     Nodo* nuevoNodo = new Nodo(dato);

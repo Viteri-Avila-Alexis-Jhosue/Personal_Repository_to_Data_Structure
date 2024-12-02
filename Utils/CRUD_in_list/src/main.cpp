@@ -25,7 +25,10 @@ int main() {
     // Crear una lista de enteros
     Lista lista;
     int opcion;
-
+    int probar =1;
+    int probar1 =10;
+    int probar2 =100;
+    int probar3 =1000;
     do {
         mostrarMenu();
         std::cin >> opcion;

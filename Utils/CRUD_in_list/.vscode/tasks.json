@@ -4,26 +4,26 @@
         {
             "type": "cppbuild",
             "label": "Compilar proyecto C++",
-            "command": "C:\\MinGW\\bin\\g++.exe",
+            "command": "g++",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "-Iinclude",                  
-                "src/main.cpp",              
-                "src/Lista.cpp",             
-                "src/Nodo.cpp",              
+                "-fdiagnostics-color=always",  // Opciones para mejorar la salida de los errores
+                "-g",                          // Genera información de depuración
+                "-Iinclude",                   // Directorio para los archivos .h
+                "src/main.cpp",                // Archivo principal
+                "src/Lista.cpp",               // Implementación de la clase Lista
+                "src/Nodo.cpp",                // Implementación de la clase Nodo
                 "-o",
-                "output/ejecutable.exe"           
+                "output/ejecutable.exe"        // Archivo de salida ejecutable
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceFolder}"    // Directorio de trabajo del proyecto
             },
             "problemMatcher": [
-                "$gcc"
+                "$gcc"                         // Matcher para detectar problemas de compilación de GCC
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": true               // Establece este task como el de compilación predeterminado
             },
             "detail": "Compilación completa del proyecto con MinGW"
         }
