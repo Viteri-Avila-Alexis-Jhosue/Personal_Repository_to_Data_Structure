@@ -78,6 +78,9 @@ public:
     void buscar_por_fecha_parqueadero(const std::string& fechaInicioStr, const std::string& fechaFinStr) const;
     void buscar_por_hora_parqueadero(const std::string& horaInicioStr, const std::string& horaFinStr) const;
     T* buscarPorPlacaYFechaImprobable(const std::string& placa) const;
+    std::shared_ptr<Nodo<T>> getRoot() const {
+        return root;
+    }
 };
 
 #include "../src/KD_Tree.cpp"

@@ -28,7 +28,7 @@ public:
     int menu_busqueda_avanzada_opciones(KD_Tree<Celda>& arbol_celdas, KD_Tree<Coche>& arbol_coches);
     void menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios);
     void menu_ordenamientos(KD_Tree<Coche>& arbol_coches);
-    void menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches);
+    int menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches);
 };
 
 #endif // MENU_H

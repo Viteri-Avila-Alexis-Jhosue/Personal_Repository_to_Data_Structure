@@ -15,6 +15,7 @@
                 "${workspaceFolder}/src/Propietario.cpp",
                 "${workspaceFolder}/src/Validaciones.cpp",
                 "${workspaceFolder}/src/Time_utils.cpp",
+                "${workspaceFolder}/src/Ordenamientos.cpp",
                 "-o",
                 "${workspaceFolder}/output/main.exe",
             ],
