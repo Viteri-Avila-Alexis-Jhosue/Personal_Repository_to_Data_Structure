@@ -6,7 +6,7 @@ using namespace std;
 template <typename T>
 class ListaCircularDoble {
 private:
-      
+    
     Nodo<T>* ultimo;    
     Nodo<T>* primero;
 public:

@@ -1,0 +1,4 @@
+AAA1234,Papumobil,negro,perrari,Wed Dec 31 19:00:00 1969,N/A
+BBB1234,corolla,verde,Toyota,Wed Dec 31 19:00:00 1969,N/A
+CCC1234,cualquiera,colorsito,delmer,Wed Dec 31 19:00:00 1969,N/A
+ZZZ1234,modelo,oscuro,china,Wed Dec 31 19:00:00 1969,N/A

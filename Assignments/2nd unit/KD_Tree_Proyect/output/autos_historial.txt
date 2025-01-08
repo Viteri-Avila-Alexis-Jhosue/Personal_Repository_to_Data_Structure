@@ -1,0 +1,6 @@
+1,2,AAA1234,Papumobil,negro,perrari,Fri Jan 03 17:23:51 2025,Sat Jan 04 18:50:10 2025
+12,14,BBB1234,corolla,verde,Toyota,Fri Jan 03 17:37:37 2025,Sat Jan 04 18:41:23 2025
+12,34,AAA1234,Papumobil,negro,perrari,Sat Jan 04 18:50:10 2025,Sat Jan 04 18:54:10 2025
+12,2,CCC1234,cualquiera,colorsito,delmer,Sat Jan 04 18:51:11 2025,N/A
+34,5,ZZZ1234,modelo,oscuro,china,Sat Jan 04 18:52:42 2025,N/A
+34,2,ZZZ1234,modelo,oscuro,china,Sat Jan 04 18:02:45 2025,Sat Jan 04 19:02:24 2025

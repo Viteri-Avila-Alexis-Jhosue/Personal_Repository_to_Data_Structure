@@ -12,6 +12,7 @@ ListaCircularDoble<Coche> listaCochesHistorial;
 
     ListaCircularDoble<Coche> listaCoches;
     listaCoches.CargarArchivo("output//autos.txt");
+    system("pause");
 
     menu(listaCoches, listaCochesHistorial, listaPropietarios);
 
