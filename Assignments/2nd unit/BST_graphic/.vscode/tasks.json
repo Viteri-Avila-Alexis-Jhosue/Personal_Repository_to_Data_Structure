@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build all files",
+            "command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${workspaceFolder}/src/Node.cpp",   // Lista explícita de archivos .cpp
+                "${workspaceFolder}/src/Menu.cpp",
+                "${workspaceFolder}/src/Tree.cpp",
+                "${workspaceFolder}/src/Validation.cpp",
+                "${workspaceFolder}/src/main.cpp",
+                "-I${workspaceFolder}/include", // Incluir los archivos de cabecera de include
+                "-o",
+                "${workspaceFolder}/output/main.exe"  // Salida en el directorio output
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compiling all source files with g++"
+        }
+    ]
+}

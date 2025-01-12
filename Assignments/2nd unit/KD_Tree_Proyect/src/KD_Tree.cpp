@@ -77,9 +77,13 @@ void KD_Tree<T>::loadPropietarios(const std::string& fileName) {
                 placas.push_back(placa);
             }
             x= convertirStringAFloat(nombre);
+            cout<<nombre<<endl;
+            cout<<x<<endl;
             y= convertirStringAFloat(apellido);
+            cout<<apellido<<endl;
+            cout<<y<<endl;
             Propietario propietario(nombre, apellido, cedula, correo, placas);
-            insert(propietario, x, y); // Ajusta las coordenadas según sea necesario
+            insert(propietario, x, y); 
         }
     }
 
@@ -182,23 +186,18 @@ void KD_Tree<T>::loadAutos(const std::string& fileName) {
     file.close();
 }
 template <typename T>
-float KD_Tree<T>::convertirStringAFloat(const std::string & str)  {
-        float resultado = 0.0f;
-
-    // Recorremos cada caracter de la palabra
-    for (char c : str) {
-        // Sumamos el valor ASCII de cada letra y lo normalizamos de alguna forma
-        resultado += static_cast<float>(c);
+float KD_Tree<T>::convertirStringAFloat(const std::string &str) {
+    if (str.empty()) {
+        // Retornamos un valor especial si el string está vacío.
+        return 0.0f; 
     }
 
-    // Podemos hacer alguna operación matemática con el resultado si es necesario,
-    // por ejemplo, dividir por la longitud del string para obtener un valor más manejable.
-    if (!str.empty()) {
-        resultado /= str.length();
-    }
+    // Tomamos el valor ASCII de la primera letra del string y lo convertimos a float.
+    float resultado = static_cast<float>(str[0]);
 
     return resultado;
 }
+
 template <typename T>
 void KD_Tree<T>::imprimir_propietarios() const {
     // Llamamos a la función recursiva para recorrer el árbol
@@ -207,7 +206,9 @@ void KD_Tree<T>::imprimir_propietarios() const {
 
 template <typename T>
 void KD_Tree<T>::imprimirRec(std::shared_ptr<Nodo<T>> node) const {
-    if (node != nullptr) {
+    if (!node) {
+        return;
+    }
         // Primero recorrer la izquierda
         imprimirRec(node->left);
 
@@ -239,7 +240,7 @@ void KD_Tree<T>::imprimirRec(std::shared_ptr<Nodo<T>> node) const {
 
         // Luego recorrer la derecha
         imprimirRec(node->right);
-    }
+    
 }
 template <typename T>
 T* KD_Tree<T>::buscarPorCedulaRec(std::shared_ptr<Nodo<T>> node, const std::string& cedula) const {

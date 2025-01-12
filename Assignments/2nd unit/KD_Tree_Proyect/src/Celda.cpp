@@ -11,6 +11,7 @@
 #include <vector>
 #include <sstream>
 #include <iomanip>
+using namespace std;
 
 // Constructor predeterminado
 Celda::Celda() : coche() {}
@@ -78,7 +79,7 @@ void Celda::guardarEnArchivo() const {
         std::cerr << "Error: No se pudo abrir el archivo autos_historial.txt para escribir." << std::endl;
         return;
     }
-
+     
     // Obtener los datos del coche
     const Coche& coche = getCoche();
     
@@ -110,6 +111,7 @@ void Celda::ingresar_al_parqueadero(Coche coche) {
     setX(stof(a));
     setY(stof(b));
     setCoche(coche);
+    setHoraSalida(definirFechaImprobable());
 
     guardarEnArchivo();
 }

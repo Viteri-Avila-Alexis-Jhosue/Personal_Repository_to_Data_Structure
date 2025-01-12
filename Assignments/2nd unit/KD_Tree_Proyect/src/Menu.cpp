@@ -425,7 +425,7 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
     addOption("Mostrar Propietarios");
     addOption("Buscar Propietario por Cedula");
     addOption("Eliminar Placa de Propietario");
-    addOption("Volcer al Menu Principal");
+    addOption("Volver al Menu Principal");
 
     addTitle("\t Menu de Gestion de Propietarios");
 

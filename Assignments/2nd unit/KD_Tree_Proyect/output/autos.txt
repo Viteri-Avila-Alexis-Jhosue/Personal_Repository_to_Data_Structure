@@ -1,4 +1,7 @@
-AAA1234,Papumobil,negro,perrari,Wed Dec 31 19:00:00 1969,N/A
-BBB1234,corolla,verde,Toyota,Wed Dec 31 19:00:00 1969,N/A
-CCC1234,cualquiera,colorsito,delmer,Wed Dec 31 19:00:00 1969,N/A
-ZZZ1234,modelo,oscuro,china,Wed Dec 31 19:00:00 1969,N/A
+AAA1234,Vitara,Azul,Chebrolet,Wed Dec 31 19:00:00 1969,N/A
+BBB1234,camioneta,negro,Ford,Wed Dec 31 19:00:00 1969,N/A
+CCC1234,Corolla,Rojo,Toyota,Wed Dec 31 19:00:00 1969,N/A
+EEE1234,Camaro,amarillo,chevrolet,Wed Dec 31 19:00:00 1969,N/A
+SSS1234,Supra,Transparente,Toyota,Wed Dec 31 19:00:00 1969,N/A
+GGG1234,modelo,color,marca,Wed Dec 31 19:00:00 1969,N/A
+ZZZ1234,modelo,color,marca,Wed Dec 31 19:00:00 1969,N/A
