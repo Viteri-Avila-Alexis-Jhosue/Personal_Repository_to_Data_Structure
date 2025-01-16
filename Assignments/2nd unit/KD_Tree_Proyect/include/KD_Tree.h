@@ -35,17 +35,19 @@ private:
     void imprimirNodosRec(const std::shared_ptr<Nodo<T>>& node) const;
     void imprimirCeldasRec(const std::shared_ptr<Nodo<T>>& node) const;
     void buscarPorFechaImprobableRec(const std::shared_ptr<Nodo<T>>& node, const std::string& placa) const;
-     void buscarPorMarcaRec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca) const;
+    void buscarPorMarcaRec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca) const;
     void buscarPorModeloRec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo) const;
     void buscarPorColorRec(const std::shared_ptr<Nodo<T>>& node, const std::string& color) const;
     void buscarPorFechaRec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& fechaInicio, const std::chrono::system_clock::time_point& fechaFin) const;
     void buscarPorHoraRec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& horaInicio, const std::chrono::system_clock::time_point& horaFin) const;
-    void imprimirCelda(const std::shared_ptr<Nodo<T>>& node) const;
     void buscar_por_marca_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca) const;
     void buscar_por_modelo_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo) const;
     void buscar_por_color_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& color) const;
     void buscar_por_fecha_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& fechaInicio, const std::chrono::system_clock::time_point& fechaFin) const;
     void buscar_por_hora_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& horaInicio, const std::chrono::system_clock::time_point& horaFin) const;
+    void imprimir_propietarios_Rec(std::shared_ptr<Nodo<T>> node) const;
+    void imprimir_propietario(std::shared_ptr<Nodo<T>> node) const;
+    void imprimir_celda(std::shared_ptr<Nodo<T>> node) const;
 
 public:
     KD_Tree();
@@ -56,7 +58,6 @@ public:
     void loadAutos(const std::string& fileName);
     float convertirStringAFloat(const std::string & str);
     void imprimir_propietarios() const;
-    void imprimirRec(std::shared_ptr<Nodo<T>> node) const;
     T* buscarPorPlaca(const std::string& placa) const;
     T* buscarPorCedula(const std::string& cedula) const;
     void eliminarPlacaPorCedula(const std::string &cedula, const std::string &placa);

@@ -1,7 +1,7 @@
 #include "../include/Menu.h"
 #include <iostream>
 #include <conio.h>
-#define WIN32_LEAN_AND_MEAN // Reduce la cantidad de cosas incluidas por windows.h
+#define WIN32_LEAN_AND_MEAN 
 #include <windows.h>
 #include <vector>
 #include <string>
@@ -46,14 +46,10 @@ void Menu::displayMenu() {
 
     while (running) {
         CLEAR();
-
-        // Mostrar el tÃ­tulo si estÃ¡ definido
         if (!title.empty()) {
             cout << title << "\n";
         }
-
         cout << "\n";
-
         for (size_t i = 0; i < options.size(); ++i) {
             if (static_cast<int>(i) == selectedIndex) {
                 cout << "==> " << options[i] << " \n";
@@ -61,7 +57,6 @@ void Menu::displayMenu() {
                 cout << "  " << options[i] << "\n";
             }
         }
-
         int key = _getch();
         switch (key) {
             case 72: // Flecha arriba
@@ -88,9 +83,8 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
     SetConsoleCP(CP_UTF8);
     bool running = true;
     string archivo, comando;
-    
-    while (running) {  // Hacerlo un bucle para asegurarnos de que regrese
-        options.clear(); // Limpiar opciones anteriores
+    while (running) {  
+        options.clear(); 
         addOption("Insertar Coche ");
         addOption("Mostrar Lista de Coches");
         addOption("Busqueda de Coche Por Placa");
@@ -796,7 +790,7 @@ int Menu::menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches) {
             cout << "Opción seleccionada: Volver al Menu Principal\n";
             running = false;
             break;
-    }
+        }
     }
     return getSelectedOption();
 }
