@@ -23,16 +23,12 @@ Coche::Coche()
 }
 
 Coche::Coche(string placa, string modelo, string color, string marca, int anio, Propietario propietario)
-    : placa(placa), modelo(modelo), color(color), marca(marca), anio(anio), propietario(propietario), horaIngreso(chrono::system_clock::now()) {}
+    : placa(placa), modelo(modelo), color(color), marca(marca), anio(anio), propietario(propietario) {}
 
 Coche::Coche(string placa, string modelo, string color, string marca,
-             chrono::system_clock::time_point horaIngreso, chrono::system_clock::time_point horaSalida, Propietario propietario)
-    : placa(placa), modelo(modelo), color(color), marca(marca), anio(0), horaIngreso(horaIngreso), horaSalida(horaSalida), propietario(propietario) {}
+             Propietario propietario)
+    : placa(placa), modelo(modelo), color(color), marca(marca), anio(0), propietario(propietario) {}
 
-
-void Coche::setHoraSalida(chrono::system_clock::time_point hora){
-    horaSalida = hora;
-}
 
 void Coche::setPlaca(const string &placa){
     this->placa = placa;
@@ -48,10 +44,6 @@ void Coche::setMarca(const string &marca){
 
 void Coche::setColor(const string &color){
     this->color = color;
-}
-
-chrono::system_clock::time_point Coche::getHoraSalida() const{
-    return horaSalida;
 }
 
 string Coche::getPlaca() const{
@@ -74,31 +66,10 @@ int Coche::getAnio() const{
     return anio;
 }
 
-chrono::system_clock::time_point Coche::getHora() const{
-    return horaIngreso;
-}
-
-
-
 ostream &operator<<(ostream &os, const Coche &coche){
     os << "Placa: " << coche.placa << "\nMarca: " << coche.marca
        << "\nModelo: " << coche.modelo << "\nColor: " << coche.color
        << "\n----------------------------------------" << endl;
-
-    time_t tiempoIngreso = chrono::system_clock::to_time_t(coche.horaIngreso);
-    os << "\nHora de Ingreso: " << ctime(&tiempoIngreso)
-       << "\n----------------------------------------" << endl;
-
-    if (coche.horaSalida == chrono::system_clock::time_point())
-    {
-        os << "\nHora de Salida: N/A" << endl;
-    }
-    else
-    {
-        time_t tiempoSalida = chrono::system_clock::to_time_t(coche.horaSalida);
-        os << "\nHora de Salida: " << ctime(&tiempoSalida)
-           << "\n----------------------------------------" << endl;
-    }
 
     return os;
 }
@@ -113,46 +84,40 @@ void Coche::guardarEnArchivo() const {
         std::cerr << "Error: No se pudo abrir el archivo autos.txt para escribir." << std::endl;
         return;
     }
-
-    // Convertir horaIngreso y horaSalida a formato legible
-    std::time_t ingreso_time = chrono::system_clock::to_time_t(horaIngreso);
-    std::string horaIngresoStr = std::ctime(&ingreso_time);
-    horaIngresoStr.pop_back(); // Para eliminar el salto de línea al final
-
-    std::string horaSalidaStr = "N/A";
-    if (horaSalida != chrono::system_clock::time_point()) {
-        std::time_t salida_time = chrono::system_clock::to_time_t(horaSalida);
-        horaSalidaStr = std::ctime(&salida_time);
-        horaSalidaStr.pop_back(); // Para eliminar el salto de línea al final
-    }
-
     // Escribir los datos del coche en el archivo
     file << placa << ","
          << modelo << ","
          << color << ","
-         << marca << ","
-         << horaIngresoStr << ","
-         << horaSalidaStr << "\n";
+         << marca << "\n";
 
     file.close();  // Cerrar el archivo
 }
-void Coche::ingresar_coche_nuevo(){
+void Coche::ingresar_coche_nuevo(int tipo){
+    string tipostr;
+    if(tipo==0){
+        tipostr="l coche";
+    }else{
+        tipostr=" la moto";
+    }
     Validaciones validaciones;
     string placa, modelo, color, marca;
-    cout << "Ingrese la placa del coche: ";
-    placa = validaciones.ingresarPlaca("");
-    cout << "Ingrese el modelo del coche: ";
+    if(tipo==0){
+        placa=validaciones.ingresarPlaca("Ingrese la placa del coche: ");
+    }else{
+        placa=validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
+    }
+    cout << "Ingrese el modelo de"<<tipostr<<" : ";
     modelo = validaciones.ingresarString("");
-    cout << "Ingrese el color del coche: ";
+    cout << "Ingrese el color de"<<tipostr<<" : ";
     color = validaciones.ingresarString("");
-    cout << "Ingrese la marca del coche: ";
+    cout << "Ingrese la marca de"<<tipostr<<" : ";
     marca = validaciones.ingresarString("");
     setPlaca(placa);
     setModelo(modelo);
     setColor(color);
     setMarca(marca);
 }
-void ingresar_coche_existente(){
+void ingresar_coche_existente(int tipo){
     Validaciones validaciones;
     string placa;
     placa = validaciones.ingresarPlaca("Ingrese la placa del coche: ");

@@ -15,8 +15,6 @@ private:
     string color;
     string modelo;
     string marca;
-    chrono::system_clock::time_point horaIngreso;
-    chrono::system_clock::time_point horaSalida;
     int anio;
     Propietario propietario;
 
@@ -25,33 +23,25 @@ public:
         std::string placa, 
         std::string modelo, 
         std::string color, 
-        std::string marca, 
-        std::chrono::system_clock::time_point horaIngreso, 
-        std::chrono::system_clock::time_point horaSalida
-    ) : placa(placa), modelo(modelo), color(color), marca(marca), 
-        horaIngreso(horaIngreso), horaSalida(horaSalida) {}
+        std::string marca
+       ) : placa(placa), modelo(modelo), color(color), marca(marca) {}
     Coche();
     Coche(string placa, string modelo, string color, string marca, int anio, Propietario propietario);
-    Coche(string placa, string modelo, string color, string marca,
-      chrono::system_clock::time_point horaIngreso, chrono::system_clock::time_point horaSalida, Propietario propietario);
-
-    void setHoraSalida(chrono::system_clock::time_point hora);
+    Coche(string placa, string modelo, string color, string marca,Propietario propietario);
     void setPlaca(const string &placa);
     void setModelo(const string &modelo);
     void setMarca(const string &marca);
     void setColor(const string &color);
     Propietario getPropietario() const;
-    void ingresar_coche_nuevo();
-    void ingresar_coche_existente();
+    void ingresar_coche_nuevo(int tipo);
+    void ingresar_coche_existente(int tipo);
 
-    chrono::system_clock::time_point getHoraSalida() const;
     string getPlaca() const;
     string getMarca() const;
     string getModelo() const;
     string getColor() const;
     int getAnio() const;
     void guardarEnArchivo() const;
-    chrono::system_clock::time_point getHora() const;
     friend ostream &operator<<(ostream &os, const Coche &coche);
     string toString() const;
 

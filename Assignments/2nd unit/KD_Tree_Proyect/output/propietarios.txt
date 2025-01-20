@@ -1,4 +1,4 @@
-Josue,Viteri,1727753962,alexisv@gmail.com,BBB1234
-Diomedez,Diaz,1753540374,alexvt@gmail.com,CCC1234
-Alexis,Viteri,1727753970,ajviteri@gmail.com,AAA1234,GGG1234
-Juanito,Alimania,0502709819,DonJuan217@gmail.com,EEE1234,SSS1234,ZZZ1234
+Medardo,Players,1753540374,alex@hotmail.com
+Alexis,Viteri,1727753970,ajviteri2@espe.edu.ec,AA123A
+Josue,Lopez,1727753962,ajviteri3@espe.edu.ec,AAA1234
+Pablo,Garces,0502709819,alexis@gmail.com,BBB1234

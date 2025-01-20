@@ -7,6 +7,7 @@
 
 int main() {
     Menu menu;
+    int size=16;
     KD_Tree<Coche> arbol_coches;
     KD_Tree<Propietario> arbol_propietarios;
     KD_Tree<Celda> arbol_celdas;
@@ -14,6 +15,9 @@ int main() {
     arbol_propietarios.loadPropietarios("output//propietarios.txt");
     arbol_coches.loadAutos("output//autos.txt");
     system("pause");
-    menu.principal_menu(arbol_coches, arbol_propietarios, arbol_celdas);
+    menu.principal_menu(arbol_coches, arbol_propietarios, arbol_celdas,size);
+    arbol_celdas.~KD_Tree();
+    arbol_propietarios.~KD_Tree();
+    arbol_coches.~KD_Tree();
     return 0;
 }

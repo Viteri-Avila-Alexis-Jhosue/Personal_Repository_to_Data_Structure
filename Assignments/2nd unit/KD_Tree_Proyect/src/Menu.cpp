@@ -78,7 +78,7 @@ int Menu::getSelectedOption() {
 //---------------------------------------------------------------------------------------------------------
 //--------------------------------Menus de la aplicacion---------------------------------------------------
 //---------------------------------------------------------------------------------------------------------
-void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& arbol_propietarios, KD_Tree<Celda>& arbol_celdas) {
+void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& arbol_propietarios, KD_Tree<Celda>& arbol_celdas, int size) {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     bool running = true;
@@ -92,6 +92,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
         addOption("Menu de Gestion de Propietarios");
         addOption("Liberar el parqueadero");
         addOption("Ordenar lista de coches");
+        addOption("Imprimir estado del parqueadero");
         addOption("Ayuda");
         addOption("Salir");
 
@@ -107,37 +108,42 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
         Propietario* propietarioEncontrado;
         Coche* coche_encontrado;
         string placa_registrada, depurador;
+        int seleccionador, sel;
+        bool confirmador;
         switch (getSelectedOption()) {
             case 0:
             cout << "Opción seleccionada: Insertar Coche\n";
+            seleccionador = menuTipoAuto();
+            if (seleccionador == 0) {
             placa_registrada = validaciones.ingresarPlaca("Ingrese la placa del coche: ");
+            } else if (seleccionador == 1) {
+            placa_registrada = validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
+            } else {
+            cout << "Volviendo al menú principal...\n";
+            break;
+            }
             propietarioEncontrado = arbol_propietarios.buscarPorPlaca(placa_registrada);
             celda_encontrada = arbol_celdas.buscarPorPlacaEnCelda(placa_registrada);
-
             if (propietarioEncontrado != nullptr) {
                 cout << "Placa encontrada\n";
-                
-                // Verificar si la hora de salida es la fecha improbable (1/1/1)
-                std::chrono::system_clock::time_point fecha_improbable;
-                struct std::tm tm_default = {};
-                tm_default.tm_year = 1 - 1900; // Año 1
-                tm_default.tm_mon = 0;         // Enero
-                tm_default.tm_mday = 1;        // Día 1
-                fecha_improbable = std::chrono::system_clock::from_time_t(std::mktime(&tm_default));
-
+                std::chrono::system_clock::time_point fecha_improbable=definirFechaImprobable();
                 if (celda_encontrada != nullptr && celda_encontrada->getHoraSalida() == fecha_improbable) {
                     cout << "El coche todavía no ha salido. Volviendo al menú principal.\n";
                     system("pause");
-                    break;  // Regresa al menú principal
+                    break;  
                 } else {
                     coche_encontrado = arbol_coches.buscarPorPlacaEnCoches(placa_registrada);
-                    celda.ingresar_al_parqueadero(*coche_encontrado);
-                    a = celda.getX();
-                    b = celda.getY();
-                    arbol_celdas.insert(celda, a, b);
-                    cout << "El coche ha ingresado al parqueadero.\n";
+                    a= celda.ingresar_coordenada(size, 0);
+                    b= celda.ingresar_coordenada(size, 1);
+                    confirmador=arbol_celdas.buscar_coordenadas_en_parqueadero(a,b);
+                    if(confirmador){
+                        celda.ingresar_al_parqueadero(*coche_encontrado, size,a,b);
+                        arbol_celdas.insert(celda, a, b);
+                        cout << "El coche ha ingresado al parqueadero.\n";
+                    }else{
+                        cout<<"La celda ya esta ocupada"<<endl;
+                    }
                 }
-
             } else {
                 // No se encontró la placa, buscar por cédula
                 cedula_propietario = validaciones.ingresarCedula("Ingrese la cédula del propietario: ");
@@ -145,7 +151,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
 
                 if (propietarioEncontrado != nullptr) {
                     cout << "Propietario encontrado. Procediendo a registrar un nuevo coche.\n";
-                    coche.ingresar_coche_nuevo();
+                    coche.ingresar_coche_nuevo(seleccionador);
                     propietarioEncontrado->agregarPlaca(coche.getPlaca());
                     propietarioEncontrado->guardar_en_archivo();
                     coche.guardarEnArchivo();
@@ -154,13 +160,17 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                     x = arbol_coches.convertirStringAFloat(coche.getPlaca());
                     y = arbol_coches.convertirStringAFloat(coche.getMarca());
                     arbol_coches.insert(coche, x, y);
-                    
                     // Registrar celda
-                    celda.ingresar_al_parqueadero(coche);
-                    a = celda.getX();
-                    b = celda.getY();
-                    arbol_celdas.insert(celda, a, b);
-                    cout << "Nuevo coche registrado e ingresado al parqueadero.\n";
+                    a= celda.ingresar_coordenada(size, 0);
+                    b= celda.ingresar_coordenada(size, 1);
+                    confirmador=arbol_celdas.buscar_coordenadas_en_parqueadero(a,b);
+                    if(confirmador){
+                        celda.ingresar_al_parqueadero(coche,size,a,b);
+                        arbol_celdas.insert(celda, a, b);
+                        cout << "Nuevo coche registrado e ingresado al parqueadero.\n";
+                    }else{
+                        cout<<"La celda ya esta ocupada"<<endl;
+                    }
                 } else {
                     cout << "Propietario no encontrado. Volviendo al menú principal.\n";
                 }
@@ -186,7 +196,15 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                 break;
             case 5:
                 cout << "Opción seleccionada: Liberar el parqueadero\n";
-                placa_registrada = validaciones.ingresarPlaca("Ingrese la placa del coche a retirar: ");
+                sel=menuTipoAuto();
+                if (sel == 0) {
+                placa_registrada = validaciones.ingresarPlaca("Ingrese la placa del coche: ");
+                } else if (sel == 1) {
+                placa_registrada = validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
+                } else {
+                cout << "Volviendo al menú principal...\n";
+                break;
+                }
                 celda_encontrada = arbol_celdas.buscarPorPlacaEnCelda(placa_registrada);
                 if(celda_encontrada != nullptr){
                     celda_encontrada = arbol_celdas.buscarPorPlacaYFechaImprobable(placa_registrada);
@@ -194,7 +212,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                     cout << "Coche retirado del parqueadero.\n";
                     system("pause");
                 }else{  
-                    cout << "Coche no encontrado en el parqueadero.\n";
+                    cout << "Automóvil no encontrado en el parqueadero.\n";
                     system("pause");
                 }
                 break;
@@ -203,15 +221,18 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                 system("pause");
                 break;
             case 7:
+                arbol_celdas.imprimir_parqueadero(size);
+                break;
+            case 8:
                 cout << "Opción seleccionada: Ayuda\n";
                 archivo = "resources/ayuda.html";
                 comando = "start " + archivo;
                 system(comando.c_str());
                 system("pause");
                 break;
-            case 8:
+            case 9: 
                 cout << "Opción seleccionada: Salir\n";
-                running = false;  // Salir del bucle principal
+                running = false; 
                 break;
         }
     }
@@ -249,6 +270,7 @@ void Menu::menu_mostrar_lista(KD_Tree<Celda>& arbol_celdas) {
 }
 void Menu::menu_buscar_por_placa(KD_Tree<Celda>& arbol_celdas) {
     bool running = true;
+    int sel;
     Validaciones validaciones;
     string placa_buscada;
     while (running) {
@@ -264,14 +286,30 @@ void Menu::menu_buscar_por_placa(KD_Tree<Celda>& arbol_celdas) {
     switch (getSelectedOption()) {
         case 0:
             cout << "Opción seleccionada: Buscar en el parqueadero\n";
-            placa_buscada = validaciones.ingresarPlaca("Ingrese la placa del coche a buscar: ");
+            sel=menuTipoAuto();
+            if (sel == 0) {
+            placa_buscada = validaciones.ingresarPlaca("Ingrese la placa del coche: ");
+            } else if (sel == 1) {
+            placa_buscada = validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
+            } else {
+            cout << "Volviendo al menú principal...\n";
+            break;
+            }
             arbol_celdas.buscarPorFechaImprobable(placa_buscada);
 
             system("pause");
             break;
         case 1:
             cout << "Opción seleccionada: Buscar en el historial de coches\n";
-            placa_buscada = validaciones.ingresarPlaca("Ingrese la placa del coche a buscar: ");
+            sel=menuTipoAuto();
+            if (sel == 0) {
+            placa_buscada = validaciones.ingresarPlaca("Ingrese la placa del coche: ");
+            } else if (sel == 1) {
+            placa_buscada = validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
+            } else {
+            cout << "Volviendo al menú principal...\n";
+            break;
+            }
             arbol_celdas.buscarPorPlacaEnCelda(placa_buscada);
             system("pause");
             break;
@@ -428,6 +466,7 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
     Validaciones validaciones;
     string cedula_buscada, placa_a_eliminar;
     float x, y;
+    int sel;
     switch (getSelectedOption()) {
         case 0:
             cout << "Opción seleccionada: Agregar Propietario\n";
@@ -454,7 +493,15 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
         case 3:
             cout << "Opción seleccionada: Eliminar Placa de Propietario\n";
             cedula_buscada = validaciones.ingresarCedula("Ingrese la cedula del propietario: ");
+            sel=menuTipoAuto();
+            if (sel == 0) {
             placa_a_eliminar = validaciones.ingresarPlaca("Ingrese la placa a eliminar: ");
+            } else if (sel == 1) {
+            placa_a_eliminar = validaciones.ingresarPlacaMoto("Ingrese la placa a eliminar: ");
+            } else {
+            cout << "Volviendo al menú principal...\n";
+            break;
+            }
             arbol_propietarios.eliminarPlacaPorCedula(cedula_buscada, placa_a_eliminar);
             system("pause");
             break;
@@ -794,4 +841,32 @@ int Menu::menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches) {
     }
     return getSelectedOption();
 }
-   
+
+int Menu::menuTipoAuto(){
+    bool running = true;
+    while (running) {
+    options.clear(); // Limpiar opciones anteriores
+    addOption("Coche");
+    addOption("Moto");
+    addOption("Volver al Menu Principal");
+    addTitle("Seleccione el tipo de vehiculo:");
+    displayMenu();
+    switch (getSelectedOption()) {
+        case 0:
+            cout << "Tipo de auto seleccionado: Coche\n";
+            return 0;
+            system("pause");
+            break;
+        case 1:
+            cout << "Tipo de auto seleccionado: Moto\n";
+            return 1;
+            system("pause");
+            break;
+        case 2:
+            cout << "Opción seleccionada: Volver al Menu Principal\n";
+            running = false;
+            break;
+        }
+    }
+    return getSelectedOption();
+}

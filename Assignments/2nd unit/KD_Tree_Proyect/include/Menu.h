@@ -21,7 +21,7 @@ public:
     void displayMenu();
     int getSelectedOption();
     void addTitle(const string& title);
-    void principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& arbol_propietarios, KD_Tree<Celda>& arbol_celdas);
+    void principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& arbol_propietarios, KD_Tree<Celda>& arbol_celdas, int size);
     void menu_mostrar_lista(KD_Tree<Celda>& arbol_celdas);
     void menu_buscar_por_placa(KD_Tree<Celda>& arbol_celdas);
     void menu_busqueda_avanzada(KD_Tree<Celda>& arbol_celdas, KD_Tree<Coche>& arbol_coches);
@@ -29,6 +29,7 @@ public:
     void menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios);
     void menu_ordenamientos(KD_Tree<Coche>& arbol_coches);
     int menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches);
+    int menuTipoAuto();
 };
 
 #endif // MENU_H

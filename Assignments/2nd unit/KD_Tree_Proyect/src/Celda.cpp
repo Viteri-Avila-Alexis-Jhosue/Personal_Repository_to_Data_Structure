@@ -103,18 +103,31 @@ void Celda::guardarEnArchivo() const {
          
     file.close();  // Cerrar el archivo
 }
-void Celda::ingresar_al_parqueadero(Coche coche) {
+void Celda::ingresar_al_parqueadero(Coche coche, int size,float a,float b) {
     Validaciones validaciones;
-    string a,b;
-    a = validaciones.ingresarCedula("Ingrese la coordenada x: ");
-    b = validaciones.ingresarCedula("Ingrese la coordenada y: ");
-    setX(stof(a));
-    setY(stof(b));
+    setX(a);
+    setY(b);
     setCoche(coche);
     setHoraSalida(definirFechaImprobable());
-
     guardarEnArchivo();
 }
+float Celda::ingresar_coordenada(int size, int coord){
+    string a,coordenada;
+    Validaciones validaciones;
+    if(coord==0){
+        coordenada="x";
+    }else{
+        coordenada="y";
+    }
+    do{
+        a = validaciones.ingresarCedula("Ingrese la coordenada x: ");
+        if(stof(a)>=size||stof(a)<0){
+            cout<<"Coordenada fuera del rango, ingrese un valor entre 0 y "<< size-1<<" "<<endl;
+            }
+    }while(stof(a)>=size||stof(a)<0);
+    return stof(a);
+}
+
 std::string Celda::toString() const {
     std::cout << "Celda: (" << x << ", " << y << ")" << std::endl;
 

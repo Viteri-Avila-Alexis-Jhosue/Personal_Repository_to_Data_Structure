@@ -15,9 +15,23 @@
 #include <ctime>
 #include <chrono>
 #include <algorithm>
+#include <functional>
 
 template <typename T>
 KD_Tree<T>::KD_Tree() : root(nullptr) {}
+
+template <typename T>
+KD_Tree<T>::~KD_Tree() {
+    clear(root);
+    root.reset(); 
+}
+template <typename T>
+void KD_Tree<T>::clear(std::shared_ptr<Nodo<T>> node) {
+    if (!node) return;
+    clear(node->left);
+    clear(node->right);
+    node.reset(); 
+}
 
 template <typename T>
 std::shared_ptr<Nodo<T>> KD_Tree<T>::insertRec(std::shared_ptr<Nodo<T>> node, const T& data, const std::array<float, 2>& coords, int depth) {
@@ -75,11 +89,7 @@ void KD_Tree<T>::loadPropietarios(const std::string& fileName) {
                 placas.push_back(placa);
             }
             x= convertirStringAFloat(nombre);
-            cout<<nombre<<endl;
-            cout<<x<<endl;
             y= convertirStringAFloat(apellido);
-            cout<<apellido<<endl;
-            cout<<y<<endl;
             Propietario propietario(nombre, apellido, cedula, correo, placas);
             insert(propietario, x, y); 
         }
@@ -124,7 +134,7 @@ void KD_Tree<T>::loadAutosHistorial(const std::string& fileName) {
             } else {
                 horaSalida = definirFechaImprobable();
             }
-            Coche coche(placa, modelo, color, marca, horaIngreso, horaSalida);
+            Coche coche(placa, modelo, color, marca);
             Celda celda(std::stof(x), std::stof(y), coche, horaIngreso, horaSalida);
             insert(celda, std::stof(x), std::stof(y));
         }
@@ -144,28 +154,15 @@ void KD_Tree<T>::loadAutos(const std::string& fileName) {
     std::cout << "Procesando autos.txt..." << std::endl;
     while (std::getline(file, line)) {
         std::istringstream stream(line);
-        std::string placa, modelo, color, marca, horaIngresoStr, horaSalidaStr;
+        std::string placa, modelo, color, marca;
         if (std::getline(stream, placa, ',') &&
             std::getline(stream, modelo, ',') &&
             std::getline(stream, color, ',') &&
-            std::getline(stream, marca, ',') &&
-            std::getline(stream, horaIngresoStr, ',') &&
-            std::getline(stream, horaSalidaStr, ',')) {
-            std::chrono::system_clock::time_point horaIngreso, horaSalida;
-            struct std::tm tm;
-            std::istringstream ss(horaIngresoStr);
-            ss >> std::get_time(&tm, "%a %b %d %H:%M:%S %Y");
-            horaIngreso = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-            if (horaSalidaStr != "N/A") {
-                std::istringstream ss(horaSalidaStr);
-                ss >> std::get_time(&tm, "%a %b %d %H:%M:%S %Y");
-                horaSalida = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-            } else {
-                horaSalida = definirFechaImprobable();
-            }
+            std::getline(stream, marca, ',')) {
+            
             x= convertirStringAFloat(placa);
-            y= convertirStringAFloat(horaIngresoStr);
-            Coche nuevoAuto(placa, modelo, color, marca, horaIngreso, horaSalida);
+            y= convertirStringAFloat(placa);
+            Coche nuevoAuto(placa, modelo, color, marca);
             insert(nuevoAuto, x, y);
         }
     }
@@ -229,7 +226,7 @@ bool KD_Tree<T>::eliminarPlacaRec(std::shared_ptr<Nodo<T>> node, const std::stri
     }
     bool eliminadoEnIzquierda = eliminarPlacaRec(node->left, cedula, placa);
     bool eliminadoEnDerecha = eliminarPlacaRec(node->right, cedula, placa);
-    return eliminadoEnIzquierda || eliminadoEnDerecha; // Retorna true si se eliminó en algún subárbol
+    return eliminadoEnIzquierda || eliminadoEnDerecha;
 }
 
 template <typename T>
@@ -298,7 +295,7 @@ void KD_Tree<T>::guardarPropietariosEnMemoria(std::shared_ptr<Nodo<T>> node, std
 template <typename T>
 T* KD_Tree<T>::buscarPorPlacaRec(std::shared_ptr<Nodo<T>> node, const std::string& placa) const {
     if (node == nullptr) {
-        return nullptr; // No se encontró la placa
+        return nullptr; 
     }
     const auto& placas = node->data.getPlacas();
     if (std::find(placas.begin(), placas.end(), placa) != placas.end()) {
@@ -637,26 +634,99 @@ void KD_Tree<T>::imprimir_propietario(std::shared_ptr<Nodo<T>> node) const{
                 std::cout <<"\n--------------------------------------------------------------------------------------"<< std::endl;
             } else {
                 std::cout << "No tiene placas registradas.";
-                std::cout <<"--------------------------------------------------------------------------------------"<< std::endl;
+                std::cout <<"\n--------------------------------------------------------------------------------------"<< std::endl;
             }
             std::cout << std::endl;
         }  
 }
 
 template <typename T>
-void KD_Tree<T>::imprimir_celda(std::shared_ptr<Nodo<T>> node) const{
-     std::cout <<"--------------------------------------------------------------------------------------"<< std::endl;
-        std::cout << "Coordenadas: (" << node->data.getX() << ", " << node->data.getY() << ")" << std::endl;
-        auto horaIngreso = std::chrono::system_clock::to_time_t(node->data.getHoraIngreso());
-        auto horaSalida = std::chrono::system_clock::to_time_t(node->data.getHoraSalida());
-        std::cout << "Hora de ingreso: " << std::put_time(std::localtime(&horaIngreso), "%a %b %d %H:%M:%S %Y") << std::endl;
-        std::cout << "Hora de salida: " << std::put_time(std::localtime(&horaSalida), "%a %b %d %H:%M:%S %Y") << std::endl;
-        const Coche& coche = node->data.getCoche();
-        std::cout << "Datos del coche: " << std::endl;
-        std::cout << "Marca: " << coche.getMarca() << std::endl;
-        std::cout << "Modelo: " << coche.getModelo() << std::endl;
-        std::cout << "Color: " << coche.getColor() << std::endl;
-        std::cout << "Placa: " << coche.getPlaca() << std::endl;
-        std::cout <<"--------------------------------------------------------------------------------------"<< std::endl;
+void KD_Tree<T>::imprimir_celda(std::shared_ptr<Nodo<T>> node) const {
+    std::cout << "--------------------------------------------------------------------------------------" << std::endl;
+    std::cout << "Coordenadas: (" << node->data.getX() << ", " << node->data.getY() << ")" << std::endl;
+
+    auto horaIngreso = node->data.getHoraIngreso(); 
+    if (horaIngreso == std::chrono::system_clock::time_point{}) {
+        std::cout << "Hora de ingreso: No registrada" << std::endl;
+    } else {
+        std::time_t tiempoIngreso = std::chrono::system_clock::to_time_t(horaIngreso);
+        std::cout << "Hora de ingreso: " << std::put_time(std::localtime(&tiempoIngreso), "%a %b %d %H:%M:%S %Y") << std::endl;
+    }
+
+    auto horaSalida = node->data.getHoraSalida(); 
+    if (horaSalida == std::chrono::system_clock::time_point{}) {
+        std::cout << "Hora de salida: N/A (el coche todavía está en el parqueadero)" << std::endl;
+    } else {
+        std::time_t tiempoSalida = std::chrono::system_clock::to_time_t(horaSalida);
+        std::cout << "Hora de salida: " << std::put_time(std::localtime(&tiempoSalida), "%a %b %d %H:%M:%S %Y") << std::endl;
+    }
+
+    const Coche& coche = node->data.getCoche();
+    std::cout << "Datos del coche: " << std::endl;
+    std::cout << "Marca: " << coche.getMarca() << std::endl;
+    std::cout << "Modelo: " << coche.getModelo() << std::endl;
+    std::cout << "Color: " << coche.getColor() << std::endl;
+    std::cout << "Placa: " << coche.getPlaca() << std::endl;
+    std::cout << "--------------------------------------------------------------------------------------" << std::endl;
 }
- 
+
+template <typename T>
+void KD_Tree<T>::imprimir_parqueadero(int size) const {
+    std::vector<std::vector<bool>> ocupacion(size, std::vector<bool>(size, false));
+    std::function<void(std::shared_ptr<Nodo<T>>)> marcarOcupacion;
+    std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+
+    marcarOcupacion = [&](std::shared_ptr<Nodo<T>> node) {
+        if (node) {
+            if (node->data.getHoraSalida() == fecha_improbable) {
+                int x = static_cast<int>(node->coords[0]);
+                int y = static_cast<int>(node->coords[1]);
+                if (x >= 0 && x < size && y >= 0 && y < size) {
+                    ocupacion[x][y] = true;
+                }
+            }
+            marcarOcupacion(node->left);
+            marcarOcupacion(node->right);
+        }
+    };
+
+    marcarOcupacion(root);
+
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            std::ostringstream oss;
+            oss << "(" << i << ";" << j << ")";
+            std::string coord = oss.str();
+
+            if (ocupacion[i][j]) {
+                std::cout << "\033[31m" << coord << "\033[0m "; // Rojo para ocupado
+            } else {
+                std::cout << "\033[32m" << coord << "\033[0m "; // Verde para disponible
+            }
+        }
+        std::cout << std::endl;
+    }
+    system("pause");
+}
+
+template <typename T>
+bool KD_Tree<T>::buscar_coordenadas_en_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, float x, float y) const {
+    if (node == nullptr) return true;
+
+    // Definir la fecha improbable como referencia
+    std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+
+    // Verificar las coordenadas y la hora de salida
+    if (node->coords[0] == x && node->coords[1] == y && node->data.getHoraSalida() == fecha_improbable) {
+        return false; // Se encontró un nodo que cumple las condiciones
+    }
+
+    // Continuar la búsqueda en los subárboles izquierdo y derecho
+    return buscar_coordenadas_en_parqueadero_rec(node->left, x, y) ||
+           buscar_coordenadas_en_parqueadero_rec(node->right, x, y);
+}
+
+template <typename T>
+bool KD_Tree<T>::buscar_coordenadas_en_parqueadero(float x, float y) const {
+    return buscar_coordenadas_en_parqueadero_rec(root, x, y);
+}

@@ -22,6 +22,7 @@
 template <typename T>
 class KD_Tree {
 private:
+    void clear(std::shared_ptr<Nodo<T>> node);
     std::shared_ptr<Nodo<T>> root;
     std::shared_ptr<Nodo<T>> insertRec(std::shared_ptr<Nodo<T>> node, const T& data, const std::array<float, 2>& coords, int depth);
     void inOrderRec(std::shared_ptr<Nodo<T>> node) const;
@@ -48,9 +49,11 @@ private:
     void imprimir_propietarios_Rec(std::shared_ptr<Nodo<T>> node) const;
     void imprimir_propietario(std::shared_ptr<Nodo<T>> node) const;
     void imprimir_celda(std::shared_ptr<Nodo<T>> node) const;
+    bool buscar_coordenadas_en_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, float x, float y) const;
 
 public:
     KD_Tree();
+    ~KD_Tree();
     void insert(const T& data, float x, float y);
     void inOrder() const;
     void loadPropietarios(const std::string& fileName);
@@ -82,6 +85,8 @@ public:
     std::shared_ptr<Nodo<T>> getRoot() const {
         return root;
     }
+    void imprimir_parqueadero(int size)const;
+    bool buscar_coordenadas_en_parqueadero(float x, float y) const;
 };
 
 #include "../src/KD_Tree.cpp"

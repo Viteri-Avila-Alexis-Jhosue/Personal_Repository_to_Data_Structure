@@ -179,6 +179,61 @@ string Validaciones::ingresarPlaca(const string &msj)
     cout << endl;
     return placa;
 }
+string Validaciones::ingresarPlacaMoto(const string &msj){
+    string placa;
+    char c;
+    const regex pattern(R"([A-Z]{2}\d{3}[A-Z])"); // Formato: dos letras, tres dígitos, una letra
+
+    cout << msj;
+
+    while (true)
+    {
+        c = _getch(); // Captura el carácter sin mostrar el eco en consola
+
+        if (isalpha(c) && placa.length() < 2) // Letras (las dos primeras posiciones)
+        {
+            c = toupper(c); // Convierte a mayúscula
+            placa += c;
+            cout << c; // Muestra la letra en mayúscula
+        }
+        else if (isdigit(c) && placa.length() >= 2 && placa.length() < 5) // Dígitos (tres siguientes posiciones)
+        {
+            placa += c;
+            cout << c; // Muestra el dígito
+        }
+        else if (isalpha(c) && placa.length() == 5) // Última posición, letra
+        {
+            c = toupper(c); // Convierte a mayúscula
+            placa += c;
+            cout << c; // Muestra la letra
+        }
+        else if (c == '\b' && !placa.empty()) // Retroceso para borrar
+        {
+            placa.pop_back();
+            cout << "\b \b"; // Borra el carácter de la consola
+        }
+        else if (c == '\r') // Enter para confirmar
+        {
+            if (placa.length() == 6 && regex_match(placa, pattern)) // Validación final
+            {
+                break;
+            }
+            else
+            {
+                cout << "\nFormato inválido. Ingrese nuevamente: ";
+                placa.clear();
+            }
+        }
+        else // Cualquier otro símbolo no permitido
+        {
+            cout << "\a"; // Sonido de alerta para caracteres no válidos
+        }
+    }
+
+    cout << endl;
+    return placa;
+}
+
 string Validaciones::ingresarFecha(const string &msj)
 {
     string fecha;

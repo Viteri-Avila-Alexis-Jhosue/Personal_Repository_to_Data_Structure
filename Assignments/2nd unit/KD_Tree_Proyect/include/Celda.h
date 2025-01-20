@@ -25,14 +25,14 @@ public:
     void setY(float y);
     float getX() const;
     float getY() const;
-    void ingresar_al_parqueadero(Coche coche);
+    void ingresar_al_parqueadero(Coche coche, int size,float a, float b);
     void retirar_del_parqueadero();
     void setHoraIngreso(chrono::system_clock::time_point hora);
     void setHoraSalida(chrono::system_clock::time_point hora);
     chrono::system_clock::time_point getHoraIngreso() const;
     chrono::system_clock::time_point getHoraSalida() const;
     string toString() const;
-
+    float ingresar_coordenada(int size, int coordenada);
 };
 
 #endif // CELDA_H

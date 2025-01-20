@@ -16,5 +16,6 @@ public:
     string ingresarPlaca(const string &msj);
     string ingresarFecha(const string &msj);
     string ingresarHora(const string &msj);
+    string ingresarPlacaMoto(const string &msj);
 };
 #endif // VALIDACIONES_H
