@@ -109,6 +109,8 @@ void Celda::ingresar_al_parqueadero(Coche coche, int size,float a,float b) {
     setY(b);
     setCoche(coche);
     setHoraSalida(definirFechaImprobable());
+    horaIngreso = std::chrono::system_clock::now();
+    setHoraIngreso(horaIngreso);
     guardarEnArchivo();
 }
 float Celda::ingresar_coordenada(int size, int coord){
@@ -120,7 +122,8 @@ float Celda::ingresar_coordenada(int size, int coord){
         coordenada="y";
     }
     do{
-        a = validaciones.ingresarCedula("Ingrese la coordenada x: ");
+        cout<<"Ingrese la coordenada "<<coordenada<<": ";
+        a = validaciones.ingresarCedula("");
         if(stof(a)>=size||stof(a)<0){
             cout<<"Coordenada fuera del rango, ingrese un valor entre 0 y "<< size-1<<" "<<endl;
             }
@@ -145,13 +148,9 @@ std::string Celda::toString() const {
     return "";
 }
 
-
-#include "Time_utils.h"
-
 void Celda::retirar_del_parqueadero() {
     // Asignar la hora de salida al momento actual
     horaSalida = std::chrono::system_clock::now();
-
     // Definir la hora improbable
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
 
@@ -164,8 +163,6 @@ void Celda::retirar_del_parqueadero() {
         while (std::getline(archivo_lectura, linea)) {
             std::istringstream stream(linea);
             std::string x_archivo, y_archivo, placa_archivo, modelo_archivo, color_archivo, marca_archivo, horaIngreso_archivo, horaSalida_archivo;
-
-            // Leer campos del archivo
             std::getline(stream, x_archivo, ',');
             std::getline(stream, y_archivo, ',');
             std::getline(stream, placa_archivo, ',');
@@ -174,17 +171,16 @@ void Celda::retirar_del_parqueadero() {
             std::getline(stream, marca_archivo, ',');
             std::getline(stream, horaIngreso_archivo, ',');
             std::getline(stream, horaSalida_archivo, ',');
-
-            // Convertir la hora de salida del archivo a time_point
             std::chrono::system_clock::time_point horaSalida_archivo_tp;
+            std::chrono::system_clock::time_point horaIngreso_archivo_tp;
             if (horaSalida_archivo == "N/A") {
                 horaSalida_archivo_tp = definirFechaImprobable();
+                horaIngreso_archivo_tp = convertirStringATimePoint02(horaIngreso_archivo);
             } else {
-                horaSalida_archivo_tp = convertirStringATimePoint(horaSalida_archivo);
+                horaSalida_archivo_tp = convertirStringATimePoint02(horaSalida_archivo);
+                horaIngreso_archivo_tp = convertirStringATimePoint02(horaIngreso_archivo);
             }
-
-            // Si la placa coincide y la hora de salida es igual a la fecha improbable, actualizamos la línea
-            if (placa_archivo == coche.getPlaca() && horaSalida_archivo_tp == fecha_improbable) {
+            if (horaIngreso_archivo_tp == horaIngreso) {
                 std::ostringstream nueva_linea;
                 auto horaSalida_time_t = std::chrono::system_clock::to_time_t(horaSalida);
 
@@ -194,7 +190,6 @@ void Celda::retirar_del_parqueadero() {
 
                 lineas.push_back(nueva_linea.str());
             } else {
-                // Si no coinciden, mantener la línea original
                 lineas.push_back(linea);
             }
         }

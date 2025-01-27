@@ -33,7 +33,7 @@ public:
     void setMarca(const string &marca);
     void setColor(const string &color);
     Propietario getPropietario() const;
-    void ingresar_coche_nuevo(int tipo);
+    void ingresar_coche_nuevo(int tipo, string placa_obt);
     void ingresar_coche_existente(int tipo);
 
     string getPlaca() const;

@@ -20,10 +20,10 @@
 using namespace std;
 #ifdef _WIN32
 #ifndef NOMINMAX
-#define NOMINMAX // Evita conflictos con las macros min y max
+#define NOMINMAX 
 #endif
-#include <windows.h> // Para limpiar pantalla en Windows
-#undef byte // Evitar ambigüedad con std::byte
+#include <windows.h> 
+#undef byte 
 #define CLEAR() system("cls")
 #else
 #include <cstdlib>
@@ -93,22 +93,25 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
         addOption("Liberar el parqueadero");
         addOption("Ordenar lista de coches");
         addOption("Imprimir estado del parqueadero");
+        addOption("Buqueda de la celda vacia mas cercana");
+        addOption("Busqueda del vehiculo mas cercano");
         addOption("Ayuda");
         addOption("Salir");
 
         addTitle("\t Menu Principal");
 
         displayMenu();
-        float x, y,a,b;
+        float x, y,a,b,c,d;
         Coche coche;
         Celda celda;
+        Celda celda1;
         Celda *celda_encontrada;
         Validaciones validaciones;
         string cedula_propietario;
         Propietario* propietarioEncontrado;
         Coche* coche_encontrado;
         string placa_registrada, depurador;
-        int seleccionador, sel;
+        int seleccionador, sel, objetivo;
         bool confirmador;
         switch (getSelectedOption()) {
             case 0:
@@ -136,6 +139,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                     a= celda.ingresar_coordenada(size, 0);
                     b= celda.ingresar_coordenada(size, 1);
                     confirmador=arbol_celdas.buscar_coordenadas_en_parqueadero(a,b);
+                    cout<<confirmador<<endl;
                     if(confirmador){
                         celda.ingresar_al_parqueadero(*coche_encontrado, size,a,b);
                         arbol_celdas.insert(celda, a, b);
@@ -145,13 +149,13 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                     }
                 }
             } else {
-                // No se encontró la placa, buscar por cédula
                 cedula_propietario = validaciones.ingresarCedula("Ingrese la cédula del propietario: ");
                 propietarioEncontrado = arbol_propietarios.buscarPorCedula(cedula_propietario);
 
                 if (propietarioEncontrado != nullptr) {
                     cout << "Propietario encontrado. Procediendo a registrar un nuevo coche.\n";
-                    coche.ingresar_coche_nuevo(seleccionador);
+
+                    coche.ingresar_coche_nuevo(seleccionador, placa_registrada);
                     propietarioEncontrado->agregarPlaca(coche.getPlaca());
                     propietarioEncontrado->guardar_en_archivo();
                     coche.guardarEnArchivo();
@@ -164,6 +168,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                     a= celda.ingresar_coordenada(size, 0);
                     b= celda.ingresar_coordenada(size, 1);
                     confirmador=arbol_celdas.buscar_coordenadas_en_parqueadero(a,b);
+                    cout<<confirmador<<endl;
                     if(confirmador){
                         celda.ingresar_al_parqueadero(coche,size,a,b);
                         arbol_celdas.insert(celda, a, b);
@@ -224,13 +229,34 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                 arbol_celdas.imprimir_parqueadero(size);
                 break;
             case 8:
+                cout << "Opción seleccionada: Busqueda de la celda vacia mas cercana\n";
+                objetivo = menu_seleccion_objetivo();
+                if(objetivo == 0){
+                    arbol_celdas.buscar_celda_vacia_mas_cercana(-1,-1, size);
+                }else if(objetivo == 1){
+                    arbol_celdas.buscar_celda_vacia_mas_cercana(size,size, size);
+                }else{
+                        cout<<"Volviendo al menu principal"<<endl;
+                        break;
+                    }
+                system("pause");
+                break;
+            case 9: 
+                cout << "Opción seleccionada: Busqueda del vehiculo mas cercano\n";
+                cout << "Ingrese las coordenadas del vehiculo: \n";
+                a= celda.ingresar_coordenada(size, 0);
+                b= celda.ingresar_coordenada(size, 1);
+                arbol_celdas.buscar_vecino_mas_cercano(a,b);
+                system("pause");
+                break;
+            case 10:
                 cout << "Opción seleccionada: Ayuda\n";
                 archivo = "resources/ayuda.html";
                 comando = "start " + archivo;
                 system(comando.c_str());
                 system("pause");
                 break;
-            case 9: 
+            case 11: 
                 cout << "Opción seleccionada: Salir\n";
                 running = false; 
                 break;
@@ -341,12 +367,14 @@ void Menu::menu_busqueda_avanzada(KD_Tree<Celda>& arbol_celdas, KD_Tree<Coche>& 
             case 0:
                 cout << "Opción seleccionada: Buscar por Modelo\n";
                 modelo = validaciones.ingresarString("Ingrese el modelo del coche a buscar: ");
+                modelo = validaciones.to_upper(modelo);
                 arbol_celdas.buscar_por_modelo_parqueadero(modelo);
                 system("pause");
                 break;
             case 1:
                 cout << "Opción seleccionada: Buscar por Color\n";
                 color = validaciones.ingresarString("Ingrese el color del coche a buscar: ");
+                color = validaciones.to_upper(color);
                 arbol_celdas.buscar_por_color_parqueadero(color);
                 system("pause");
                 break;
@@ -360,6 +388,7 @@ void Menu::menu_busqueda_avanzada(KD_Tree<Celda>& arbol_celdas, KD_Tree<Coche>& 
             case 3:
                 cout << "Opción seleccionada: Buscar por Marca\n";
                 marca = validaciones.ingresarString("Ingrese la marca del coche a buscar: ");
+                marca = validaciones.to_upper(marca);
                 arbol_celdas.buscar_por_marca_parqueadero(marca);
                 system("pause");
                 break;
@@ -380,12 +409,14 @@ void Menu::menu_busqueda_avanzada(KD_Tree<Celda>& arbol_celdas, KD_Tree<Coche>& 
             case 0:
                 cout << "Opción seleccionada: Buscar por Modelo en Historial\n";
                 modelo = validaciones.ingresarString("Ingrese el modelo del coche a buscar: ");
+                modelo = validaciones.to_upper(modelo);
                 arbol_celdas.buscarPorModelo(modelo);
                 system("pause");
                 break;
             case 1:
                 cout << "Opción seleccionada: Buscar por Color en Historial\n";
                 color = validaciones.ingresarString("Ingrese el color del coche a buscar: ");
+                color = validaciones.to_upper(color);
                 arbol_celdas.buscarPorColor(color);
                 system("pause");
                 break;
@@ -399,6 +430,7 @@ void Menu::menu_busqueda_avanzada(KD_Tree<Celda>& arbol_celdas, KD_Tree<Coche>& 
             case 3:
                 cout << "Opción seleccionada: Buscar por Marca en Historial\n";
                 marca = validaciones.ingresarString("Ingrese la marca del coche a buscar: ");
+                marca = validaciones.to_upper(marca);
                 arbol_celdas.buscarPorMarca(marca);
                 system("pause");
                 break;
@@ -451,6 +483,7 @@ int Menu::menu_busqueda_avanzada_opciones(KD_Tree<Celda>& arbol_celdas, KD_Tree<
 
 void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
     bool running = true;
+    Propietario* propietarioEncontrado;
     while (running) {
     options.clear(); // Limpiar opciones anteriores
     addOption("Agregar Propietario");
@@ -471,6 +504,11 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
         case 0:
             cout << "Opción seleccionada: Agregar Propietario\n";
             propietario.ingresar_propietario();
+            if(arbol_propietarios.buscarPorCedula(propietario.getCedula())){
+                cout<<"El propietario ya existe"<<endl;
+                system("pause");
+                break;
+            }
             x= arbol_propietarios.convertirStringAFloat(propietario.getNombre());
             y= arbol_propietarios.convertirStringAFloat(propietario.getApellido());
             arbol_propietarios.insert(propietario, x, y);
@@ -514,331 +552,64 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
 }
 void Menu::menu_ordenamientos(KD_Tree<Coche>& arbol_coches) {
     bool running = true;
-    int opcion;
     Ordenamientos ordenamientos;
+
     while (running) {
-        options.clear(); // Limpiar opciones anteriores
+        options.clear();
         addOption("Quick Sort");
         addOption("Bucket Sort");
         addOption("Bubble Sort");
         addOption("Shell Sort");
-        addOption("Radix sort");
+        addOption("Radix Sort");
         addOption("Heap Sort");
         addOption("Volver al Menu Principal");
 
         addTitle("\t Menu de Ordenamientos");
-
         displayMenu();
 
-        switch (getSelectedOption()) {
-            case 0: { // Quick Sort
-                opcion = menu_ordenamientos_opciones(arbol_coches);
-                switch (opcion) {
-                    case 0: {
-                        cout << "Opción seleccionada: ordenar por Placa en Quick Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 0);
-                        system("pause");
-                        break;
-                    }
-                    case 1: {
-                        cout << "Opción seleccionada: ordenar por Apellido del Propietario en Quick Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 4);
-                        system("pause");
-                        break;
-                    }
-                    case 2: {
-                        cout << "Opción seleccionada: ordenar por Color en Quick Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 1);
-                        system("pause");
-                        break;
-                    }
-                    case 3: {
-                        cout << "Opción seleccionada: ordenar por Modelo en Quick Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 3);
-                        system("pause");
-                        break;
-                    }
-                    case 4: {
-                        cout << "Opción seleccionada: ordenar por Marca en Quick Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 2);
-                        system("pause");
-                        break;
-                    }
-                    default: {
-                        cout << "Opción seleccionada: Volver al Menu Principal\n";
-                        system("pause");
-                        break;
-                    }
-                }
-                break;
-            }
-            case 1: { // Bucket Sort
-                opcion = menu_ordenamientos_opciones(arbol_coches);
-                switch (opcion) {
-                    case 0: {
-                        cout << "Opción seleccionada: ordenar por Placa en Bucket Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 0);
-                        system("pause");
-                        break;
-                    }
-                    case 1: {
-                        cout << "Opción seleccionada: ordenar por Apellido del Propietario en Bucket Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 4);
-                        system("pause");
-                        break;
-                    }
-                    case 2: {
-                        cout << "Opción seleccionada: ordenar por Color en Bucket Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 1);
-                        system("pause");
-                        break;
-                    }
-                    case 3: {
-                        cout << "Opción seleccionada: ordenar por Modelo en Bucket Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 3);
-                        system("pause");
-                        break;
-                    }
-                    case 4: {
-                        cout << "Opción seleccionada: ordenar por Marca en Bucket Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 2);
-                        system("pause");
-                        break;
-                    }
-                    default: {
-                        cout << "Opción seleccionada: Volver al Menu Principal\n";
-                        system("pause");
-                        break;
-                    }
-                }
-                break;
-            }
-            case 2: { // Bubble Sort
-                opcion = menu_ordenamientos_opciones(arbol_coches);
-                switch (opcion) {
-                    case 0: {
-                        cout << "Opción seleccionada: ordenar por Placa en Bubble Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 0);
-                        system("pause");
-                        break;
-                    }
-                    case 1: {
-                        cout << "Opción seleccionada: ordenar por Apellido del Propietario en Bubble Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 4);
-                        system("pause");
-                        break;
-                    }
-                    case 2: {
-                        cout << "Opción seleccionada: ordenar por Color en Bubble Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 1);    
-                        system("pause");
-                        break;
-                    }
-                    case 3: {
-                        cout << "Opción seleccionada: ordenar por Modelo en Bubble Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 3);    
-                        system("pause");
-                        break;
-                    }
-                    case 4: {
-                        cout << "Opción seleccionada: ordenar por Marca en Bubble Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 2);
-                        system("pause");
-                        break;
-                    }
-                    default: {
-                        cout << "Opción seleccionada: Volver al Menu Principal\n";
-                        system("pause");
-                        break;
-                    }
-                }
-                break;
-            }
-            case 3: { // Shell Sort
-                opcion = menu_ordenamientos_opciones(arbol_coches);
-                switch (opcion) {
-                    case 0: {
-                        cout << "Opción seleccionada: ordenar por Placa en Shell Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 0);
-                        system("pause");
-                        break;
-                    }
-                    case 1: {
-                        cout << "Opción seleccionada: ordenar por Apellido del Propietario en Shell Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 4);
-                        system("pause");
-                        break;
-                    }
-                    case 2: {
-                        cout << "Opción seleccionada: ordenar por Color en Shell Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 1);
-                        system("pause");
-                        break;
-                    }
-                    case 3: {
-                        cout << "Opción seleccionada: ordenar por Modelo en Shell Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 3);
-                        system("pause");
-                        break;
-                    }
-                    case 4: {
-                        cout << "Opción seleccionada: ordenar por Marca en Shell Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 2);
-                        system("pause");
-                        break;
-                    }
-                    default: {
-                        cout << "Opción seleccionada: Volver al Menu Principal\n";
-                        system("pause");
-                        break;
-                    }
-                }
-                break;
-            }
-            case 4: { // Radix Sort
-                opcion = menu_ordenamientos_opciones(arbol_coches);
-                switch (opcion) {
-                    case 0: {
-                        cout << "Opción seleccionada: ordenar por Placa en Radix Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 0);
-                        system("pause");
-                        break;
-                    }
-                    case 1: {
-                        cout << "Opción seleccionada: ordenar por Apellido del Propietario en Radix Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 4);
-                        system("pause");
-                        break;
-                    }
-                    case 2: {
-                        cout << "Opción seleccionada: ordenar por Color en Radix Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 1);
-                        system("pause");
-                        break;
-                    }
-                    case 3: {
-                        cout << "Opción seleccionada: ordenar por Modelo en Radix Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 3);
-                        system("pause");
-                        break;
-                    }
-                    case 4: {
-                        cout << "Opción seleccionada: ordenar por Marca en Radix Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 2);
-                        system("pause");
-                        break;
-                    }
-                    default: {
-                        cout << "Opción seleccionada: Volver al Menu Principal\n";
-                        system("pause");
-                        break;
-                    }
-                }
-                break;
-            }
-            case 5: { // Heap Sort
-                opcion = menu_ordenamientos_opciones(arbol_coches);
-                switch (opcion) {
-                    case 0: {
-                        cout << "Opción seleccionada: ordenar por Placa en Heap Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 0);
-                        system("pause");
-                        break;
-                    }
-                    case 1: {
-                        cout << "Opción seleccionada: ordenar por Apellido del Propietario en Heap Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 4);
-                        system("pause");
-                        break;
-                    }
-                    case 2: {
-                        cout << "Opción seleccionada: ordenar por Color en Heap Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 1);
-                        system("pause");
-                        break;
-                    }
-                    case 3: {
-                        cout << "Opción seleccionada: ordenar por Modelo en Heap Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 3);
-                        system("pause");
-                        break;
-                    }
-                    case 4: {
-                        cout << "Opción seleccionada: ordenar por Marca en Heap Sort\n";
-                        ordenamientos.imprimirOrdenado(arbol_coches, 2);
-                        system("pause");
-                        break;
-                    }
-                    default: {
-                        cout << "Opción seleccionada: Volver al Menu Principal\n";
-                        system("pause");
-                        break;
-                    }
-                }
-                break;
-            }
-            case 6: { // Volver al Menu Principal
-                cout << "Opción seleccionada: Volver al Menu Principal\n";
-                running = false;
-                system("pause");
-                break;
-            }
-            default: {
-                cout << "Opción no válida. Inténtalo nuevamente.\n";
-                system("pause");
-                break;
-            }
+        int algoritmo = getSelectedOption();
+        if (algoritmo == 6) { // Volver al menú principal
+            cout << "Opción seleccionada: Volver al Menu Principal\n";
+            running = false;
+            system("pause");
+            continue;
         }
+
+        if (algoritmo < 0 || algoritmo > 6) { // Opción no válida
+            cout << "Opción no válida. Inténtalo nuevamente.\n";
+            system("pause");
+            continue;
+        }
+
+        // Mostrar submenú para seleccionar criterio de ordenamiento
+        int criterio = menu_ordenamientos_opciones(arbol_coches);
+        if (criterio < 0 || criterio > 3) { // Volver al menú principal
+            cout << "Opción seleccionada: Volver al Menu Principal\n";
+            system("pause");
+            continue;
+        }
+
+        // Ejecutar ordenamiento
+        string algoritmos[] = {"Quick Sort", "Bucket Sort", "Bubble Sort", "Shell Sort", "Radix Sort", "Heap Sort"};
+        string criterios[] = {"Placa", "Color", "Marca", "Modelo"};
+
+        cout << "Opción seleccionada: ordenar por " << criterios[criterio] << " en " << algoritmos[algoritmo] << "\n";
+        ordenamientos.imprimirOrdenado(arbol_coches, criterio);
+        system("pause");
     }
 }
 
 int Menu::menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches) {
-    bool running = true;
-    while (running) {
-    options.clear(); // Limpiar opciones anteriores
+    options.clear();
     addOption("Ordenar por Placa");
-    addOption("Ordenar por Apellido del Propietario");
     addOption("Ordenar por Color");
-    addOption("Ordenar por Modelo");
     addOption("Ordenar por Marca");
+    addOption("Ordenar por Modelo");
     addOption("Volver al Menu Principal");
 
-    addTitle("\t Menu de Ordenamientos");
-
+    addTitle("\t Opciones de Criterio de Ordenamiento");
     displayMenu();
 
-    switch (getSelectedOption()) {
-        case 0:
-            cout << "Opción seleccionada: Ordenar por Placa\n";
-            return 0;
-            system("pause");
-            break;
-        case 1:
-            cout << "Opción seleccionada: Ordenar por Apellido del Propietario\n";
-            return 1;
-            system("pause");
-            break;
-        case 2:
-            cout << "Opción seleccionada: Ordenar por Color\n";
-            return 2;
-            system("pause");
-            break;
-        case 3:
-            cout << "Opción seleccionada: Ordenar por Modelo\n";
-            return 3;
-            system("pause");
-            break;
-        case 4:
-            cout << "Opción seleccionada: Ordenar por Marca\n";
-            return 4;
-            system("pause");
-            break;
-        case 5:
-            cout << "Opción seleccionada: Volver al Menu Principal\n";
-            running = false;
-            break;
-        }
-    }
     return getSelectedOption();
 }
 
@@ -861,6 +632,32 @@ int Menu::menuTipoAuto(){
             cout << "Tipo de auto seleccionado: Moto\n";
             return 1;
             system("pause");
+            break;
+        case 2:
+            cout << "Opción seleccionada: Volver al Menu Principal\n";
+            running = false;
+            break;
+        }
+    }
+    return getSelectedOption();
+}
+int Menu::menu_seleccion_objetivo(){
+    bool running = true;
+    while (running) {
+    options.clear(); // Limpiar opciones anteriores
+    addOption("Celda vacia mas cercana a la entrada");
+    addOption("Celda vacia mas cercana a la salida");
+    addOption("Volver al Menu Principal");
+    addTitle("Seleccione el objetivo de la busqueda:");
+    displayMenu();
+    switch (getSelectedOption()) {
+        case 0:
+            cout << "Objetivo seleccionado: Celda vacia mas cercana a la entrada\n";
+            return 0;
+            break;
+        case 1:
+            cout << "Objetivo seleccionado: Celda vacia mas cercana a la salida\n";
+            return 1;
             break;
         case 2:
             cout << "Opción seleccionada: Volver al Menu Principal\n";

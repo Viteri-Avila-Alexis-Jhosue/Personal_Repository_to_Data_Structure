@@ -17,5 +17,6 @@ public:
     string ingresarFecha(const string &msj);
     string ingresarHora(const string &msj);
     string ingresarPlacaMoto(const string &msj);
+    string to_upper(string str);
 };
 #endif // VALIDACIONES_H

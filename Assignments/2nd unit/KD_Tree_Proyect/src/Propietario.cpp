@@ -68,8 +68,6 @@ string Propietario::getCorreo() const
     return correo;
 }
 
-
-
 void Propietario::agregarPlaca(const string &placa)
 {
     placas.push_back(placa);
@@ -79,7 +77,6 @@ vector<string>& Propietario::getPlacas()
 {
     return placas;
 }
-
 
 string Propietario::toString() const
 {
@@ -94,7 +91,9 @@ void Propietario::ingresar_propietario()
 {
     Validaciones validaciones;
     nombre = validaciones.ingresarString("Ingrese el nombre del propietario: ");
+    validaciones.to_upper(nombre);
     apellido = validaciones.ingresarString("Ingrese el apellido del propietario: ");
+    apellido = validaciones.to_upper(apellido);
     do
     {
         cedula = validaciones.ingresarCedula("Ingrese la cedula del propietario: ");

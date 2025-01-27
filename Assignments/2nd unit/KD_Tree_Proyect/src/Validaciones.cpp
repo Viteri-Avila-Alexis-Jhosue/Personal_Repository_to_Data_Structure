@@ -3,7 +3,7 @@
 #include <iostream>
 #include <conio.h>
 #include <regex>
-
+using namespace std;
 string Validaciones::ingresarString(const string &msj)
 {
     string input;
@@ -15,7 +15,7 @@ string Validaciones::ingresarString(const string &msj)
     {
         c = getch();  
 
-        if (isalpha(c))
+        if (isalpha(c) || c == ' ')
         {
             input += c;
             cout << c;
@@ -352,4 +352,13 @@ string Validaciones::ingresarHora(const string &msj)
 
     cout << endl;
     return hora;
+}
+
+string Validaciones::to_upper(string str)
+{
+        if (!str.empty())
+        {
+            str[0] = toupper(str[0]);
+        }
+    return str;
 }

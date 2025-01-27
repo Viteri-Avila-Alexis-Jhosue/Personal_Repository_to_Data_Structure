@@ -1,3 +1,8 @@
-1,1,AA123A,Deportiva,Rojo,Beneli,Mon Jan 20 09:49:53 2025,N/A
-0,12,AAA1234,Terreneitor,Amarillo,Patito,Mon Jan 20 10:15:14 2025,N/A
-1,2,BBB1234,modelo,color,marca,Mon Jan 20 11:49:35 2025,N/A
+1,1,AA123A,Deportiva,Negro,Benelli,Sun Jan 26 15:34:35 2025,N/A
+12,12,CCC1234,SPM,Rojo,Toyota,Sun Jan 26 15:33:27 2025,Sun Jan 26 16:00:08 2025
+15,15,AAA1234,RPM,Blanco,Subaru,Sun Jan 26 15:35:35 2025,Sun Jan 26 16:09:58 2025
+12,6,ZZ123Z,Motoneta,Fosforecente,Benelli,Sun Jan 26 15:36:55 2025,N/A
+0,0,ZZZ1234,Modelito,colorsito,marquita,Sun Jan 26 16:00:08 2025,N/A
+12,12,AB123C,ModeloMoto,Verde,MarcaMoto,Sun Jan 26 16:27:52 2025,N/A
+15,15,ABC1235,Corolla,Verde,Toyota,Mon Jan 27 09:16:30 2025,N/A
+2,3,MNB1234,Deportivo,Rojo,Ferrari,Mon Jan 27 09:41:30 2025,Mon Jan 27 09:45:00 2025

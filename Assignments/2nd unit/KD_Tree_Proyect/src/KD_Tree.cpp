@@ -16,6 +16,9 @@
 #include <chrono>
 #include <algorithm>
 #include <functional>
+#include <cmath>
+#include <set>
+
 
 template <typename T>
 KD_Tree<T>::KD_Tree() : root(nullptr) {}
@@ -259,16 +262,17 @@ void KD_Tree<T>::eliminarPlacaPorCedula(const std::string& cedula, const std::st
 template <typename T>
 std::shared_ptr<Nodo<T>> KD_Tree<T>::buscarNodoPorCedula(std::shared_ptr<Nodo<T>> node, const std::string& cedula) const {
     if (node == nullptr) {
-        return nullptr;
+        return nullptr; // Caso base: nodo vacío
     }
+
     if (node->data.getCedula() == cedula) {
-        return node;
+        return node; // Nodo encontrado
     }
-    if (cedula < node->data.getCedula()) {
-        return buscarNodoPorCedula(node->left, cedula);
-    } else {
-        return buscarNodoPorCedula(node->right, cedula);
+    std::shared_ptr<Nodo<T>> encontradoIzquierda = buscarNodoPorCedula(node->left, cedula);
+    if (encontradoIzquierda != nullptr) {
+        return encontradoIzquierda;
     }
+    return buscarNodoPorCedula(node->right, cedula);
 }
 
 template <typename T>
@@ -465,10 +469,15 @@ void KD_Tree<T>::buscarPorFechaRec(const std::shared_ptr<Nodo<T>>& node,
                                    const std::chrono::system_clock::time_point& fechaInicio, 
                                    const std::chrono::system_clock::time_point& fechaFin) const {
     if (node == nullptr) return;
-    auto horaSalida = node->data.getHoraSalida();
-    if (horaSalida >= fechaInicio && horaSalida <= fechaFin) {
-        imprimir_celda(node);
+
+    auto horaEntrada = node->data.getHoraIngreso();
+    if(horaEntrada == fechaInicio){
+        imprimir_celda(node);   
+        } else if (horaEntrada >= fechaInicio && horaEntrada <= fechaFin) {
+        imprimir_celda(node); // Imprime solo si está dentro del rango
     }
+
+    // Busca recursivamente en el subárbol izquierdo y derecho
     buscarPorFechaRec(node->left, fechaInicio, fechaFin);
     buscarPorFechaRec(node->right, fechaInicio, fechaFin);
 }
@@ -477,29 +486,44 @@ template <typename T>
 void KD_Tree<T>::buscarPorFecha(const std::string& fechaInicioStr, const std::string& fechaFinStr) const {
     auto fechaInicio = convertirStringATimePoint(fechaInicioStr);
     auto fechaFin = convertirStringATimePoint(fechaFinStr);
+
+    if (fechaInicio > fechaFin) {
+        std::cerr << "El rango de fechas es inválido: fechaInicio es posterior a fechaFin.\n";
+        return;
+    }
+
     buscarPorFechaRec(root, fechaInicio, fechaFin);
 }
 
-// Función recursiva para buscar por rango de hora (con segundos)
 template <typename T>
 void KD_Tree<T>::buscarPorHoraRec(const std::shared_ptr<Nodo<T>>& node, 
-                                 const std::chrono::system_clock::time_point& horaInicio, 
-                                 const std::chrono::system_clock::time_point& horaFin) const {
+                                  const std::chrono::minutes& horaInicio, 
+                                  const std::chrono::minutes& horaFin) const {
     if (node == nullptr) return;
-    auto horaSalida = node->data.getHoraSalida();
-    if (horaSalida >= horaInicio && horaSalida <= horaFin) {
-        imprimir_celda(node);
+
+    // Extraer solo la hora como minutos desde el inicio del día
+    auto horaIngreso = convertirHoraAMinutos(node->data.getHoraIngreso());
+    if (horaIngreso >= horaInicio && horaIngreso <= horaFin) {
+        imprimir_celda(node);  // Asume que esta función imprime los datos del nodo
     }
+
     buscarPorHoraRec(node->left, horaInicio, horaFin);
     buscarPorHoraRec(node->right, horaInicio, horaFin);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorHora(const std::string& horaInicioStr, const std::string& horaFinStr) const {
-    auto horaInicio = convertirStringATimePointHora(horaInicioStr);
-    auto horaFin = convertirStringATimePointHora(horaFinStr);
+    auto horaInicio = convertirStringAMinutos(horaInicioStr);
+    auto horaFin = convertirStringAMinutos(horaFinStr);
+
+    if (horaInicio > horaFin) {
+        std::cerr << "El rango de horas es inválido: horaInicio es posterior a horaFin.\n";
+        return;
+    }
+
     buscarPorHoraRec(root, horaInicio, horaFin);
 }
+
 
 //---------------------------------------------------------------------------------------------------------
 template <typename T>
@@ -556,8 +580,9 @@ void KD_Tree<T>::buscar_por_fecha_parqueadero_rec(const std::shared_ptr<Nodo<T>>
                                                   const std::chrono::system_clock::time_point& fechaFin) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+    auto horaIngreso = node->data.getHoraIngreso();
     auto horaSalida = node->data.getHoraSalida();
-    if (horaSalida >= fechaInicio && horaSalida <= fechaFin && horaSalida == fecha_improbable) {
+    if (horaIngreso >= fechaInicio && horaIngreso <= fechaFin && horaSalida == fecha_improbable) {
         imprimir_celda(node);
     }
     buscar_por_fecha_parqueadero_rec(node->left, fechaInicio, fechaFin);
@@ -568,17 +593,22 @@ template <typename T>
 void KD_Tree<T>::buscar_por_fecha_parqueadero(const std::string& fechaInicioStr, const std::string& fechaFinStr) const {
     auto fechaInicio = convertirStringATimePoint(fechaInicioStr);
     auto fechaFin = convertirStringATimePoint(fechaFinStr);
+    if (fechaInicio > fechaFin) {
+        std::cerr << "El rango de fechas es inválido: fechaInicio es posterior a fechaFin.\n";
+        return;
+    }
     buscar_por_fecha_parqueadero_rec(root, fechaInicio, fechaFin);
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_hora_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, 
-                                                 const std::chrono::system_clock::time_point& horaInicio, 
-                                                 const std::chrono::system_clock::time_point& horaFin) const {
+                                                 const std::chrono::minutes& horaInicio, 
+                                                 const std::chrono::minutes& horaFin) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+    auto horaIngreso = convertirHoraAMinutos(node->data.getHoraIngreso());
     auto horaSalida = node->data.getHoraSalida();
-    if (horaSalida >= horaInicio && horaSalida <= horaFin && horaSalida == fecha_improbable) {
+    if (horaIngreso >= horaInicio && horaIngreso <= horaFin && horaSalida == fecha_improbable) {
         imprimir_celda(node);
     }
     buscar_por_hora_parqueadero_rec(node->left, horaInicio, horaFin);
@@ -587,8 +617,12 @@ void KD_Tree<T>::buscar_por_hora_parqueadero_rec(const std::shared_ptr<Nodo<T>>&
 
 template <typename T>
 void KD_Tree<T>::buscar_por_hora_parqueadero(const std::string& horaInicioStr, const std::string& horaFinStr) const {
-    auto horaInicio = convertirStringATimePointHora(horaInicioStr);
-    auto horaFin = convertirStringATimePointHora(horaFinStr);
+    auto horaInicio = convertirStringAMinutos(horaInicioStr);
+    auto horaFin = convertirStringAMinutos(horaFinStr);
+    if (horaInicio > horaFin) {
+        std::cerr << "El rango de horas es inválido: horaInicio es posterior a horaFin.\n";
+        return;
+    }
     buscar_por_hora_parqueadero_rec(root, horaInicio, horaFin);
 }
 
@@ -691,7 +725,7 @@ void KD_Tree<T>::imprimir_parqueadero(int size) const {
     };
 
     marcarOcupacion(root);
-
+    std::cout << "\033[34m" << " ENT " << "\033[0m "; 
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
             std::ostringstream oss;
@@ -699,12 +733,16 @@ void KD_Tree<T>::imprimir_parqueadero(int size) const {
             std::string coord = oss.str();
 
             if (ocupacion[i][j]) {
-                std::cout << "\033[31m" << coord << "\033[0m "; // Rojo para ocupado
+                std::cout << "\033[31m" << coord << "\033[0m "; 
             } else {
-                std::cout << "\033[32m" << coord << "\033[0m "; // Verde para disponible
+                std::cout << "\033[32m" << coord << "\033[0m "; 
             }
+            if (i == size - 1 && j == size - 1) {
+                std::cout << "\033[34m" << "SAL" << "\033[0m "; 
+            } 
         }
         std::cout << std::endl;
+        std::cout << "      ";
     }
     system("pause");
 }
@@ -722,11 +760,140 @@ bool KD_Tree<T>::buscar_coordenadas_en_parqueadero_rec(const std::shared_ptr<Nod
     }
 
     // Continuar la búsqueda en los subárboles izquierdo y derecho
-    return buscar_coordenadas_en_parqueadero_rec(node->left, x, y) ||
+    return buscar_coordenadas_en_parqueadero_rec(node->left, x, y) &&
            buscar_coordenadas_en_parqueadero_rec(node->right, x, y);
 }
 
 template <typename T>
 bool KD_Tree<T>::buscar_coordenadas_en_parqueadero(float x, float y) const {
     return buscar_coordenadas_en_parqueadero_rec(root, x, y);
+}
+//--------------------------------------------------------------------------------------------------------
+//---------------BUSQUEDAS DE VECINOS CERCANOS-----------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
+
+template <typename T>
+void KD_Tree<T>::buscar_vecino_mas_cercano_rec(std::shared_ptr<Nodo<T>> node, float x, float y, float &min_dist, std::shared_ptr<Nodo<T>> &min_node, int depth) const {
+    if (node == nullptr) return;
+
+    std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+
+    if (node->data.getHoraSalida() == fecha_improbable) {
+        float dx = node->coords[0] - x;
+        float dy = node->coords[1] - y;
+        float dist = std::sqrt(dx * dx + dy * dy);
+
+        if (dist < min_dist) {
+            min_dist = dist;
+            min_node = node;
+        }
+    }
+
+    int axis = depth % 2;
+    float diff = (axis == 0) ? (x - node->coords[0]) : (y - node->coords[1]);
+
+    std::shared_ptr<Nodo<T>> near_node = (diff < 0) ? node->left : node->right;
+    std::shared_ptr<Nodo<T>> far_node = (diff < 0) ? node->right : node->left;
+
+    buscar_vecino_mas_cercano_rec(near_node, x, y, min_dist, min_node, depth + 1);
+
+    if (std::abs(diff) < min_dist) {
+        buscar_vecino_mas_cercano_rec(far_node, x, y, min_dist, min_node, depth + 1);
+    }
+}
+
+template <typename T>
+void KD_Tree<T>::buscar_vecino_mas_cercano(float x, float y) const {
+    float min_dist = std::numeric_limits<float>::max();
+    std::shared_ptr<Nodo<T>> min_node = nullptr;
+
+    buscar_vecino_mas_cercano_rec(root, x, y, min_dist, min_node, 0);
+
+    if (min_node) {
+        std::cout << "El vecino más cercano está en (" << min_node->coords[0] << ", " << min_node->coords[1] << ") con una distancia de " << min_dist << std::endl;
+        imprimir_celda(min_node);
+    } else {
+        std::cout << "No se encontró ningún vecino." << std::endl;
+    }
+}
+
+template <typename T>
+void KD_Tree<T>::buscar_celda_vacia_mas_cercana(float x, float y, int size) const {
+    // 1. Extraer coordenadas ocupadas
+    std::set<std::pair<float, float>> ocupadas;
+    extraer_coordenadas_ocupadas(root, ocupadas);
+
+    // 2. Generar coordenadas faltantes
+    std::vector<std::pair<float, float>> faltantes;
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            if (ocupadas.find({i, j}) == ocupadas.end()) {
+                faltantes.emplace_back(i, j);
+            }
+        }
+    }
+
+    // 3. Construir un nuevo KD-Tree con las coordenadas faltantes
+    KD_Tree<T> kd_vacio;
+    for (const auto& coord : faltantes) {
+        kd_vacio.insert(T{}, coord.first, coord.second);
+
+    }
+
+    // 4. Buscar celda vacía más cercana en el nuevo árbol
+    float min_dist = std::numeric_limits<float>::max();
+    std::shared_ptr<Nodo<T>> min_node = nullptr;
+    kd_vacio.buscar_celda_vacia_mas_cercana_rec(kd_vacio.root, x, y, min_dist, min_node, 0);
+
+    // Imprimir resultados
+    if (min_node) {
+        std::cout << "La celda vacía más cercana está en (" << min_node->coords[0] << ", " << min_node->coords[1] << ") con una distancia de " << min_dist << std::endl;
+    } else {
+        std::cout << "No se encontró ninguna celda vacía." << std::endl;
+    }
+    imprimir_parqueadero(size);
+    kd_vacio.~KD_Tree();
+}
+
+// Método auxiliar: Extraer coordenadas ocupadas
+template <typename T>
+void KD_Tree<T>::extraer_coordenadas_ocupadas(const std::shared_ptr<Nodo<T>> node, std::set<std::pair<float, float>>& ocupadas) const {
+    if (!node) return;
+
+    std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+    if (node->data.getHoraSalida() == fecha_improbable) { // Celda ocupada
+        ocupadas.insert({node->coords[0], node->coords[1]});
+    }
+
+    extraer_coordenadas_ocupadas(node->left, ocupadas);
+    extraer_coordenadas_ocupadas(node->right, ocupadas);
+}
+
+template <typename T>
+void KD_Tree<T>::buscar_celda_vacia_mas_cercana_rec(std::shared_ptr<Nodo<T>> node, float x, float y, float &min_dist, std::shared_ptr<Nodo<T>> &min_node, int depth) const {
+    if (node == nullptr) return;
+
+    std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+
+    if (node->data.getHoraSalida() != fecha_improbable) { // Check if the cell is empty
+        float dx = node->coords[0] - x;
+        float dy = node->coords[1] - y;
+        float dist = std::sqrt(dx * dx + dy * dy);
+
+        if (dist < min_dist) {
+            min_dist = dist;
+            min_node = node;
+        }
+    }
+    int axis = depth % 2;
+    float diff = (axis == 0) ? (x - node->coords[0]) : (y - node->coords[1]);
+
+    std::shared_ptr<Nodo<T>> near_node = (diff < 0) ? node->left : node->right;
+    std::shared_ptr<Nodo<T>> far_node = (diff < 0) ? node->right : node->left;
+
+    buscar_celda_vacia_mas_cercana_rec(near_node, x, y, min_dist, min_node, depth + 1);
+
+    if (std::abs(diff) < min_dist) {
+        buscar_celda_vacia_mas_cercana_rec(far_node, x, y, min_dist, min_node, depth + 1);
+    }
 }

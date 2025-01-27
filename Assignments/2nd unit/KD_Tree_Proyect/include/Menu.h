@@ -30,6 +30,7 @@ public:
     void menu_ordenamientos(KD_Tree<Coche>& arbol_coches);
     int menu_ordenamientos_opciones(KD_Tree<Coche>& arbol_coches);
     int menuTipoAuto();
+    int menu_seleccion_objetivo();
 };
 
 #endif // MENU_H

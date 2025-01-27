@@ -92,7 +92,7 @@ void Coche::guardarEnArchivo() const {
 
     file.close();  // Cerrar el archivo
 }
-void Coche::ingresar_coche_nuevo(int tipo){
+void Coche::ingresar_coche_nuevo(int tipo, string placa_obt){
     string tipostr;
     if(tipo==0){
         tipostr="l coche";
@@ -101,17 +101,17 @@ void Coche::ingresar_coche_nuevo(int tipo){
     }
     Validaciones validaciones;
     string placa, modelo, color, marca;
-    if(tipo==0){
-        placa=validaciones.ingresarPlaca("Ingrese la placa del coche: ");
-    }else{
-        placa=validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
-    }
+    cout << "Placa de"<<tipostr<<" a registrar : "<<placa_obt<<endl;
+    placa=placa_obt;
     cout << "Ingrese el modelo de"<<tipostr<<" : ";
     modelo = validaciones.ingresarString("");
+    modelo= validaciones.to_upper(modelo);
     cout << "Ingrese el color de"<<tipostr<<" : ";
     color = validaciones.ingresarString("");
+    color= validaciones.to_upper(color);
     cout << "Ingrese la marca de"<<tipostr<<" : ";
     marca = validaciones.ingresarString("");
+    marca= validaciones.to_upper(marca);
     setPlaca(placa);
     setModelo(modelo);
     setColor(color);

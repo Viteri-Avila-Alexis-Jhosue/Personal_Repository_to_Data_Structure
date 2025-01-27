@@ -17,6 +17,8 @@
 #include <ctime>
 #include <chrono>
 #include <algorithm>
+#include <set>
+
 
 
 template <typename T>
@@ -40,17 +42,20 @@ private:
     void buscarPorModeloRec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo) const;
     void buscarPorColorRec(const std::shared_ptr<Nodo<T>>& node, const std::string& color) const;
     void buscarPorFechaRec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& fechaInicio, const std::chrono::system_clock::time_point& fechaFin) const;
-    void buscarPorHoraRec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& horaInicio, const std::chrono::system_clock::time_point& horaFin) const;
+    void buscarPorHoraRec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::minutes& horaInicio, const std::chrono::minutes& horaFin) const;
     void buscar_por_marca_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca) const;
     void buscar_por_modelo_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo) const;
     void buscar_por_color_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& color) const;
     void buscar_por_fecha_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& fechaInicio, const std::chrono::system_clock::time_point& fechaFin) const;
-    void buscar_por_hora_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::chrono::system_clock::time_point& horaInicio, const std::chrono::system_clock::time_point& horaFin) const;
+    void buscar_por_hora_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node,const std::chrono::minutes& horaInicio, const std::chrono::minutes& horaFin) const;
     void imprimir_propietarios_Rec(std::shared_ptr<Nodo<T>> node) const;
     void imprimir_propietario(std::shared_ptr<Nodo<T>> node) const;
     void imprimir_celda(std::shared_ptr<Nodo<T>> node) const;
     bool buscar_coordenadas_en_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, float x, float y) const;
-
+    void buscar_vecino_mas_cercano_rec(std::shared_ptr<Nodo<T>> node, float x, float y, float &min_dist, std::shared_ptr<Nodo<T>> &min_node, int depth) const;
+    void buscar_celda_vacia_mas_cercana_rec(std::shared_ptr<Nodo<T>> node, float x, float y, float &min_dist, std::shared_ptr<Nodo<T>> &min_node, int depth) const;
+    void extraer_coordenadas_ocupadas(const std::shared_ptr<Nodo<T>> node, std::set<std::pair<float, float>>& ocupadas) const;
+  
 public:
     KD_Tree();
     ~KD_Tree();
@@ -87,6 +92,9 @@ public:
     }
     void imprimir_parqueadero(int size)const;
     bool buscar_coordenadas_en_parqueadero(float x, float y) const;
+    void buscar_vecino_mas_cercano(float x, float y) const;
+    void buscar_celda_vacia_mas_cercana(float x, float y, int size) const;
+ 
 };
 
 #include "../src/KD_Tree.cpp"

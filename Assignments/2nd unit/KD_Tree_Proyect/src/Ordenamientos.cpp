@@ -11,7 +11,6 @@ bool compararPorCriterio(const Coche& c1, const Coche& c2, int criterio) {
         case 1: return c1.getColor() < c2.getColor();
         case 2: return c1.getMarca() < c2.getMarca();
         case 3: return c1.getModelo() < c2.getModelo();
-        case 4: return c1.getPropietario().getNombre() < c2.getPropietario().getNombre();
         default: return false;
     }
 }
