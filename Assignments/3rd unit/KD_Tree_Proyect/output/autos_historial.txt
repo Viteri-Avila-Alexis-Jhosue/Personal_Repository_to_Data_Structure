@@ -1,0 +1,24 @@
+1,1,AA123A,Deportiva,Negro,Benelli,Sun Jan 26 15:34:35 2025,N/A
+12,12,CCC1234,SPM,Rojo,Toyota,Sun Jan 26 15:33:27 2025,Sun Jan 26 16:00:08 2025
+15,15,AAA1234,RPM,Blanco,Subaru,Sun Jan 26 15:35:35 2025,Sun Jan 26 16:09:58 2025
+12,6,ZZ123Z,Motoneta,Fosforecente,Benelli,Sun Jan 26 15:36:55 2025,N/A
+0,0,ZZZ1234,Modelito,Colorsito,Marquita,Sun Jan 26 16:00:08 2025,N/A
+12,12,AB123C,ModeloMoto,Verde,MarcaMoto,Sun Jan 26 16:27:52 2025,N/A
+15,15,ABC1235,Corolla,Verde,Toyota,Mon Jan 27 09:16:30 2025,N/A
+2,3,MNB1234,Deportivo,Rojo,Ferrari,Mon Jan 27 09:41:30 2025,Mon Jan 27 09:45:00 2025
+8,9,MNB1234,Deportivo,Rojo,Ferrari,Tue Jan 28 19:26:11 2025,N/A
+15,14,DCC1234,Modelo hoy,Negro,Marca hoy,Wed Jan 29 07:51:02 2025,N/A
+0,1,PCF7679,Modelo,Color,Marca,Wed Jan 29 08:28:49 2025,N/A
+7,8,AAA1234,RPM,Blanco,Subaru,Thu Jan 30 16:00:26 2025,N/A
+1,0,CCC1239,Son las tres,Del dia,Y estoy,Thu Jan 30 19:20:14 2025,N/A
+0,2,CCC1234,SPM,Rojo,Toyota,Thu Jan 30 19:23:12 2025,N/A
+2,0,KLF1234,Hola,Otra vez,Te veo,Thu Jan 30 22:21:43 2025,N/A
+1,2,HHF1234,Modelito,Calorsito,Salchipapa,Thu Jan 30 22:37:16 2025,N/A
+4,4,XNG1234,Modelo,Color,Marca,Fri Jan 31 08:10:09 2025,N/A
+5,5,JJ124K,Modelito,Colorcito,Marca,Fri Jan 31 09:30:57 2025,N/A
+10,10,KJ123S,Modelo moto,Negro como mi vida,Delmer,Fri Jan 31 09:37:50 2025,N/A
+7,7,QEW1232,Perrari,Rosadita,Patito,Fri Jan 31 10:08:02 2025,N/A
+2,2,NM123N,Motito,Rojita,Marquita,Fri Jan 31 10:22:57 2025,N/A
+14,14,SKJ1232,Cosa,Cosita,Hola,Fri Jan 31 10:23:30 2025,N/A
+11,11,NM123N,Motito,Rojita,Marquita,Fri Jan 31 10:24:18 2025,N/A
+8,8,SL232I,Dsfsfsdf,Asas,Dasd,Fri Jan 31 10:32:37 2025,N/A

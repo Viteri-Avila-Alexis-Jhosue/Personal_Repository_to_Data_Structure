@@ -12,3 +12,6 @@
 7,8,AAA1234,RPM,Blanco,Subaru,Thu Jan 30 16:00:26 2025,N/A
 1,0,CCC1239,Son las tres,Del dia,Y estoy,Thu Jan 30 19:20:14 2025,N/A
 0,2,CCC1234,SPM,Rojo,Toyota,Thu Jan 30 19:23:12 2025,N/A
+2,0,KLF1234,Hola,Otra vez,Te veo,Thu Jan 30 22:21:43 2025,N/A
+1,2,HHF1234,Modelito,Calorsito,Salchipapa,Thu Jan 30 22:37:16 2025,N/A
+4,4,XNG1234,Modelo,Color,Marca,Fri Jan 31 08:10:09 2025,N/A

@@ -12,3 +12,7 @@ DCC1234,Modelo hoy,Negro,Marca hoy
 PCF7679,Modelo,Color,Marca
 CCC1289,Hace frio,Y estoy lejos de casa,Hace tiempo
 CCC1239,Son las tres,Del dia,Y estoy
+KLF1234,Hola,Otra vez,Te veo
+SS123G,Modelito,Colorcito,Marcaaa
+HHF1234,Modelito,Calorsito,Salchipapa
+XNG1234,Modelo,Color,Marca

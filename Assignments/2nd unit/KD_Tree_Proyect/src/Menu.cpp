@@ -140,6 +140,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                 break;
             } else {
                 coche_encontrado = arbol_coches.buscarPorPlacaEnCoches(placa_registrada);
+                cout << "Le informamos que:"<<endl;
                 arbol_celdas.buscar_celda_vacia_mas_cercana(-1,-1, size);
                 a = celda.ingresar_coordenada(size, 0);
                 b = celda.ingresar_coordenada(size, 1);
@@ -155,11 +156,12 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                 }
             }
         } else {
-                cedula_propietario = validaciones.ingresarCedula("Ingrese la cédula del propietario: ");
-                if (!validaciones.validarCedula(cedula_propietario)) {
-                    system("pause");
-                    break;
-                }
+                do {
+                    cedula_propietario = validaciones.ingresarCedula("Ingrese la cédula del propietario: ");
+                    if (!validaciones.validarCedula(cedula_propietario)) {
+                        cout << "Cédula inválida. Intente nuevamente.\n";
+                    }
+                } while (!validaciones.validarCedula(cedula_propietario));
 
             propietarioEncontrado = arbol_propietarios.buscarPorCedula(cedula_propietario);
 
@@ -178,6 +180,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                 arbol_coches.insert(coche, x, y);
 
                 // Registrar celda
+                cout << "Le informamos que:"<<endl;
                 arbol_celdas.buscar_celda_vacia_mas_cercana(-1,-1, size);
                 a = celda.ingresar_coordenada(size, 0);
                 b = celda.ingresar_coordenada(size, 1);
@@ -536,6 +539,11 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
         case 2:
             cout << "Opción seleccionada: Buscar Propietario por Cedula\n";
             cedula_buscada = validaciones.ingresarCedula("Ingrese la cedula del propietario a buscar: ");
+            if (!validaciones.validarCedula(cedula_buscada)) {
+                cout << "Cédula inválida.\n";
+                    system("pause");
+                    break;
+                }
             if(!arbol_propietarios.buscarPorCedula(cedula_buscada)){
                 cout << "Propietario no encontrado\n";
                 }
@@ -544,6 +552,11 @@ void Menu::menu_gestion_propietarios(KD_Tree<Propietario>& arbol_propietarios) {
         case 3:
             cout << "Opción seleccionada: Eliminar Placa de Propietario\n";
             cedula_buscada = validaciones.ingresarCedula("Ingrese la cedula del propietario: ");
+            if (!validaciones.validarCedula(cedula_buscada)) {
+                cout << "Cédula inválida.\n";
+                    system("pause");
+                    break;
+                }
             sel=menuTipoAuto();
             if (sel == 0) {
             placa_a_eliminar = validaciones.ingresarPlaca("Ingrese la placa a eliminar: ");

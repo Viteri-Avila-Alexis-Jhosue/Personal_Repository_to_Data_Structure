@@ -401,229 +401,283 @@ void KD_Tree<T>::imprimirNodos() const {
 }
 
 template <typename T>
-void KD_Tree<T>::buscarPorFechaImprobableRec(const std::shared_ptr<Nodo<T>>& node, const std::string& placa) const {
+void KD_Tree<T>::buscarPorFechaImprobableRec(const std::shared_ptr<Nodo<T>>& node, const std::string& placa, bool& found) const {
     if (node == nullptr) {
         return;
     }
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
-    buscarPorFechaImprobableRec(node->left, placa);
+    buscarPorFechaImprobableRec(node->left, placa, found);
     if (node->data.getHoraSalida() == fecha_improbable && node->data.getCoche().getPlaca() == placa) {
         std::cout << "Celda encontrada: " << std::endl;
         imprimir_celda(node);
+        found = true;
     }
-    buscarPorFechaImprobableRec(node->right, placa);
+    buscarPorFechaImprobableRec(node->right, placa, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorFechaImprobable(const std::string& placa) const {
-    buscarPorFechaImprobableRec(root, placa);
+    bool found = false;
+    buscarPorFechaImprobableRec(root, placa, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con la placa especificada." << std::endl;
+    }
 }
 //--------------------------------------------------------------------------------------------------------
 template <typename T>
-void KD_Tree<T>::buscarPorMarcaRec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca) const {
+void KD_Tree<T>::buscarPorMarcaRec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca, bool& found) const {
     if (node == nullptr) return;
     if (node->data.getCoche().getMarca() == marca) {
         imprimir_celda(node);
+        found = true;
     }
-    buscarPorMarcaRec(node->left, marca);
-    buscarPorMarcaRec(node->right, marca);
+    buscarPorMarcaRec(node->left, marca, found);
+    buscarPorMarcaRec(node->right, marca, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorMarca(const std::string& marca) const {
-    buscarPorMarcaRec(root, marca);
+    bool found = false;
+    buscarPorMarcaRec(root, marca, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con la marca especificada." << std::endl;
+    }
 }
 
 template <typename T>
-void KD_Tree<T>::buscarPorModeloRec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo) const {
+void KD_Tree<T>::buscarPorModeloRec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo, bool& found) const {
     if (node == nullptr) return;
     if (node->data.getCoche().getModelo() == modelo) {
         imprimir_celda(node);
+        found = true;
     }
-    buscarPorModeloRec(node->left, modelo);
-    buscarPorModeloRec(node->right, modelo);
+    buscarPorModeloRec(node->left, modelo, found);
+    buscarPorModeloRec(node->right, modelo, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorModelo(const std::string& modelo) const {
-    buscarPorModeloRec(root, modelo);
+    bool found = false;
+    buscarPorModeloRec(root, modelo, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con el modelo especificado." << std::endl;
+    }
 }
 
 template <typename T>
-void KD_Tree<T>::buscarPorColorRec(const std::shared_ptr<Nodo<T>>& node, const std::string& color) const {
+void KD_Tree<T>::buscarPorColorRec(const std::shared_ptr<Nodo<T>>& node, const std::string& color, bool& found) const {
     if (node == nullptr) return;
     if (node->data.getCoche().getColor() == color) {
         imprimir_celda(node);
+        found = true;
     }
-    buscarPorColorRec(node->left, color);
-    buscarPorColorRec(node->right, color);
+    buscarPorColorRec(node->left, color, found);
+    buscarPorColorRec(node->right, color, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorColor(const std::string& color) const {
-    buscarPorColorRec(root, color);
+    bool found = false;
+    buscarPorColorRec(root, color, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con el color especificado." << std::endl;
+    }
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorFechaRec(const std::shared_ptr<Nodo<T>>& node, 
                                    const std::chrono::system_clock::time_point& fechaInicio, 
-                                   const std::chrono::system_clock::time_point& fechaFin) const {
+                                   const std::chrono::system_clock::time_point& fechaFin, bool& found) const {
     if (node == nullptr) return;
 
     auto horaEntrada = node->data.getHoraIngreso();
     if(horaEntrada == fechaInicio){
-        imprimir_celda(node);   
+        imprimir_celda(node);
+        found = true;   
         } else if (horaEntrada >= fechaInicio && horaEntrada <= fechaFin) {
         imprimir_celda(node); // Imprime solo si está dentro del rango
+        found = true;
     }
 
     // Busca recursivamente en el subárbol izquierdo y derecho
-    buscarPorFechaRec(node->left, fechaInicio, fechaFin);
-    buscarPorFechaRec(node->right, fechaInicio, fechaFin);
+    buscarPorFechaRec(node->left, fechaInicio, fechaFin, found);
+    buscarPorFechaRec(node->right, fechaInicio, fechaFin, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorFecha(const std::string& fechaInicioStr, const std::string& fechaFinStr) const {
     auto fechaInicio = convertirStringATimePoint(fechaInicioStr);
     auto fechaFin = convertirStringATimePoint(fechaFinStr);
-
+    bool found = false;
     if (fechaInicio > fechaFin) {
         std::cerr << "El rango de fechas es inválido: fechaInicio es posterior a fechaFin.\n";
         return;
     }
 
-    buscarPorFechaRec(root, fechaInicio, fechaFin);
+    buscarPorFechaRec(root, fechaInicio, fechaFin, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con el rango de fechas especificado." << std::endl;
+    }
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorHoraRec(const std::shared_ptr<Nodo<T>>& node, 
                                   const std::chrono::minutes& horaInicio, 
-                                  const std::chrono::minutes& horaFin) const {
+                                  const std::chrono::minutes& horaFin, bool& found) const {
     if (node == nullptr) return;
 
     // Extraer solo la hora como minutos desde el inicio del día
     auto horaIngreso = convertirHoraAMinutos(node->data.getHoraIngreso());
     if (horaIngreso >= horaInicio && horaIngreso <= horaFin) {
         imprimir_celda(node);  // Asume que esta función imprime los datos del nodo
+        found = true;
     }
 
-    buscarPorHoraRec(node->left, horaInicio, horaFin);
-    buscarPorHoraRec(node->right, horaInicio, horaFin);
+    buscarPorHoraRec(node->left, horaInicio, horaFin, found);
+    buscarPorHoraRec(node->right, horaInicio, horaFin, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscarPorHora(const std::string& horaInicioStr, const std::string& horaFinStr) const {
     auto horaInicio = convertirStringAMinutos(horaInicioStr);
     auto horaFin = convertirStringAMinutos(horaFinStr);
-
+    bool found = false;
     if (horaInicio > horaFin) {
         std::cerr << "El rango de horas es inválido: horaInicio es posterior a horaFin.\n";
         return;
     }
 
-    buscarPorHoraRec(root, horaInicio, horaFin);
+    buscarPorHoraRec(root, horaInicio, horaFin, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con el rango de horas especificado." << std::endl;
+    }
 }
 
 
 //---------------------------------------------------------------------------------------------------------
 template <typename T>
-void KD_Tree<T>::buscar_por_marca_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca) const {
+void KD_Tree<T>::buscar_por_marca_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& marca, bool& found) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
     if (node->data.getCoche().getMarca() == marca && node->data.getHoraSalida() == fecha_improbable) {
         imprimir_celda(node);
+        found = true;
     }
-    buscar_por_marca_parqueadero_rec(node->left, marca);
-    buscar_por_marca_parqueadero_rec(node->right, marca);
+    buscar_por_marca_parqueadero_rec(node->left, marca, found);
+    buscar_por_marca_parqueadero_rec(node->right, marca, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_marca_parqueadero(const std::string& marca) const {
-    buscar_por_marca_parqueadero_rec(root, marca);
+    bool found = false;
+    buscar_por_marca_parqueadero_rec(root, marca, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con la marca especificada en el parqueadero." << std::endl;
+    }
 }
 
 template <typename T>
-void KD_Tree<T>::buscar_por_modelo_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo) const {
+void KD_Tree<T>::buscar_por_modelo_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& modelo, bool& found) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
     if (node->data.getCoche().getModelo() == modelo && node->data.getHoraSalida() == fecha_improbable) {
         imprimir_celda(node);
+        found = true;
     }
-    buscar_por_modelo_parqueadero_rec(node->left, modelo);
-    buscar_por_modelo_parqueadero_rec(node->right, modelo);
+    buscar_por_modelo_parqueadero_rec(node->left, modelo, found);
+    buscar_por_modelo_parqueadero_rec(node->right, modelo, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_modelo_parqueadero(const std::string& modelo) const {
-    buscar_por_modelo_parqueadero_rec(root, modelo);
+    bool found = false;
+    buscar_por_modelo_parqueadero_rec(root, modelo, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con el modelo especificado en el parqueadero." << std::endl;
+    }
 }
 
 template <typename T>
-void KD_Tree<T>::buscar_por_color_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& color) const {
+void KD_Tree<T>::buscar_por_color_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, const std::string& color,bool& found) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
     if (node->data.getCoche().getColor() == color && node->data.getHoraSalida() == fecha_improbable) {
         imprimir_celda(node);
+        found = true;
     }
-    buscar_por_color_parqueadero_rec(node->left, color);
-    buscar_por_color_parqueadero_rec(node->right, color);
+    buscar_por_color_parqueadero_rec(node->left, color, found);
+    buscar_por_color_parqueadero_rec(node->right, color, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_color_parqueadero(const std::string& color) const {
-    buscar_por_color_parqueadero_rec(root, color);
+    bool found = false;
+    buscar_por_color_parqueadero_rec(root, color, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche con el color especificado en el parqueadero." << std::endl;
+    }
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_fecha_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, 
                                                   const std::chrono::system_clock::time_point& fechaInicio, 
-                                                  const std::chrono::system_clock::time_point& fechaFin) const {
+                                                  const std::chrono::system_clock::time_point& fechaFin, bool& found) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
     auto horaIngreso = node->data.getHoraIngreso();
     auto horaSalida = node->data.getHoraSalida();
     if (horaIngreso >= fechaInicio && horaIngreso <= fechaFin && horaSalida == fecha_improbable) {
         imprimir_celda(node);
+        found = true;
     }
-    buscar_por_fecha_parqueadero_rec(node->left, fechaInicio, fechaFin);
-    buscar_por_fecha_parqueadero_rec(node->right, fechaInicio, fechaFin);
+    buscar_por_fecha_parqueadero_rec(node->left, fechaInicio, fechaFin, found);
+    buscar_por_fecha_parqueadero_rec(node->right, fechaInicio, fechaFin, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_fecha_parqueadero(const std::string& fechaInicioStr, const std::string& fechaFinStr) const {
+    bool found = false;
     auto fechaInicio = convertirStringATimePoint(fechaInicioStr);
     auto fechaFin = convertirStringATimePoint(fechaFinStr);
     if (fechaInicio > fechaFin) {
         std::cerr << "El rango de fechas es inválido: fechaInicio es posterior a fechaFin.\n";
         return;
     }
-    buscar_por_fecha_parqueadero_rec(root, fechaInicio, fechaFin);
+    buscar_por_fecha_parqueadero_rec(root, fechaInicio, fechaFin, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche en el parqueadero con el rango de fechas especificado." << std::endl;
+    }
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_hora_parqueadero_rec(const std::shared_ptr<Nodo<T>>& node, 
                                                  const std::chrono::minutes& horaInicio, 
-                                                 const std::chrono::minutes& horaFin) const {
+                                                 const std::chrono::minutes& horaFin, bool& found) const {
     if (node == nullptr) return;
     std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
     auto horaIngreso = convertirHoraAMinutos(node->data.getHoraIngreso());
     auto horaSalida = node->data.getHoraSalida();
     if (horaIngreso >= horaInicio && horaIngreso <= horaFin && horaSalida == fecha_improbable) {
         imprimir_celda(node);
+        found = true;
     }
-    buscar_por_hora_parqueadero_rec(node->left, horaInicio, horaFin);
-    buscar_por_hora_parqueadero_rec(node->right, horaInicio, horaFin);
+    buscar_por_hora_parqueadero_rec(node->left, horaInicio, horaFin, found);
+    buscar_por_hora_parqueadero_rec(node->right, horaInicio, horaFin, found);
 }
 
 template <typename T>
 void KD_Tree<T>::buscar_por_hora_parqueadero(const std::string& horaInicioStr, const std::string& horaFinStr) const {
+    bool found = false;
     auto horaInicio = convertirStringAMinutos(horaInicioStr);
     auto horaFin = convertirStringAMinutos(horaFinStr);
     if (horaInicio > horaFin) {
         std::cerr << "El rango de horas es inválido: horaInicio es posterior a horaFin.\n";
         return;
     }
-    buscar_por_hora_parqueadero_rec(root, horaInicio, horaFin);
+    buscar_por_hora_parqueadero_rec(root, horaInicio, horaFin, found);
+    if (!found) {
+        std::cout << "No se encontró ningún coche en el parqueadero con el rango de horas especificado." << std::endl;
+    }
 }
 
 template <typename T>
@@ -744,6 +798,11 @@ void KD_Tree<T>::imprimir_parqueadero(int size) const {
         std::cout << std::endl;
         std::cout << "      ";
     }
+    cout << endl;
+    cout << "\033[31m" << "(x ; y)" << "\033[0m ";
+    cout << "Celda ocupada" << endl;
+    cout << "\033[32m" << "(x ; y)" << "\033[0m ";
+    cout << "Celda libre" << endl;  
     system("pause");
 }
 

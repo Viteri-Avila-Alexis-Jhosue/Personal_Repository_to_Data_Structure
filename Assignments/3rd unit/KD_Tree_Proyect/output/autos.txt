@@ -1,0 +1,25 @@
+CCC1234,SPM,Rojo,Toyota
+AA123A,Deportiva,Negro,Benelli
+AAA1234,RPM,Blanco,Subaru
+ZZ123Z,Motoneta,Fosforecente,Benelli
+FFF1234,Modelazo,Colorsito,Marcad
+FGH1234,Mod,Dol,Marc
+ZZZ1234,Modelito,Colorsito,Marquita
+AB123C,ModeloMoto,Verde,MarcaMoto
+ABC1235,Corolla,Verde,Toyota
+MNB1234,Deportivo,Rojo,Ferrari
+DCC1234,Modelo hoy,Negro,Marca hoy
+PCF7679,Modelo,Color,Marca
+CCC1289,Hace frio,Y estoy lejos de casa,Hace tiempo
+CCC1239,Son las tres,Del dia,Y estoy
+KLF1234,Hola,Otra vez,Te veo
+SS123G,Modelito,Colorcito,Marcaaa
+HHF1234,Modelito,Calorsito,Salchipapa
+XNG1234,Modelo,Color,Marca
+JJ124K,Modelito,Colorcito,Marca
+KJ123S,Modelo moto,Negro como mi vida,Delmer
+QEW1232,Perrari,Rosadita,Patito
+NM123N,Motito,Rojita,Marquita
+SKJ1232,Cosa,Cosita,Hola
+SFK4583,Modeloadsd,Invisible,Patito
+SL232I,Dsfsfsdf,Asas,Dasd
