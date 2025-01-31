@@ -91,7 +91,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
         addOption("Busqueda Avanzada");
         addOption("Menu de Gestion de Propietarios");
         addOption("Liberar el parqueadero");
-        addOption("Ordenar lista de coches");
+        addOption("Imprimir arbol ordenado de coches");
         addOption("Imprimir estado del parqueadero");
         addOption("Buqueda de la celda vacia mas cercana");
         addOption("Busqueda del vehiculo mas cercano");
@@ -114,75 +114,88 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
         int seleccionador, sel, objetivo;
         bool confirmador;
         switch (getSelectedOption()) {
-            case 0:
-            cout << "Opción seleccionada: Insertar Coche\n";
-            seleccionador = menuTipoAuto();
-            if (seleccionador == 0) {
+             case 0:
+        cout << "Opción seleccionada: Insertar Coche\n";
+        seleccionador = menuTipoAuto();
+        
+        if (seleccionador == 0) {
             placa_registrada = validaciones.ingresarPlaca("Ingrese la placa del coche: ");
-            } else if (seleccionador == 1) {
+        } else if (seleccionador == 1) {
             placa_registrada = validaciones.ingresarPlacaMoto("Ingrese la placa de la moto: ");
-            } else {
+        } else {
             cout << "Volviendo al menú principal...\n";
             break;
-            }
-            propietarioEncontrado = arbol_propietarios.buscarPorPlaca(placa_registrada);
-            celda_encontrada = arbol_celdas.buscarPorPlacaEnCelda(placa_registrada);
-            if (propietarioEncontrado != nullptr) {
-                cout << "Placa encontrada\n";
-                std::chrono::system_clock::time_point fecha_improbable=definirFechaImprobable();
-                if (celda_encontrada != nullptr && celda_encontrada->getHoraSalida() == fecha_improbable) {
-                    cout << "El coche todavía no ha salido. Volviendo al menú principal.\n";
-                    system("pause");
-                    break;  
+        }
+
+        propietarioEncontrado = arbol_propietarios.buscarPorPlaca(placa_registrada);
+        celda_encontrada = arbol_celdas.buscarPorPlacaEnCelda(placa_registrada);
+
+        if (propietarioEncontrado != nullptr) {
+            cout << "Placa encontrada\n";
+            std::chrono::system_clock::time_point fecha_improbable = definirFechaImprobable();
+            
+            if (celda_encontrada != nullptr && celda_encontrada->getHoraSalida() == fecha_improbable) {
+                cout << "El coche todavía no ha salido. Volviendo al menú principal.\n";
+                system("pause");
+                break;
+            } else {
+                coche_encontrado = arbol_coches.buscarPorPlacaEnCoches(placa_registrada);
+                arbol_celdas.buscar_celda_vacia_mas_cercana(-1,-1, size);
+                a = celda.ingresar_coordenada(size, 0);
+                b = celda.ingresar_coordenada(size, 1);
+                confirmador = arbol_celdas.buscar_coordenadas_en_parqueadero(a, b);
+                
+                
+                if (confirmador) {
+                    celda.ingresar_al_parqueadero(*coche_encontrado, size, a, b);
+                    arbol_celdas.insert(celda, a, b);
+                    cout << "El coche ha ingresado al parqueadero.\n";
                 } else {
-                    coche_encontrado = arbol_coches.buscarPorPlacaEnCoches(placa_registrada);
-                    a= celda.ingresar_coordenada(size, 0);
-                    b= celda.ingresar_coordenada(size, 1);
-                    confirmador=arbol_celdas.buscar_coordenadas_en_parqueadero(a,b);
-                    cout<<confirmador<<endl;
-                    if(confirmador){
-                        celda.ingresar_al_parqueadero(*coche_encontrado, size,a,b);
-                        arbol_celdas.insert(celda, a, b);
-                        cout << "El coche ha ingresado al parqueadero.\n";
-                    }else{
-                        cout<<"La celda ya esta ocupada"<<endl;
-                    }
+                    cout << "La celda ya está ocupada" << endl;
+                }
+            }
+        } else {
+                cedula_propietario = validaciones.ingresarCedula("Ingrese la cédula del propietario: ");
+                if (!validaciones.validarCedula(cedula_propietario)) {
+                    system("pause");
+                    break;
+                }
+
+            propietarioEncontrado = arbol_propietarios.buscarPorCedula(cedula_propietario);
+
+            if (propietarioEncontrado != nullptr) {
+                cout << "Propietario encontrado. Procediendo a registrar un nuevo coche.\n";
+
+                coche.ingresar_coche_nuevo(seleccionador, placa_registrada);
+
+                propietarioEncontrado->agregarPlaca(coche.getPlaca());
+                propietarioEncontrado->guardar_en_archivo();
+                coche.guardarEnArchivo();
+
+                // Convertir placa y marca a coordenadas para el árbol KD
+                x = arbol_coches.convertirStringAFloat(coche.getPlaca());
+                y = arbol_coches.convertirStringAFloat(coche.getMarca());
+                arbol_coches.insert(coche, x, y);
+
+                // Registrar celda
+                arbol_celdas.buscar_celda_vacia_mas_cercana(-1,-1, size);
+                a = celda.ingresar_coordenada(size, 0);
+                b = celda.ingresar_coordenada(size, 1);
+                confirmador = arbol_celdas.buscar_coordenadas_en_parqueadero(a, b);
+
+                if (confirmador) {
+                    celda.ingresar_al_parqueadero(coche, size, a, b);
+                    arbol_celdas.insert(celda, a, b);
+                    cout << "Nuevo coche registrado e ingresado al parqueadero.\n";
+                } else {
+                    cout << "La celda ya está ocupada" << endl;
                 }
             } else {
-                cedula_propietario = validaciones.ingresarCedula("Ingrese la cédula del propietario: ");
-                propietarioEncontrado = arbol_propietarios.buscarPorCedula(cedula_propietario);
-
-                if (propietarioEncontrado != nullptr) {
-                    cout << "Propietario encontrado. Procediendo a registrar un nuevo coche.\n";
-
-                    coche.ingresar_coche_nuevo(seleccionador, placa_registrada);
-                    propietarioEncontrado->agregarPlaca(coche.getPlaca());
-                    propietarioEncontrado->guardar_en_archivo();
-                    coche.guardarEnArchivo();
-                    
-                    // Convertir placa y marca a coordenadas para el árbol KD
-                    x = arbol_coches.convertirStringAFloat(coche.getPlaca());
-                    y = arbol_coches.convertirStringAFloat(coche.getMarca());
-                    arbol_coches.insert(coche, x, y);
-                    // Registrar celda
-                    a= celda.ingresar_coordenada(size, 0);
-                    b= celda.ingresar_coordenada(size, 1);
-                    confirmador=arbol_celdas.buscar_coordenadas_en_parqueadero(a,b);
-                    cout<<confirmador<<endl;
-                    if(confirmador){
-                        celda.ingresar_al_parqueadero(coche,size,a,b);
-                        arbol_celdas.insert(celda, a, b);
-                        cout << "Nuevo coche registrado e ingresado al parqueadero.\n";
-                    }else{
-                        cout<<"La celda ya esta ocupada"<<endl;
-                    }
-                } else {
-                    cout << "Propietario no encontrado. Volviendo al menú principal.\n";
-                }
+                cout << "Propietario no encontrado. Volviendo al menú principal.\n";
             }
-            system("pause");
-            break;
-
+        }
+        system("pause");
+        break;
             case 1:
                 menu_mostrar_lista(arbol_celdas);
                 system("pause");

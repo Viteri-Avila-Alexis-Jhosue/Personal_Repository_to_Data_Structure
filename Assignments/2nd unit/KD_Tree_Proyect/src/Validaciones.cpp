@@ -100,7 +100,9 @@ bool Validaciones::validarCedula(const string &cedula)
 {
     if (cedula.length() != 10)
     {
+        cout<<"La cedula debe tener 10 digitos"<<endl;
         return false;
+
     }
 
     int suma = 0;
@@ -120,7 +122,9 @@ bool Validaciones::validarCedula(const string &cedula)
 
     int ultimoDigito = cedula[9] - '0';
     int digitoVerificador = (10 - (suma % 10)) % 10;
-
+    if(ultimoDigito != digitoVerificador){
+        cout<<"La cedula no es valida"<<endl;
+    }
     return ultimoDigito == digitoVerificador;
 }
 

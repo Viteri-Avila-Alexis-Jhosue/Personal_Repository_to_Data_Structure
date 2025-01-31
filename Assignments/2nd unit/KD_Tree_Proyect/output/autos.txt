@@ -4,7 +4,11 @@ AAA1234,RPM,Blanco,Subaru
 ZZ123Z,Motoneta,Fosforecente,Benelli
 FFF1234,Modelazo,Colorsito,Marcad
 FGH1234,Mod,Dol,Marc
-ZZZ1234,Modelito,colorsito,Marquita
+ZZZ1234,Modelito,Colorsito,Marquita
 AB123C,ModeloMoto,Verde,MarcaMoto
 ABC1235,Corolla,Verde,Toyota
 MNB1234,Deportivo,Rojo,Ferrari
+DCC1234,Modelo hoy,Negro,Marca hoy
+PCF7679,Modelo,Color,Marca
+CCC1289,Hace frio,Y estoy lejos de casa,Hace tiempo
+CCC1239,Son las tres,Del dia,Y estoy

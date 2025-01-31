@@ -2,7 +2,13 @@
 12,12,CCC1234,SPM,Rojo,Toyota,Sun Jan 26 15:33:27 2025,Sun Jan 26 16:00:08 2025
 15,15,AAA1234,RPM,Blanco,Subaru,Sun Jan 26 15:35:35 2025,Sun Jan 26 16:09:58 2025
 12,6,ZZ123Z,Motoneta,Fosforecente,Benelli,Sun Jan 26 15:36:55 2025,N/A
-0,0,ZZZ1234,Modelito,colorsito,marquita,Sun Jan 26 16:00:08 2025,N/A
+0,0,ZZZ1234,Modelito,Colorsito,Marquita,Sun Jan 26 16:00:08 2025,N/A
 12,12,AB123C,ModeloMoto,Verde,MarcaMoto,Sun Jan 26 16:27:52 2025,N/A
 15,15,ABC1235,Corolla,Verde,Toyota,Mon Jan 27 09:16:30 2025,N/A
 2,3,MNB1234,Deportivo,Rojo,Ferrari,Mon Jan 27 09:41:30 2025,Mon Jan 27 09:45:00 2025
+8,9,MNB1234,Deportivo,Rojo,Ferrari,Tue Jan 28 19:26:11 2025,N/A
+15,14,DCC1234,Modelo hoy,Negro,Marca hoy,Wed Jan 29 07:51:02 2025,N/A
+0,1,PCF7679,Modelo,Color,Marca,Wed Jan 29 08:28:49 2025,N/A
+7,8,AAA1234,RPM,Blanco,Subaru,Thu Jan 30 16:00:26 2025,N/A
+1,0,CCC1239,Son las tres,Del dia,Y estoy,Thu Jan 30 19:20:14 2025,N/A
+0,2,CCC1234,SPM,Rojo,Toyota,Thu Jan 30 19:23:12 2025,N/A
