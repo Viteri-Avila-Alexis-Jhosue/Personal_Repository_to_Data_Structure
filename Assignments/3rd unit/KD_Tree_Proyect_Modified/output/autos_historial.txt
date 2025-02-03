@@ -1,0 +1,56 @@
+1,1,AA123A,Deportiva,Negro,Benelli,Sun Jan 26 15:34:35 2025,Sat Feb 01 13:50:34 2025
+12,12,CCC1234,SPM,Rojo,Toyota,Sun Jan 26 15:33:27 2025,Sun Jan 26 16:00:08 2025
+15,15,AAA1234,RPM,Blanco,Subaru,Sun Jan 26 15:35:35 2025,Sun Jan 26 16:09:58 2025
+12,6,ZZ123Z,Motoneta,Fosforecente,Benelli,Sun Jan 26 15:36:55 2025,Sat Feb 01 13:50:34 2025
+0,0,ZZZ1234,Modelito,Colorsito,Marquita,Sun Jan 26 16:00:08 2025,Sat Feb 01 13:50:34 2025
+12,12,AB123C,ModeloMoto,Verde,MarcaMoto,Sun Jan 26 16:27:52 2025,Sat Feb 01 13:50:34 2025
+15,15,ABC1235,Corolla,Verde,Toyota,Mon Jan 27 09:16:30 2025,Sat Feb 01 13:50:34 2025
+2,3,MNB1234,Deportivo,Rojo,Ferrari,Mon Jan 27 09:41:30 2025,Mon Jan 27 09:45:00 2025
+8,9,MNB1234,Deportivo,Rojo,Ferrari,Tue Jan 28 19:26:11 2025,Sat Feb 01 13:50:34 2025
+15,14,DCC1234,Modelo hoy,Negro,Marca hoy,Wed Jan 29 07:51:02 2025,Sat Feb 01 13:50:34 2025
+0,1,PCF7679,Modelo,Color,Marca,Wed Jan 29 08:28:49 2025,Sat Feb 01 13:50:34 2025
+7,8,AAA1234,RPM,Blanco,Subaru,Thu Jan 30 16:00:26 2025,Sat Feb 01 13:50:34 2025
+1,0,CCC1239,Son las tres,Del dia,Y estoy,Thu Jan 30 19:20:14 2025,Sat Feb 01 13:50:34 2025
+0,2,CCC1234,SPM,Rojo,Toyota,Thu Jan 30 19:23:12 2025,Sat Feb 01 13:50:34 2025
+2,0,KLF1234,Hola,Otra vez,Te veo,Thu Jan 30 22:21:43 2025,Sat Feb 01 13:50:34 2025
+1,2,HHF1234,Modelito,Calorsito,Salchipapa,Thu Jan 30 22:37:16 2025,Sat Feb 01 13:50:34 2025
+4,4,XNG1234,Modelo,Color,Marca,Fri Jan 31 08:10:09 2025,Sat Feb 01 13:50:34 2025
+5,5,JJ124K,Modelito,Colorcito,Marca,Fri Jan 31 09:30:57 2025,Sat Feb 01 13:50:34 2025
+10,10,KJ123S,Modelo moto,Negro como mi vida,Delmer,Fri Jan 31 09:37:50 2025,Sat Feb 01 13:50:34 2025
+7,7,QEW1232,Perrari,Rosadita,Patito,Fri Jan 31 10:08:02 2025,Sat Feb 01 13:50:34 2025
+2,2,NM123N,Motito,Rojita,Marquita,Fri Jan 31 10:22:57 2025,Sat Feb 01 13:50:34 2025
+14,14,SKJ1232,Cosa,Cosita,Hola,Fri Jan 31 10:23:30 2025,Sat Feb 01 13:50:34 2025
+11,11,NM123N,Motito,Rojita,Marquita,Fri Jan 31 10:24:18 2025,Sat Feb 01 13:50:34 2025
+8,8,SL232I,Dsfsfsdf,Asas,Dasd,Fri Jan 31 10:32:37 2025,Sat Feb 01 13:50:34 2025
+3,3,LL123K,Modelo moto,Color moto,Marca moto,Sat Feb 01 11:50:34 2025,Sat Feb 01 13:50:34 2025
+4,4,AAA9876,Modelo coche,Color coche,Marca coche,Sat Feb 01 12:13:36 2025,Sat Feb 01 13:50:34 2025
+11,11,LJ232S,Modelos,Colores,Marcas,Sat Feb 01 12:14:32 2025,Sat Feb 01 13:50:34 2025
+9,9,AAA1234,RPM,Blanco,Subaru,Sun Feb 02 10:29:20 2025,Sun Feb 02 17:40:22 2025
+0,0,ZZZ1234,Modelito,Colorsito,Marquita,Sun Feb 02 10:30:21 2025,Sun Feb 02 17:40:22 2025
+3,3,HHF1234,Modelito,Calorsito,Salchipapa,Sun Feb 02 10:31:16 2025,Sun Feb 02 17:40:22 2025
+13,13,CCC1234,SPM,Rojo,Toyota,Sun Feb 02 10:31:58 2025,Sun Feb 02 17:40:22 2025
+4,4,AAA9876,Modelo coche,Color coche,Marca coche,Sun Feb 02 10:32:53 2025,Sun Feb 02 17:40:22 2025
+15,15,LL123K,Modelo moto,Color moto,Marca moto,Sun Feb 02 10:33:17 2025,Sun Feb 02 17:40:22 2025
+7,7,KLJ1232,Modelo,Color,Marca,Sun Feb 02 15:33:11 2025,Sun Feb 02 17:40:22 2025
+6,6,DFS1233,Modelo,Color,Marca,Sun Feb 02 15:41:46 2025,Sun Feb 02 17:40:22 2025
+11,11,DFS1233,Modelo,Color,Marca,Sun Feb 02 15:42:54 2025,Sun Feb 02 17:40:22 2025
+2,2,DSJ8958,Modeleso,Coloreso,Marcaso,Sun Feb 02 15:44:06 2025,Sun Feb 02 17:40:22 2025
+12,12,ISD4895,Modelito,Bonito,Cosa,Sun Feb 02 15:44:48 2025,Sun Feb 02 17:40:22 2025
+14,14,SDF4438,Asdjasiodad,Asdasdasd,Rydfhfgh,Sun Feb 02 15:45:28 2025,Sun Feb 02 17:40:22 2025
+10,10,DFS1233,Modelo,Color,Marca,Sun Feb 02 15:45:52 2025,Sun Feb 02 17:40:22 2025
+8,8,SF387Y,Sfsfsdf,Sfsdf,Adfsg,Sun Feb 02 16:03:29 2025,Sun Feb 02 17:40:22 2025
+1,1,DCC1234,Modelo hoy,Negro,Marca hoy,Sun Feb 02 16:10:20 2025,Sun Feb 02 17:40:22 2025
+5,5,IRG9348,Sjdioadja,Asodi,Asdo,Sun Feb 02 16:40:52 2025,Sun Feb 02 17:40:22 2025
+1,1,FJS1293,Saksdf,Sdaiosd,Dsaoid,Sun Feb 02 17:13:20 2025,Sun Feb 02 17:40:22 2025
+9,10,ABC1235,Corolla,Verde,Toyota,Sun Feb 02 17:38:51 2025,Sun Feb 02 17:40:22 2025
+15,10,SAI3948,Asdasd,Fdgd,Sdfd,Sun Feb 02 17:39:22 2025,Sun Feb 02 17:40:22 2025
+2,15,CCC1234,SPM,Rojo,Toyota,Sun Feb 02 17:42:31 2025,N/A
+1,2,AA123A,Deportiva,Negro,Benelli,Sun Feb 02 17:43:25 2025,N/A
+8,2,CCC1239,Son las tres,Del dia,Y estoy,Sun Feb 02 17:47:57 2025,N/A
+2,4,ABC1235,Corolla,Verde,Toyota,Sun Feb 02 18:02:27 2025,Sun Feb 02 18:04:55 2025
+13,2,DCC1234,Modelo hoy,Negro,Marca hoy,Sun Feb 02 18:59:49 2025,N/A
+13,10,AAA1234,RPM,Blanco,Subaru,Sun Feb 02 19:01:22 2025,N/A
+12,5,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Sun Feb 02 19:01:46 2025,N/A
+7,10,DDD1234,Asda,Dsf,Sdf,Sun Feb 02 19:02:56 2025,N/A
+9,2,EEE1234,Sdasf,Sfse,Fas,Sun Feb 02 19:03:30 2025,N/A
+8,11,DFS1233,Modelo,Color,Marca,Sun Feb 02 21:15:50 2025,N/A

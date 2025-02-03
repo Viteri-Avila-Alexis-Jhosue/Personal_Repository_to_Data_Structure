@@ -1,0 +1,56 @@
+CCC1234,SPM,Rojo,Toyota
+AA123A,Deportiva,Negro,Benelli
+AAA1234,RPM,Blanco,Subaru
+ZZ123Z,Motoneta,Fosforecente,Benelli
+FFF1234,Modelazo,Colorsito,Marcad
+FGH1234,Mod,Dol,Marc
+ZZZ1234,Modelito,Colorsito,Marquita
+AB123C,ModeloMoto,Verde,MarcaMoto
+ABC1235,Corolla,Verde,Toyota
+MNB1234,Deportivo,Rojo,Ferrari
+DCC1234,Modelo hoy,Negro,Marca hoy
+PCF7679,Modelo,Color,Marca
+CCC1289,Hace frio,Y estoy lejos de casa,Hace tiempo
+CCC1239,Son las tres,Del dia,Y estoy
+KLF1234,Hola,Otra vez,Te veo
+SS123G,Modelito,Colorcito,Marcaaa
+HHF1234,Modelito,Calorsito,Salchipapa
+XNG1234,Modelo,Color,Marca
+JJ124K,Modelito,Colorcito,Marca
+KJ123S,Modelo moto,Negro como mi vida,Delmer
+QEW1232,Perrari,Rosadita,Patito
+NM123N,Motito,Rojita,Marquita
+SKJ1232,Cosa,Cosita,Hola
+SFK4583,Modeloadsd,Invisible,Patito
+SL232I,Dsfsfsdf,Asas,Dasd
+LL123K,Modelo moto,Color moto,Marca moto
+AAA9876,Modelo coche,Color coche,Marca coche
+LJ232S,Modelos,Colores,Marcas
+KLJ1232,Modelo,Color,Marca
+DFS1233,Modelo,Color,Marca
+DS487Y,Modeli,Colori,Virgolinni
+DSJ8958,Modeleso,Coloreso,Marcaso
+ISD4895,Modelito,Bonito,Cosa
+SDF4438,Asdjasiodad,Asdasdasd,Rydfhfgh
+RER2324,Sidjf,Frasf,Trurt
+SD284S,Modelo,Asodjaosd,Erfsdfs
+LAS1334,Mdoelo,Saiduasd,Afa
+SJH8273,Msfoisfas,Faafafas,Afadfaf
+SF387Y,Sfsfsdf,Sfsdf,Adfsg
+KF834D,Msdiofj,Odisufasd,Asdijaosd
+WQ934U,Sadasdtr,Czxvxcb,Asdasd
+IJ342R,Sdfstgr,Dfsdfwethytj,Fjy
+KU948O,Sdfofsdf,Doiasfoasd,Sdkoapsd
+GKT3493,Soijdfosd,Spodsad,Oisdsa
+WO289I,Sdfsf,Rty,Sd
+SDJ4823,Asidj,Dsapod,Adsod
+IDH3942,Safsdfijsf,Aoidad,Sdiuad
+ZWE8934,Asd,Rtet,Szxc
+LKJ3784,Dfgk,Fsof,Dsadji
+IRG9348,Sjdioadja,Asodi,Asdo
+FJS1293,Saksdf,Sdaiosd,Dsaoid
+DSO4853,Asdkas,Asdasd,Asdjiooad
+SAI3948,Asdasd,Fdgd,Sdfd
+BBB1234,Asijd,Sdiasdjo,Dasuidhaid
+DDD1234,Asda,Dsf,Sdf
+EEE1234,Sdasf,Sfse,Fas
