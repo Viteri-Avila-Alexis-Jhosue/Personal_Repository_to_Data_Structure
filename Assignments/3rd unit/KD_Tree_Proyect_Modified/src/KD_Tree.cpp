@@ -147,6 +147,53 @@ void KD_Tree<T>::loadAutosHistorial(const std::string& fileName) {
 }
 
 template <typename T>
+void KD_Tree<T>::loadAutosHistorial_en_parqueadero(const std::string& fileName) {
+    std::ifstream file(fileName);
+    if (!file.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo " << fileName << std::endl;
+        return;
+    }
+    std::string line;
+    std::cout << "Procesando autos_historial.txt..." << std::endl;
+    while (std::getline(file, line)) {
+        std::istringstream stream(line);
+        std::string x, y, placa, modelo, color, marca, horaIngresoStr, horaSalidaStr;
+        if (std::getline(stream, x, ',') &&
+            std::getline(stream, y, ',') &&
+            std::getline(stream, placa, ',') &&
+            std::getline(stream, modelo, ',') &&
+            std::getline(stream, color, ',') &&
+            std::getline(stream, marca, ',') &&
+            std::getline(stream, horaIngresoStr, ',') &&
+            std::getline(stream, horaSalidaStr, ','))  {
+            std::chrono::system_clock::time_point horaIngreso, horaSalida;
+            if (horaIngresoStr != "N/A") {
+                struct std::tm tm = {};
+                std::istringstream ss(horaIngresoStr);
+                ss >> std::get_time(&tm, "%a %b %d %H:%M:%S %Y");
+                horaIngreso = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+            } else {
+                horaIngreso = std::chrono::system_clock::now();
+            }
+            if (horaSalidaStr != "N/A") {
+                struct std::tm tm = {};
+                std::istringstream ss(horaSalidaStr);
+                ss >> std::get_time(&tm, "%a %b %d %H:%M:%S %Y");
+                horaSalida = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+            } else {
+                horaSalida = definirFechaImprobable();
+            }
+            if(horaSalida == definirFechaImprobable()){
+                Coche coche(placa, modelo, color, marca);
+                Celda celda(std::stof(x), std::stof(y), coche, horaIngreso, horaSalida);
+                insert(celda, std::stof(x), std::stof(y));
+            }
+        }
+    }
+    file.close();
+}
+
+template <typename T>
 void KD_Tree<T>::loadAutos(const std::string& fileName) {
     std::ifstream file(fileName);
     float x,y;
@@ -1009,7 +1056,7 @@ int KD_Tree<T>::getHeightRec(const std::shared_ptr<Nodo<T>>& node) const {
     int leftHeight = getHeightRec(node->left);
     int rightHeight = getHeightRec(node->right);
 
-    return std::max(leftHeight, rightHeight) + 1; // Sumamos 1 por el nodo actual
+    return std::max(leftHeight, rightHeight) + 1; 
 }
 template <typename T>
 int KD_Tree<T>::getNodeLevel(const std::shared_ptr<Nodo<T>>& target) const {
@@ -1122,21 +1169,22 @@ bool KD_Tree<T>::existeCeldaOcupada(const std::shared_ptr<Nodo<T>>& node, float 
     // Buscar en los subárboles
     return existeCeldaOcupada(node->left, x, y) || existeCeldaOcupada(node->right, x, y);
 }
-
 template <typename T>
 void KD_Tree<T>::graficar_arbol() const {
     if (!root) {
         std::cout << "El árbol está vacío." << std::endl;
         return;
     }
-    // Obtener la profundidad del árbol
+    
     int depth = getDepth();
-    // Obtener los nodos por nivel
     std::vector<std::vector<std::shared_ptr<Nodo<T>>>> niveles;
     obtener_niveles(root, niveles);
-    // Imprimir el árbol nivel por nivel
+    
     for (int i = 0; i < niveles.size(); ++i) {
         imprimir_nivel(niveles[i], depth, i);
+        if (i < niveles.size() - 1) {
+            imprimir_conexiones(niveles[i], niveles[i + 1], depth, i);
+        }
     }
 }
 
@@ -1155,17 +1203,14 @@ void KD_Tree<T>::obtener_niveles(const std::shared_ptr<Nodo<T>>& node, std::vect
             auto nodo_actual = cola.front();
             cola.pop();
 
-            if (nodo_actual) {
-                nivel_actual.push_back(nodo_actual);
+            nivel_actual.push_back(nodo_actual);
 
-                // Insertar hijos solo si no son nullptr
-                if (nodo_actual->left) cola.push(nodo_actual->left);
-                if (nodo_actual->right) cola.push(nodo_actual->right);
-            } else {
-                nivel_actual.push_back(nullptr); // Marcador para nodos vacíos
+            if (nodo_actual) {
+                cola.push(nodo_actual->left);
+                cola.push(nodo_actual->right);
             }
         }
-
+        
         niveles.push_back(nivel_actual);
     }
 }
@@ -1174,51 +1219,40 @@ template <typename T>
 void KD_Tree<T>::imprimir_nivel(const std::vector<std::shared_ptr<Nodo<T>>>& nivel, int depth, int nivel_actual) const {
     int espacios = std::pow(2, depth - nivel_actual) - 1;
     int separacion = std::pow(2, depth - nivel_actual + 1) - 1;
+    
+    for (int i = 0; i < espacios; ++i) std::cout << " ";
 
-    // Imprimir espacios iniciales
-    for (int i = 0; i < espacios; ++i) {
-        std::cout << "   ";
-    }
-
-    // Imprimir nodos y conexiones
-    for (int i = 0; i < nivel.size(); ++i) {
+    for (size_t i = 0; i < nivel.size(); ++i) {
         if (nivel[i]) {
             std::cout << "(" << nivel[i]->coords[0] << "," << nivel[i]->coords[1] << ")";
         } else {
-            std::cout << "   "; // Espacio para nodos vacíos
-        }
-
-        // Imprimir espacios entre nodos
-        for (int j = 0; j < separacion; ++j) {
             std::cout << "   ";
         }
+        for (int j = 0; j < separacion; ++j) std::cout << " ";
     }
-
     std::cout << std::endl;
+}
 
-    // Imprimir conexiones entre nodos
-    if (nivel_actual < depth - 1) {
-        for (int i = 0; i < espacios; ++i) {
+template <typename T>
+void KD_Tree<T>::imprimir_conexiones(const std::vector<std::shared_ptr<Nodo<T>>>& nivel, const std::vector<std::shared_ptr<Nodo<T>>>& siguiente_nivel, int depth, int nivel_actual) const {
+    int espacios = std::pow(2, depth - nivel_actual) - 1;
+    int separacion = std::pow(2, depth - nivel_actual + 1) - 1;
+    
+    for (int i = 0; i < espacios; ++i) std::cout << " ";
+
+    for (size_t i = 0; i < nivel.size(); ++i) {
+        if (nivel[i]) {
+            if (nivel[i]->left) std::cout << "/";
+            else std::cout << " ";
+            
             std::cout << "   ";
+            
+            if (nivel[i]->right) std::cout << "\\";
+            else std::cout << " ";
+        } else {
+            std::cout << "     ";
         }
-
-        for (int i = 0; i < nivel.size(); ++i) {
-            if (nivel[i]) {
-                if (nivel[i]->left) std::cout << " / ";
-                else std::cout << "   ";
-
-                if (nivel[i]->right) std::cout << " \\ ";
-                else std::cout << "   ";
-            } else {
-                std::cout << "       "; // Espacio para nodos vacíos
-            }
-
-            // Imprimir espacios entre conexiones
-            for (int j = 0; j < separacion; ++j) {
-                std::cout << "   ";
-            }
-        }
-
-        std::cout << std::endl;
+        for (int j = 0; j < separacion; ++j) std::cout << " ";
     }
+    std::cout << std::endl;
 }

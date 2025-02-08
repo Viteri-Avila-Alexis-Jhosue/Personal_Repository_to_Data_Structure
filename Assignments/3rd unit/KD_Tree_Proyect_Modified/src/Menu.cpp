@@ -298,7 +298,7 @@ void Menu::principal_menu(KD_Tree<Coche>& arbol_coches, KD_Tree<Propietario>& ar
                     }
                     case 1: {
                         height = arbol_experimental.getHeight();
-                        cout << "Altura del árbol: " << height << endl;
+                        cout << "Altura del árbol: " << height+1 << endl;
                         system("pause");
                         break;
                     }

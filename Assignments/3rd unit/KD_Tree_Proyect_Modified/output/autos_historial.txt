@@ -44,13 +44,60 @@
 1,1,FJS1293,Saksdf,Sdaiosd,Dsaoid,Sun Feb 02 17:13:20 2025,Sun Feb 02 17:40:22 2025
 9,10,ABC1235,Corolla,Verde,Toyota,Sun Feb 02 17:38:51 2025,Sun Feb 02 17:40:22 2025
 15,10,SAI3948,Asdasd,Fdgd,Sdfd,Sun Feb 02 17:39:22 2025,Sun Feb 02 17:40:22 2025
-2,15,CCC1234,SPM,Rojo,Toyota,Sun Feb 02 17:42:31 2025,N/A
-1,2,AA123A,Deportiva,Negro,Benelli,Sun Feb 02 17:43:25 2025,N/A
-8,2,CCC1239,Son las tres,Del dia,Y estoy,Sun Feb 02 17:47:57 2025,N/A
+2,15,CCC1234,SPM,Rojo,Toyota,Sun Feb 02 17:42:31 2025,Sun Feb 02 21:19:40 2025
+1,2,AA123A,Deportiva,Negro,Benelli,Sun Feb 02 17:43:25 2025,Sun Feb 02 21:19:40 2025
+8,2,CCC1239,Son las tres,Del dia,Y estoy,Sun Feb 02 17:47:57 2025,Sun Feb 02 21:19:40 2025
 2,4,ABC1235,Corolla,Verde,Toyota,Sun Feb 02 18:02:27 2025,Sun Feb 02 18:04:55 2025
-13,2,DCC1234,Modelo hoy,Negro,Marca hoy,Sun Feb 02 18:59:49 2025,N/A
-13,10,AAA1234,RPM,Blanco,Subaru,Sun Feb 02 19:01:22 2025,N/A
-12,5,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Sun Feb 02 19:01:46 2025,N/A
-7,10,DDD1234,Asda,Dsf,Sdf,Sun Feb 02 19:02:56 2025,N/A
-9,2,EEE1234,Sdasf,Sfse,Fas,Sun Feb 02 19:03:30 2025,N/A
-8,11,DFS1233,Modelo,Color,Marca,Sun Feb 02 21:15:50 2025,N/A
+13,2,DCC1234,Modelo hoy,Negro,Marca hoy,Sun Feb 02 18:59:49 2025,Sun Feb 02 21:19:40 2025
+13,10,AAA1234,RPM,Blanco,Subaru,Sun Feb 02 19:01:22 2025,Sun Feb 02 21:30:40 2025
+12,5,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Sun Feb 02 19:01:46 2025,Sun Feb 02 21:19:40 2025
+7,10,DDD1234,Asda,Dsf,Sdf,Sun Feb 02 19:02:56 2025,Sun Feb 02 21:19:40 2025
+9,2,EEE1234,Sdasf,Sfse,Fas,Sun Feb 02 19:03:30 2025,Sun Feb 02 21:19:40 2025
+8,11,DFS1233,Modelo,Color,Marca,Sun Feb 02 21:15:50 2025,Sun Feb 02 21:19:40 2025
+5,5,XNG1234,Modelo,Color,Marca,Mon Feb 03 07:12:59 2025,Mon Feb 03 07:18:21 2025
+15,2,SKJ1232,Cosa,Cosita,Hola,Mon Feb 03 07:13:16 2025,Mon Feb 03 07:18:21 2025
+14,2,SL232I,Dsfsfsdf,Asas,Dasd,Mon Feb 03 07:13:37 2025,Mon Feb 03 07:18:21 2025
+4,13,AAA9876,Modelo coche,Color coche,Marca coche,Mon Feb 03 07:14:00 2025,Mon Feb 03 07:18:21 2025
+11,1,DS487Y,Modeli,Colori,Virgolinni,Mon Feb 03 07:14:27 2025,Mon Feb 03 07:18:21 2025
+9,6,ISD4895,Modelito,Bonito,Cosa,Mon Feb 03 07:14:44 2025,Mon Feb 03 07:18:21 2025
+8,5,RER2324,Sidjf,Frasf,Trurt,Mon Feb 03 07:15:18 2025,Mon Feb 03 07:18:21 2025
+14,4,LAS1334,Mdoelo,Saiduasd,Afa,Mon Feb 03 07:16:21 2025,Mon Feb 03 07:18:21 2025
+8,14,AAA1234,RPM,Blanco,Subaru,Mon Feb 03 07:17:39 2025,Mon Feb 03 07:22:08 2025
+3,9,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Mon Feb 03 07:17:46 2025,Mon Feb 03 07:22:08 2025
+10,8,CCC1234,SPM,Rojo,Toyota,Mon Feb 03 07:17:54 2025,Mon Feb 03 07:22:08 2025
+6,14,AAA9876,Modelo coche,Color coche,Marca coche,Mon Feb 03 07:19:08 2025,Mon Feb 03 07:22:08 2025
+1,1,AAA1234,RPM,Blanco,Subaru,Mon Feb 03 07:28:55 2025,Mon Feb 03 07:32:55 2025
+7,4,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Mon Feb 03 07:29:23 2025,Mon Feb 03 07:32:55 2025
+13,1,CCC1234,SPM,Rojo,Toyota,Mon Feb 03 07:29:29 2025,Mon Feb 03 07:32:55 2025
+2,0,SJH8273,Msfoisfas,Faafafas,Afadfaf,Mon Feb 03 07:29:56 2025,Mon Feb 03 07:32:55 2025
+13,13,RER2324,Sidjf,Frasf,Trurt,Mon Feb 03 07:30:55 2025,Mon Feb 03 07:32:55 2025
+15,2,AAA1234,RPM,Blanco,Subaru,Mon Feb 03 07:33:48 2025,Mon Feb 03 07:38:04 2025
+0,14,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Mon Feb 03 07:34:04 2025,Mon Feb 03 07:38:04 2025
+12,10,CCC1234,SPM,Rojo,Toyota,Mon Feb 03 07:34:16 2025,Mon Feb 03 07:38:04 2025
+12,3,AAA9876,Modelo coche,Color coche,Marca coche,Mon Feb 03 07:35:04 2025,Mon Feb 03 07:38:04 2025
+12,5,AAA1234,RPM,Blanco,Subaru,Mon Feb 03 07:59:05 2025,Mon Feb 03 09:14:15 2025
+5,15,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Mon Feb 03 07:59:36 2025,Mon Feb 03 09:14:15 2025
+9,5,CCC1234,SPM,Rojo,Toyota,Mon Feb 03 07:59:41 2025,Mon Feb 03 09:14:15 2025
+1,12,ABC1235,Corolla,Verde,Toyota,Mon Feb 03 08:00:23 2025,Mon Feb 03 09:14:15 2025
+2,9,AAA9876,Modelo coche,Color coche,Marca coche,Mon Feb 03 08:01:10 2025,Mon Feb 03 09:14:15 2025
+8,9,SFK1232,Asfs,Dfsdf,Sfd,Mon Feb 03 08:01:44 2025,Mon Feb 03 09:14:15 2025
+4,4,LL123K,Modelo moto,Color moto,Marca moto,Mon Feb 03 08:02:21 2025,Mon Feb 03 09:14:15 2025
+12,13,SFK4583,Modeloadsd,Invisible,Patito,Mon Feb 03 08:02:51 2025,Mon Feb 03 09:14:15 2025
+12,14,RER2324,Sidjf,Frasf,Trurt,Mon Feb 03 08:03:08 2025,Mon Feb 03 09:14:15 2025
+4,6,LAS1334,Mdoelo,Saiduasd,Afa,Mon Feb 03 08:03:26 2025,Mon Feb 03 09:14:15 2025
+4,14,ISD4895,Modelito,Bonito,Cosa,Mon Feb 03 08:03:48 2025,Mon Feb 03 09:14:15 2025
+11,10,AAA1234,RPM,Blanco,Subaru,Mon Feb 03 09:16:03 2025,Tue Feb 04 21:42:16 2025
+13,2,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Mon Feb 03 09:16:29 2025,Tue Feb 04 21:42:16 2025
+9,0,BBB1235,Asfasf,Afdfasd,Asfafg,Tue Feb 04 20:24:19 2025,Tue Feb 04 21:42:16 2025
+7,4,FFF1234,Modelazo,Colorsito,Marcad,Tue Feb 04 20:25:02 2025,Tue Feb 04 21:42:16 2025
+1,10,HHF1234,Modelito,Calorsito,Salchipapa,Tue Feb 04 20:25:40 2025,Tue Feb 04 21:42:16 2025
+2,5,AA123A,Deportiva,Negro,Benelli,Tue Feb 04 20:39:46 2025,Tue Feb 04 20:40:46 2025
+15,12,XNG1234,Modelo,Color,Marca,Tue Feb 04 20:52:00 2025,Tue Feb 04 21:42:16 2025
+9,15,AAA9876,Modelo coche,Color coche,Marca coche,Tue Feb 04 21:38:19 2025,Tue Feb 04 21:42:16 2025
+9,10,MNB1234,Deportivo,Rojo,Ferrari,Tue Feb 04 21:39:16 2025,Tue Feb 04 21:42:16 2025
+10,10,AAA1234,RPM,Blanco,Subaru,Tue Feb 04 21:46:28 2025,N/A
+8,4,BBB1234,Asijd,Sdiasdjo,Dasuidhaid,Tue Feb 04 21:46:40 2025,N/A
+14,10,CCC1234,SPM,Rojo,Toyota,Tue Feb 04 21:47:03 2025,N/A
+7,2,MNB1234,Deportivo,Rojo,Ferrari,Tue Feb 04 21:47:21 2025,Tue Feb 04 22:47:21 2025
+3,3,KLJ1232,Modelo,Color,Marca,Wed Feb 05 07:51:14 2025,Wed Feb 05 07:53:14 2025
+4,5,FFF1234,Modelazo,Colorsito,Marcad,Wed Feb 05 08:14:48 2025,N/A

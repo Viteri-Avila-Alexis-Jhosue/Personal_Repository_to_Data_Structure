@@ -75,6 +75,7 @@ public:
     void inOrder() const;
     void loadPropietarios(const std::string& fileName);
     void loadAutosHistorial(const std::string& fileName);
+    void loadAutosHistorial_en_parqueadero(const std::string& fileName);
     void loadAutos(const std::string& fileName);
     float convertirStringAFloat(const std::string & str);
     void imprimir_propietarios() const;
@@ -116,6 +117,7 @@ public:
     void postOrderTraversal() const;
     std::array<float, 2> buscarCeldaVacia(int size) const;
     void graficar_arbol() const;
+    void imprimir_conexiones(const std::vector<std::shared_ptr<Nodo<T>>>& nivel, const std::vector<std::shared_ptr<Nodo<T>>>& siguiente_nivel, int depth, int nivel_actual) const;
 
 };
 

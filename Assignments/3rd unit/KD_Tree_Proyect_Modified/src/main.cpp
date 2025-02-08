@@ -15,10 +15,12 @@ int main() {
     arbol_celdas.loadAutosHistorial("output//autos_historial.txt");
     arbol_propietarios.loadPropietarios("output//propietarios.txt");
     arbol_coches.loadAutos("output//autos.txt");
+    arbol_experimental.loadAutosHistorial_en_parqueadero("output//autos_historial.txt");
     system("pause");
     menu.principal_menu(arbol_coches, arbol_propietarios, arbol_celdas,size,arbol_experimental);
     arbol_celdas.~KD_Tree();
     arbol_propietarios.~KD_Tree();
     arbol_coches.~KD_Tree();
+    arbol_experimental.~KD_Tree();
     return 0;
 }
