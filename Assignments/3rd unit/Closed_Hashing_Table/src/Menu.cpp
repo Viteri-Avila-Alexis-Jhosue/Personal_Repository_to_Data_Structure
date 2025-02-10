@@ -101,14 +101,14 @@ void Menu::principal_menu()
         {
         case 0:
         {
-            cout << " Tabla de enteros" << endl;
+            cout << "Tabla de enteros" << endl;
             auxiliar_menu(0);
             system("pause");
             break;
         }
         case 1:
         {
-            cout << " Tabla de String" << endl;
+            cout << "Tabla de String" << endl;
             auxiliar_menu(1);
             system("pause");
             break;
@@ -148,7 +148,7 @@ void Menu::auxiliar_menu(int type)
         {
         case 0:
         {
-            cout << " Lineal " << endl;
+            cout << " ineal " << endl;
             if(type==0){
                 num = validation.ingresarInt("INGRESE SU NUMERO:\t");
                 cout << endl;
@@ -168,7 +168,7 @@ void Menu::auxiliar_menu(int type)
         }
         case 1:
         {
-            cout << " Cuadratica " << endl;
+            cout << "Cuadratica " << endl;
             if(type==0){
                 num = validation.ingresarInt("INGRESE SU NUMERO:\t");
                 cout << endl;
@@ -188,7 +188,7 @@ void Menu::auxiliar_menu(int type)
         }
         case 2:
         {
-            cout << " Doble " << endl;
+            cout << "Doble " << endl;
             if(type==0){
                 num = validation.ingresarInt("INGRESE SU NUMERO:\t");
                 cout << endl;
