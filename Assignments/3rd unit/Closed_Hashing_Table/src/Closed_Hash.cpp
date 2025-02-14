@@ -52,16 +52,16 @@ void Closed_Hash<T>::display() {
     int count = 0;
     for (int i = 0; i < size; i++) {
         if (occupied[i]) {
-            std::cout << "[" << i << "]: " << table[i].getWord() << "   ";
+            std::cout << "Posicion: " << i << ": " << table[i].getWord() << "     ";
         } else {
-            std::cout << "[" << i << "]: +    ";
+            std::cout << "Posicion: " << i << ": +    ";
         }
         count++;
-        if (count % 3 == 0) {
+        if (count % 5 == 0) {
             std::cout << std::endl;
         }
     }
-    if (count % 3 != 0) {
+    if (count % 5!= 0) {
         std::cout << std::endl;
     }
 }

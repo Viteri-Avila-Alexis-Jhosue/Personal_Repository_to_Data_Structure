@@ -12,6 +12,7 @@
                 "-IC:\\Users\\Usuario\\Documents\\SFML-2.5.0-windows-gcc-7.3.0-mingw-64-bit\\SFML-2.5.0\\include",  // Incluir SFML
                 "${workspaceFolder}/src/Queen.cpp",
                 "${workspaceFolder}/src/State.cpp",
+                "${workspaceFolder}/src/Game.cpp",
                 "${workspaceFolder}/src/main.cpp",
                 "-o",
                 "${workspaceFolder}/output/main.exe",

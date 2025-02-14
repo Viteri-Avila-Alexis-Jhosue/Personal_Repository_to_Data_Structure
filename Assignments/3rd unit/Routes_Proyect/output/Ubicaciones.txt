@@ -1,2 +1,17 @@
 12,1,Hospital
 23,2,Casa
+56,45,Hospital
+6,7,Coco
+56,78,Aqui hay Prostitutas
+3,4,Papulandia
+56,65,Bar de Moe
+1,1,sfsf
+2,2,ssfsad
+3,3,sadasd
+4,4,sdada
+12,23,Segunda casa
+7,78,Casa tres
+67,89,Banios
+45,45,Clinica
+90,90,KJaj
+34,78,Luz

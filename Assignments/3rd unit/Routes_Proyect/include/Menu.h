@@ -6,6 +6,7 @@
 #include <iostream>
 #include "KD_Tree.h"
 #include "Ubication.h"
+#include "Route.h"
 using namespace std;
 class Menu {
 private:
@@ -18,8 +19,9 @@ public:
     void displayMenu();
     int getSelectedOption();
     void addTitle(const string& title);
-    void principal_menu(int size,KD_Tree<Ubication>& ubication_tree);
+    void principal_menu(int size,KD_Tree<Ubication>& ubication_tree,KD_Tree<Route> routes_tree);
     int auxiliar_menu();
+    int distance_menu();
 };
 
 #endif // MENU_H

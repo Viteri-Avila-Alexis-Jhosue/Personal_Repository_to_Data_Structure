@@ -1,5 +1,5 @@
 #include "../include/Queen.h"
-#include <cmath> // Para usar la función abs
+#include <cmath>
 
 Queen::Queen(int row, int col) : row(row), col(col) {}
 

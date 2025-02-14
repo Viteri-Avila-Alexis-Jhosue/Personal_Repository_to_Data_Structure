@@ -1,6 +1,6 @@
 #include "../include/Menu.h"
 #include "../include/Ubication.h"
-#include  "../include/KD_Tree.h"
+#include "../include/KD_Tree.h"
 #include <iostream>
 #include <conio.h>
 #define WIN32_LEAN_AND_MEAN
@@ -84,13 +84,13 @@ int Menu::getSelectedOption()
 }
 //------------------------------------------------------------------------------------------------------------------------
 
-void Menu::principal_menu(int size,KD_Tree<Ubication>& ubication_tree)
+void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> routes_tree)
 {
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     bool running = true;
     string archivo, comando, name, name1, name2;
-    int x,y,continuador;
+    int x, y, continuador, cosa;
     Ubication ubication;
     Validation validation;
     while (running)
@@ -115,32 +115,134 @@ void Menu::principal_menu(int size,KD_Tree<Ubication>& ubication_tree)
         case 0:
         {
             cout << "Definir nueva ubicacion" << endl;
-            x=ubication.ingresar_coordenada(size,0);
-            y=ubication.ingresar_coordenada(size,1);
-            name=validation.ingresarStringConEspacios("\nIngrese el nombre del lugar: ");
-            cout<<endl;
-            ubication.ingresar_ubicacion(name,x,y);
-            ubication_tree.insert(ubication,x,y);
+            x = ubication.ingresar_coordenada(size, 0);
+            y = ubication.ingresar_coordenada(size, 1);
+
+            // Verificar si ya existe una ubicación con las coordenadas dadas
+            if (ubication_tree.findNode(x, y) != nullptr)
+            {
+                cout << "Error: Ya existe una ubicacion con las coordenadas (" << x << ", " << y << ")" << endl;
+            }
+            else
+            {
+                name = validation.ingresarStringConEspacios("\nIngrese el nombre del lugar: ");
+                cout << endl;
+                ubication.ingresar_ubicacion(name, x, y);
+                ubication_tree.insert(ubication, x, y);
+            }
+
             system("pause");
             break;
         }
         case 1:
-        {
-            cout << "Definir nueva ruta" << endl;
-            name=validation.ingresarStringConEspacios("Ingrese el nombre de la ruta:  ");
-            name1= validation.ingresarStringConEspacios("Ingrese el punto inicial de la ruta: ");
-            name2= validation.ingresarStringConEspacios("Ingrese la siguiente ubicacion:  ");
-            while (continuador==0)
+{
+    cout << "Definir nueva ruta" << endl;
+    string routeName = validation.ingresarStringConEspacios("\nIngrese el nombre de la ruta: ");
+    
+    // Verificar si ya existe una ruta con el mismo nombre
+    if (routes_tree.findNodeByName(routeName)) {
+        cout << "Error: Ya existe una ruta con el nombre '" << routeName << "'" << endl;
+        system("pause");
+        break;
+    }
+
+    Ubication previousUbication;
+    bool addingRoutes = true;
+
+    while (addingRoutes) {
+        // Mostrar el menú auxiliar para decidir si agregar una nueva ubicación o finalizar la ruta
+        int option = auxiliar_menu();
+
+        switch (option) {
+            case 0: // Ingresar nueva ubicación
             {
-                continuador=auxiliar_menu();
-                if(continuador==0){
-                    name1=validation.ingresarStringConEspacios("Ingrese el nombre de la ubicacion");
-                }  
+                Ubication initialUbication;
+                Ubication lastUbication;
+
+                if (previousUbication.getName() == "") {
+                    // Primera ubicación
+                    cout << "Ingrese las coordenadas de la primera ubicación: " << endl;
+                    int x1 = ubication.ingresar_coordenada(size, 0);
+                    int y1 = ubication.ingresar_coordenada(size, 1);
+
+                    // Verificar que la ubicación inicial exista
+                    auto initialUbicationNode = ubication_tree.findNode(x1, y1);
+                    if (initialUbicationNode == nullptr) {
+                        cout << "Error: No existe una ubicación con las coordenadas (" << x1 << ", " << y1 << ")" << endl;
+                        system("pause");
+                        break;
+                    }
+
+                    initialUbication = initialUbicationNode->data;
+
+                    cout << "\nIngrese las coordenadas de la segunda ubicación: " << endl;
+                    int x2 = ubication.ingresar_coordenada(size, 0);
+                    int y2 = ubication.ingresar_coordenada(size, 1);
+
+                    // Verificar que la ubicación final exista
+                    auto lastUbicationNode = ubication_tree.findNode(x2, y2);
+                    if (lastUbicationNode == nullptr) {
+                        cout << "Error: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
+                        system("pause");
+                        break;
+                    }
+
+                    lastUbication = lastUbicationNode->data;
+                } else {
+                    // Ubicaciones posteriores
+                    auto initialUbicationNode = ubication_tree.findNode(previousUbication.getX(), previousUbication.getY());
+                    initialUbication = initialUbicationNode->data;
+
+                    cout << "Tramo desde " << initialUbication.getName() << " hasta: ?" << endl;
+                    cout << "Ingrese las coordenadas de la segunda ubicación: " << endl;
+                    int x2 = ubication.ingresar_coordenada(size, 0);
+                    int y2 = ubication.ingresar_coordenada(size, 1);
+
+                    // Verificar que la ubicación final exista
+                    auto lastUbicationNode = ubication_tree.findNode(x2, y2);
+                    if (lastUbicationNode == nullptr) {
+                        cout << "Error: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
+                        system("pause");
+                        break;
+                    }
+
+                    lastUbication = lastUbicationNode->data;
+                }
+
+                // Definir la distancia
+                int distance = distance_menu();
+
+                // Crear la ruta
+                Route newRoute;
+                newRoute.definir_ruta(routeName, distance, initialUbication, lastUbication, size);
+
+                // Insertar la ruta en el árbol de rutas
+                routes_tree.insert(newRoute, initialUbication.getX(), initialUbication.getY());
+                previousUbication = lastUbication; // Actualizar la ubicación anterior
+
+                cout << "\nRuta agregada exitosamente." << endl;
+                system("pause");
+                break;
             }
-            
-            system("pause");
-            break;
+            case 1: // Finalizar ruta
+            {
+                addingRoutes = false;
+                cout << "Finalizando la creación de la ruta '" << routeName << "'." << endl;
+                break;
+            }
+            default:
+            {
+                cout << "Opción no válida. Inténtelo de nuevo." << endl;
+                system("pause");
+                break;
+            }
         }
+    }
+
+    cout << "Ruta '" << routeName << "' creada exitosamente." << endl;
+    system("pause");
+    break;
+}
         case 2:
         {
             cout << "Modificar ruta existente" << endl;
@@ -168,6 +270,7 @@ void Menu::principal_menu(int size,KD_Tree<Ubication>& ubication_tree)
         case 6:
         {
             cout << "Imprimir rutas" << endl;
+            routes_tree.print_routes();
             system("pause");
             break;
         }
@@ -205,15 +308,48 @@ void Menu::principal_menu(int size,KD_Tree<Ubication>& ubication_tree)
         }
     }
 }
-int Menu::auxiliar_menu(){
+
+int Menu::auxiliar_menu()
+{
     bool running = true;
-    
-    while (running) {
+    int selectedOption = -1;
+
+    while (running)
+    {
         options.clear();
         addOption("Ingresar nueva ubicacion");
         addOption("Finalizar Ruta");
         addTitle("\t Seleccione para continuar");
         displayMenu();
+
+        selectedOption = getSelectedOption(); // Almacenar la opción seleccionada
+
+        if (selectedOption == 0 || selectedOption == 1)
+        {
+            running = false; // Salir del bucle si se selecciona una opción válida
+        }
+        else
+        {
+            cout << "Opción no válida. Inténtelo de nuevo." << endl;
+            system("pause");
+        }
     }
-    return getSelectedOption();
+
+    return selectedOption; // Devuelve 0 (Ingresar nueva ubicación) o 1 (Finalizar Ruta)
+}
+
+int Menu::distance_menu()
+{
+    bool running = true;
+    while (running)
+    {
+        options.clear();
+        addOption("Asignar distancia recta (Automáticamente)");
+        addOption("Asignar distancia no recta (Manualmente)");
+        addTitle("\t Seleccione para continuar");
+        displayMenu();
+        running = false; // Salir del bucle si se selecciona una opción válida
+    }
+
+    return getSelectedOption(); // Devuelve 0 (automático) o 1 (manual)
 }

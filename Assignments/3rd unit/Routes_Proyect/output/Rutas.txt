@@ -1,0 +1,2 @@
+El sol,12,1,Hospital,1,1,sfsf,11,45
+El sol,1,1,sfsf,45,45,Clinica,62.2254,34

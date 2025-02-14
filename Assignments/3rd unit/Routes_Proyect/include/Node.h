@@ -7,12 +7,13 @@
 template <typename T>
 class Node {
 public:
-    T data;
-    std::array<int, 2> coords;
-    std::shared_ptr<Node<T>> left;
-    std::shared_ptr<Node<T>> right;
+T data;                      // Datos almacenados en el nodo
+std::array<int, 2> coords;   // Coordenadas (x, y) del nodo
+Node<T>* left;               // Puntero al hijo izquierdo
+Node<T>* right;              // Puntero al hijo derecho
 
     Node(const T& data, int x, int y);
 };
+
 #include "../src/Node.cpp"
 #endif // Node_H
