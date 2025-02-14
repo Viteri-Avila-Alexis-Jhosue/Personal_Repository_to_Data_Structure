@@ -10,6 +10,7 @@
                 "-g",
                 "-I${workspaceFolder}/include",
                 "-IC:\\Users\\Usuario\\Documents\\SFML-2.5.0-windows-gcc-7.3.0-mingw-64-bit\\SFML-2.5.0\\include",  // Incluir SFML
+                "${workspaceFolder}/src/Graph.cpp",
 				"${workspaceFolder}/src/Menu.cpp",
 				"${workspaceFolder}/src/Validation.cpp",
                 "${workspaceFolder}/src/main.cpp",
