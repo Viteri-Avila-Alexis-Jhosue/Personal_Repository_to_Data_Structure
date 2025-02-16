@@ -12,6 +12,8 @@ NRC:  1978
 #include <cstdio>
 #include <cstring>
 #include <cstdlib> 
+#include <conio.h>
+#include <regex>
 #include "../include/Validation.h"
 
 using namespace std;
@@ -184,4 +186,65 @@ string Validation::ingresarStringConEspacios(const char* msj) {
     cadena1 = cad;  
     delete[] cad;  
     return cadena1;  
+}
+
+
+string Validation::ingresarHora(const string &msj)
+{
+    string hora;
+    char c;
+    const regex pattern(R"(\d{2}:\d{2}:\d{2})"); // Formato: hh:mm:ss
+
+    cout << msj;
+
+    while (true)
+    {
+        c = _getch(); // Captura el carácter sin mostrar el eco en consola
+
+        if (isdigit(c) && hora.length() < 8) // Dígitos (solo las ocho posiciones)
+        {
+            hora += c;
+            cout << c; // Muestra el dígito
+
+            // Agrega automáticamente los dos puntos después de 2 y 5 dígitos
+            if (hora.length() == 2 || hora.length() == 5)
+            {
+                hora += ':';
+                cout << ':'; // Muestra el colon
+            }
+        }
+        else if (c == '\b' && !hora.empty()) // Retroceso para borrar
+        {
+            if (hora.back() == ':') // Evitar borrar los dos puntos
+            {
+                hora.pop_back();
+                cout << "\b \b"; // Borra el dos puntos de la consola
+            }
+            else
+            {
+                hora.pop_back();
+                cout << "\b \b"; // Borra el carácter de la consola
+            }
+        }
+        else if (c == '\r') // Enter para confirmar
+        {
+            if (hora.length() == 8 && regex_match(hora, pattern)) // Validación final
+            {
+                break;
+            }
+            else
+            {
+                cout << "\nFormato inválido. Ingrese nuevamente: ";
+                hora.clear();
+                cout << msj;
+            }
+        }
+        else // Cualquier otro símbolo no permitido
+        {
+            cout << "\a"; // Sonido de alerta para caracteres no válidos
+        }
+    }
+
+    cout << endl;
+    return hora;
 }

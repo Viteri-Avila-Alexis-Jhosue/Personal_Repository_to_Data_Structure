@@ -1,5 +1,6 @@
 #include "../include/Route.h"
 #include "../include/Validation.h"
+#include "../include/Trafic.h"
 #include <iostream>
 #include <cmath>
 
@@ -9,7 +10,12 @@ Route::Route(const std::string& name, double distance, const Ubication& initial,
 Route::Route() : name(""), distance(0.0), speed(0.0) {
     initial = Ubication(0, 0, "");  // Puedes inicializar con valores por defecto
     last = Ubication(0, 0, "");
+    trafic = Trafic("","",0);
 }
+
+Route::Route(const std::string& name, double distance, const Ubication& initial, const Ubication& last, double speed, Trafic trafic)
+    : name(name), distance(distance), initial(initial), last(last), speed(speed), trafic(trafic) {}
+
 std::string Route::getName() const { return name; }
 
 double Route::getDistance() const { return distance; }
@@ -17,6 +23,8 @@ double Route::getDistance() const { return distance; }
 Ubication Route::getInitialUbication() const { return initial; }
 
 Ubication Route::getLastUbication() const { return last; }
+
+Trafic Route::getTrafic() const { return trafic;}
 
 double Route::getSpeed() const { return speed; }
 
@@ -74,6 +82,10 @@ void Route::definir_ruta(std::string name, double distance, Ubication initial, U
     guardar_en_archivo();
 }
 
+void Route::agregar_trafico(Trafic trafic) {
+    this->trafic = trafic;
+}
+
 void Route::guardar_en_archivo() {
     // Abrir el archivo en modo "append" (agregar al final)
     std::ofstream file("output//Rutas.txt", std::ios::app);
@@ -91,7 +103,14 @@ void Route::guardar_en_archivo() {
          << last.getY() << ","
          << last.getName() << ","
          << distance << ","
-         << speed << "\n";
+         << speed;
+    if (!trafic.getInitialHour().empty() && !trafic.getLastHour().empty() && trafic.getLevel() > 0) {
+        file << "," << trafic.getInitialHour() << ","
+             << trafic.getLastHour() << ","
+             << trafic.getLevel();
+    }
+
+    file << "\n";
 
     // Cerrar el archivo
     file.close();

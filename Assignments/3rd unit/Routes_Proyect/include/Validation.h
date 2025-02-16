@@ -23,6 +23,7 @@ public:
     double ingresarDouble(const char* msj);
     string ingresarString(const char* msj);
     string ingresarStringConEspacios(const char* msj);
+    string ingresarHora(const string &msj);
 };
 
 #endif

@@ -8,11 +8,10 @@ private:
     std::string initial_hour;
     std::string last_hour;
     int level;
-    Ubication initial;
-    Ubication last;
 
 public:
-    Trafic(const std::string& initial_hour, const std::string& last_hour, int level, const Ubication& initial, const Ubication& last);
+    Trafic(const std::string& initial_hour, const std::string& last_hour, int level);
+    Trafic();
     std::string getInitialHour() const;
     std::string getLastHour() const;
     int getLevel() const;

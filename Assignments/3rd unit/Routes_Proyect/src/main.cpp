@@ -14,4 +14,5 @@ int main(){
     system("pause");
     menu.principal_menu(size, ubication_tree, routes_tree);
     ubication_tree.~KD_Tree();
+    routes_tree.~KD_Tree();
 }

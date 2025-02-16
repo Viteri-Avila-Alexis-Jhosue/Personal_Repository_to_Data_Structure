@@ -1,2 +1,4 @@
-El sol,12,1,Hospital,1,1,sfsf,11,45
-El sol,1,1,sfsf,45,45,Clinica,62.2254,34
+Sol,45,45,Clinica,12,23,Segunda casa,39.6611,56
+Luna,12,1,Hospital,23,2,Casa,11,67,09:45:45,12:12:12,3
+Luna,23,2,Casa,56,45,Hospital2,54,45,09:45:45,12:12:12,3
+Luna,56,45,Hospital2,3,4,Papulandia,78,45,09:45:45,12:12:12,3

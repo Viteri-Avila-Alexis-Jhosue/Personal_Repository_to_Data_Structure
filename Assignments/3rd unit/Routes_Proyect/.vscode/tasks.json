@@ -12,6 +12,7 @@
                 "${workspaceFolder}/src/Menu.cpp",
 				"${workspaceFolder}/src/Route.cpp",
 				"${workspaceFolder}/src/Ubication.cpp",
+                "${workspaceFolder}/src/Trafic.cpp",
                 "${workspaceFolder}/src/Validation.cpp",
                 "-o",
                 "${workspaceFolder}/output/main.exe",

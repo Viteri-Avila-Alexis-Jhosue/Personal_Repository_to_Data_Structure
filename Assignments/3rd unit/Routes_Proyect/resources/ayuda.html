@@ -4,92 +4,140 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual de Ayuda - Sistema de Parqueadero</title>
+    <title>Manual de Ayuda - Gestor de Rutas</title>
 </head>
 <body>
     <div class="container">
-        <h1>Manual de Ayuda</h1>
-        <p>Bienvenido al manual de usuario del <strong>Gestor de Rutas</strong>. Este sistema le permite gestionar la informacion sobre rutas y ubicaciones en un plano bidimencional.</p>
+        <h1>Manual de Ayuda - Gestor de Rutas</h1>
+        <p>Bienvenido al manual de usuario del <strong>Gestor de Rutas</strong>. Este sistema le permite gestionar rutas, ubicaciones y niveles de tráfico en una ciudad, así como calcular rutas óptimas y generar gráficas estadísticas.</p>
+
         <div class="section">
-            <h2>Funcionamiento del Sistema</h2>
-            <p>El sistema controla La insercion de ubicaciones en un plano bidimencioal, es decir, cada ubicacion debe tener <strong>una coordenada "x" y una coordenada "y" </strong>.Ademas, las rutas deben estar conectadas entre ubicaciones, por lo que, entre mas puntos de referencia, mas acercado a la realidad sera el mapa de las rutas .</p>
-
-            <h3>1. Definir una nueva ubicacion</h3>
-            <p>El primer paso es definir una ubicacion, sin ubicaciones no se pueden crear las rutas, antes de comenzar a ingresar rutas, es recomendable haber ingresado todos los puntos de referencia. Los datos que tiene cada Ubicacion son:</p>
+            <h2>Menú Principal</h2>
+            <p>El sistema cuenta con las siguientes opciones en el menú principal:</p>
             <ul>
-                <li><strong>Nombre:</strong> Nombre del lugar. Ejemplo: Casa</li>
-                <li><strong>Coordenada x :</strong> Se refiere a la coordenada del lugar en el eje horizontal.</li>
-                <li><strong>Coordenada y :</strong> Se refiere a la coordenada del lugar en el eje vertical.</li>
+                <li><strong>Definir nueva ubicación:</strong> Permite agregar nuevas ubicaciones al sistema.</li>
+                <li><strong>Definir nueva ruta:</strong> Permite crear nuevas rutas entre ubicaciones existentes.</li>
+                <li><strong>Modificar ruta existente:</strong> Permite editar rutas ya creadas.</li>
+                <li><strong>Definir niveles de tráfico:</strong> Permite establecer niveles de tráfico para las rutas.</li>
+                <li><strong>Modificar niveles de tráfico:</strong> Permite ajustar los niveles de tráfico existentes.</li>
+                <li><strong>Cálculo de rutas óptimas:</strong> Calcula la ruta más eficiente entre dos puntos.</li>
+                <li><strong>Imprimir rutas:</strong> Muestra las rutas disponibles en el sistema.</li>
+                <li><strong>Imprimir ubicaciones:</strong> Muestra las ubicaciones registradas.</li>
+                <li><strong>Imprimir gráficas:</strong> Genera gráficas estadísticas de las rutas.</li>
+                <li><strong>Ayuda:</strong> Muestra este manual de ayuda.</li>
+                <li><strong>Salir:</strong> Cierra el sistema.</li>
             </ul>
-            <p>Es necesario definir por lo menos 2 ubicaciones para definir rutas.</p>
-
-            <h3>2. Definir una ruta</h3>
-            <p>Despues de haber creado por lo menos 2 ubicaciones podemos continuar con el ingreso de rutas, los elementos de cada ruta son:</p>
-            <ul>
-                <li><strong>Nombre :</strong> Se refiere al nombre de la ruta. Ejemplo: Av. Simon Bolivar.</li>
-                <li><strong>Velocidad maxima :</strong> Se refiere a la velocidad maxima a la que puede circular un vehiculo liviano en este tramo de la ruta.</li>
-                <li><strong>Ubicaciones :</strong> Se selecciona ubicaciones ya ingresadas para definir la ruta.Este paso es definido por el numero de ubicaciones registradas pudiendose construir una ruta que abarque todas las ubicaciones. </li>
-                <li><strong>Distancia :</strong> En cada tramo se define una distancia, esta puede ser calculada por el sistema o puede definirse manualmente siempre y cuando no sea menor a la distancia minima del sistema.</li>
-            </ul>
-
-            <h3>3. Búsqueda de Autos</h3>
-            <p>El sistema permite buscar un auto por su placa y verificar su estado actual.</p>
-
-            <h3>4. Gestión de Propietarios</h3>
-            <p>Para agregar un auto nuevo, primero se debe registrar un propietario con los siguientes datos:</p>
-            <ul>
-                <li><strong>Nombre</strong></li>
-                <li><strong>Apellido</strong></li>
-                <li><strong>Cédula </strong></li>
-                <li><strong>Correo</strong></li>
-            </ul>
-            <p>Una vez registrado, el propietario podrá vincular autos.</p>
-            <h3>5. Manejo del espacio en el parqueadero</h3>
-            <p>El sistema permite visualizar el estado actual del parqueadero y la disponibilidad de espacios.</p>
-            <h3>6. Busquedas Avazadas</h3>
-            <p>El sistema permite realizar busquedas avanzadas de autos por placa, marca, color, modelo, rango de fechas y rango de horas .</p>
-            <h3>7. Busquedas espaciales</h3>
-            <h4><strong>El sistema cuenta con:</strong></h4>
-            <ul>
-                <li>Busqueda del vehiculo mas cercano a una coordenada</li>
-                <li>Busqueda de la celda vacia mas cercana a la entrada o a la salida</li>
         </div>
+
         <div class="section">
-            <h2>Funcionamiento de los Backups con Cobian Reflector</h2>
-            <p>Para mantener la seguridad de sus datos y prevenir la pérdida de información valiosa, el sistema realiza automáticamente copias de seguridad de los archivos relacionados con el parqueadero. Esto incluye los archivos de texto donde se almacenan los datos de los coches registrados.</p>
+            <h2>Funcionalidades del Sistema</h2>
+            <h3>1. Definir una nueva ubicación</h3>
+            <p>Para definir una nueva ubicación, ingrese los siguientes datos:</p>
+            <ul>
+                <li><strong>Nombre:</strong> Nombre del lugar. Ejemplo: Plaza Central.</li>
+                <li><strong>Coordenada X:</strong> Coordenada en el eje horizontal.</li>
+                <li><strong>Coordenada Y:</strong> Coordenada en el eje vertical.</li>
+            </ul>
+            <p>Las ubicaciones se almacenan en un árbol kd para facilitar su búsqueda y gestión.</p>
 
-            <h3>1. ¿Qué Archivos se Respaldan?</h3>
-            <p>El sistema realiza copias de seguridad de los archivos .txt que contienen la información de los coches registrados en el parqueadero. Estos archivos son vitales para mantener la integridad de los datos, por lo que se respaldan de manera periódica.</p>
-
-            <h3>2. Selección de los Archivos para el Backup</h3>
-            <p>Cobian Reflector está configurado para seleccionar automáticamente los archivos relevantes del sistema. Los archivos de datos del parqueadero, típicamente almacenados con la extensión <code>.txt</code>, son los que se respaldan.</p>
-
-            <h3>3. ¿Cómo se Crean los Backups?</h3>
-            <p>El proceso de creación de backups con Cobian Reflector es automático. Sigue estos pasos:</p>
+            <h3>2. Definir una nueva ruta</h3>
+            <p>Para crear una nueva ruta, siga estos pasos:</p>
             <ol>
-                <li><strong>Identificación de Archivos:</strong> Cobian Reflector identifica los archivos relevantes.</li>
-                <li><strong>Creación del Backup:</strong> Se realiza una copia exacta de estos archivos.</li>
-                <li><strong>Almacenamiento del Backup:</strong> La copia de seguridad se guarda en una ubicación segura.</li>
-                <li><strong>Notificación:</strong> Cobian Reflector puede enviar una notificación indicando que el proceso de copia de seguridad se ha completado correctamente.</li>
+                <li>
+                    <strong>Nombre de la ruta:</strong> Asigne un nombre a la ruta. Ejemplo: Av. Principal.
+                </li>
+                <li>
+                    <strong>Ingresar coordenadas:</strong> Conecte la ruta ingresando pares de coordenadas (x, y) que representan los puntos de la ruta.
+                </li>
+                <li>
+                    <strong>Definir velocidad y distancia:</strong> Para cada par de coordenadas conectadas, defina:
+                    <ul>
+                        <li><strong>Velocidad máxima:</strong> Velocidad permitida en ese tramo de la ruta.</li>
+                        <li><strong>Distancia:</strong> Distancia entre las coordenadas. Puede ser calculada automáticamente por el sistema o ingresada manualmente.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Repetir el proceso:</strong> Continúe agregando pares de coordenadas y definiendo velocidad y distancia hasta que la ruta esté completamente conectada.
+                </li>
             </ol>
-            <h3>4. ¿Dónde se Guardan los Backups?</h3>
-            <p>Los backups se guardan en una carpeta de destino que puede ser configurada durante la instalación del sistema. El destino más común es una carpeta local en su computadora, pero también puede configurar una unidad externa o una carpeta en red para almacenar las copias de seguridad, lo que proporciona una mayor seguridad ante fallos del sistema.</p>
-            <h3>5. ¿Qué Hacer en Caso de Necesitar Restaurar los Datos?</h3>
-            <p>Si alguna vez necesita recuperar la información de los coches registrados, simplemente abra Cobian Reflector, seleccione la tarea de backup correspondiente y elija la opción de restauración. El sistema reemplazará los archivos actuales con los datos de la copia de seguridad, asegurando que toda la información se recupere tal como estaba.</p>
-            <h3>6. Video Tutorial sobre Cómo Hacer Copias de Seguridad en Cobian Reflector</h3>
-            <p>Para una explicación más visual de cómo hacer copias de seguridad con Cobian Reflector, puede consultar el siguiente video tutorial:</p>
-                <p><a href="https://youtu.be/yOSFdqtzyYk" target="_blank">Ver tutorial sobre Cobian Reflector</a></p>
-            <h3>Conclusión</h3>
-            <p>Este manual le ayudará a gestionar su sistema de parqueadero de forma efectiva, así como a realizar backups de sus archivos .txt utilizando Cobian Reflector para garantizar la seguridad de sus datos. Si tiene alguna duda o necesita ayuda adicional, no dude en ponerse en contacto con el soporte técnico.</p>
-            </div>
+            <p><strong>Nota:</strong> Asegúrese de que las coordenadas ingresadas correspondan a ubicaciones previamente definidas en el sistema.</p>
 
+            <h3>3. Modificar una ruta existente</h3>
+            <p>En el menú secundario de modificación de rutas, puede:</p>
+            <ul>
+                <li><strong>Cambiar el nombre de la ruta.</strong> Ingresar el nombre actual de la ruta y luego el nuevo nombre.</li>
+                <li><strong>Modificar la velocidad en un tramo.</strong> Deberá escribir el nombre de la ruta y las coordenadas en las que se encuentra ese tramo de ruta.</li>
+                <li><strong>Modificar la distancia entre ubicaciones de un tramo.</strong> La distancia no puede ser menor a la distancia recta entre las dos ubicaciones.</li>
+            </ul>
 
+            <h3>4. Definir niveles de tráfico</h3>
+            <p>Para definir niveles de tráfico en una ruta, siga estos pasos:</p>
+            <ol>
+                <li>
+                    <strong>Seleccionar la ruta:</strong> Elija la ruta en la que desea definir el nivel de tráfico.
+                </li>
+                <li>
+                    <strong>Seleccionar el tramo:</strong> Especifique el tramo de la ruta afectado por el tráfico.
+                </li>
+                <li>
+                    <strong>Definir el horario:</strong> Ingrese la hora de inicio y la hora de finalización del tráfico.
+                </li>
+                <li>
+                    <strong>Seleccionar el nivel de tráfico:</strong> Elija entre:
+                    <ul>
+                        <li><strong>Bajo:</strong> Tráfico leve, sin retrasos significativos.</li>
+                        <li><strong>Medio:</strong> Tráfico moderado, con retrasos ocasionales.</li>
+                        <li><strong>Alto:</strong> Tráfico intenso, con retrasos considerables.</li>
+                    </ul>
+                </li>
+            </ol>
+            <p><strong>Nota:</strong> Los niveles de tráfico afectan el cálculo de rutas óptimas, especialmente en términos de tiempo estimado de viaje.</p>
+
+            <h3>5. Modificar niveles de tráfico</h3>
+            <p>Para modificar los niveles de tráfico existentes, siga estos pasos:</p>
+            <ol>
+                <li>
+                    <strong>Seleccionar la ruta:</strong> Elija la ruta con el nivel de tráfico que desea modificar.
+                </li>
+                <li>
+                    <strong>Seleccionar el tramo:</strong> Especifique el tramo de la ruta que desea ajustar.
+                </li>
+                <li>
+                    <strong>Modificar el horario:</strong> Actualice la hora de inicio y la hora de finalización del tráfico.
+                </li>
+                <li>
+                    <strong>Cambiar el nivel de tráfico:</strong> Ajuste el nivel de tráfico (bajo, medio, alto) según sea necesario.
+                </li>
+            </ol>
+
+            <h3>6. Cálculo de rutas óptimas</h3>
+            <p>El sistema utiliza algoritmos como Dijkstra para calcular rutas óptimas basadas en:</p>
+            <ul>
+                <li><strong>Distancia total.</strong> A veces la ruta más corta no es la más óptima, debido a los niveles de tráfico.</li>
+                <li><strong>Tiempo estimado de viaje.</strong> Esta es la ruta óptima por excelencia.</li>
+            </ul>
+            <p>También se pueden encontrar rutas alternativas no óptimas utilizando backtracking.</p>
+
+            <h3>7. Gráficas estadísticas</h3>
+            <p>El sistema genera gráficas estadísticas utilizando MatLab, incluyendo:</p>
+            <ul>
+                <li><strong>Gráficas de barras de rutas posibles (tiempo y distancia).</strong> Solamente de las 5 primeras rutas posibles.</li>
+                <li><strong>Visualización de aristas (calles) y nodos (ubicaciones).</strong> El mapa se representará mediante un grafo.</li>
+            </ul>
+
+            <h3>8. Almacenamiento de datos</h3>
+            <p>Los datos se guardan en archivos de texto (<code>.txt</code>) para:</p>
+            <ul>
+                <li><strong>Ubicaciones.</strong> Líneas simples que contienen coordenadas y nombre del lugar.</li>
+                <li><strong>Rutas.</strong> Se guardan por tramos.</li>
+                <li><strong>Niveles de tráfico.</strong> En el mismo archivo que Rutas.</li>
+            </ul>
+        </div>
 
         <footer>
-            <p><strong>Desarrollado por:</strong> </p>
-            <p><strong>Programa base:</strong> Mario Anrrango, Joffre Gomez e Iván Mantilla. </p>
-            <p><strong>Modificaciones y mejoras:</strong> Camila Amores, Alexander Benavidez, Alexis Viteri. 
-            </p>
+            <p><strong>Desarrollado por:</strong> Alexis Viteri </p>
+            <p><strong>Curso de:</strong> Estructura de Datos </p>
+            <p><strong>NRC:</strong> 1978 </p>
         </footer>
     </div>
 </body>

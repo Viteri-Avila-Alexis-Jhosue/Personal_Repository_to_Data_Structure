@@ -19,9 +19,11 @@ public:
     void displayMenu();
     int getSelectedOption();
     void addTitle(const string& title);
-    void principal_menu(int size,KD_Tree<Ubication>& ubication_tree,KD_Tree<Route> routes_tree);
+    void principal_menu(int size,KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree);
     int auxiliar_menu();
     int distance_menu();
+    int level_menu();
+    void routeCh_menu(KD_Tree<Route>& routes_tree);
 };
 
 #endif // MENU_H
