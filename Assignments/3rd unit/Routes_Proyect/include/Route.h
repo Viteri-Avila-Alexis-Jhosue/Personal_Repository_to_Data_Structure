@@ -32,6 +32,8 @@ public:
     void definir_ruta(std::string name,double distance, Ubication initial, Ubication last, int size);
     void guardar_en_archivo();
     void agregar_trafico(Trafic trafic);
+    static bool eliminarTramoDelArchivo(const std::string& nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal);
+    static bool eliminarRutaDelArchivo(const std::string& nombreRuta);
 };
 
 #endif // ROUTE_H

@@ -3,6 +3,10 @@
 #include "../include/Trafic.h"
 #include <iostream>
 #include <cmath>
+#include <fstream>
+#include <sstream>
+#include <vector>
+
 
 Route::Route(const std::string& name, double distance, const Ubication& initial, const Ubication& last, double speed)
     : name(name), distance(distance), initial(initial), last(last), speed(speed) {}
@@ -114,4 +118,93 @@ void Route::guardar_en_archivo() {
 
     // Cerrar el archivo
     file.close();
+}
+bool Route::eliminarRutaDelArchivo(const std::string& nombreRuta) {
+    std::ifstream inputFile("output//Rutas.txt");
+    if (!inputFile.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo de Rutas para leer." << std::endl;
+        return false;
+    }
+
+    std::vector<std::string> lineas;
+    std::string linea;
+
+    // Leer todas las líneas del archivo
+    while (std::getline(inputFile, linea)) {
+        // Si la línea no comienza con el nombre de la ruta, la guardamos
+        if (linea.find(nombreRuta + ",") != 0) {
+            lineas.push_back(linea);
+        }
+    }
+    inputFile.close();
+
+    // Escribir las líneas restantes de vuelta al archivo
+    std::ofstream outputFile("output//Rutas.txt", std::ios::trunc); // Abrir en modo truncar (sobrescribir)
+    if (!outputFile.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
+        return false;
+    }
+
+    for (const auto& l : lineas) {
+        outputFile << l << "\n";
+    }
+    outputFile.close();
+
+    return true;
+}
+
+bool Route::eliminarTramoDelArchivo(const std::string& nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal) {
+    std::ifstream inputFile("output//Rutas.txt");
+    if (!inputFile.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo de Rutas para leer." << std::endl;
+        return false;
+    }
+
+    std::vector<std::string> lineas;
+    std::string linea;
+
+    // Leer todas las líneas del archivo
+    while (std::getline(inputFile, linea)) {
+        std::stringstream ss(linea);
+        std::vector<std::string> datos;
+        std::string elemento;
+
+        // Separar la línea por comas y almacenarla en un vector
+        while (std::getline(ss, elemento, ',')) {
+            datos.push_back(elemento);
+        }
+
+        // Verificar si la línea tiene al menos 7 elementos (ruta, x1, y1, destino, x2, y2, destino final)
+        if (datos.size() < 7) {
+            std::cerr << "Error: Formato incorrecto en la línea -> " << linea << std::endl;
+            continue;  // Ignorar líneas con formato incorrecto
+        }
+
+        // Extraer valores de la línea
+        std::string name = datos[0];  // Nombre de la ruta
+        int xi = std::stoi(datos[1]); // X inicial
+        int yi = std::stoi(datos[2]); // Y inicial
+        int xf = std::stoi(datos[4]); // X final
+        int yf = std::stoi(datos[5]); // Y final
+
+        // Si la línea NO coincide con el tramo a eliminar, la guardamos
+        if (!(name == nombreRuta && xi == xInicial && yi == yInicial && xf == xFinal && yf == yFinal)) {
+            lineas.push_back(linea);
+        }
+    }
+    inputFile.close();
+
+    // Escribir las líneas restantes de vuelta al archivo
+    std::ofstream outputFile("output//Rutas.txt", std::ios::trunc);
+    if (!outputFile.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
+        return false;
+    }
+
+    for (const auto& l : lineas) {
+        outputFile << l << "\n";
+    }
+    outputFile.close();
+
+    return true;
 }

@@ -4,7 +4,7 @@ body {
     line-height: 1.8;
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Fondo oscuro base */
+    background-color: #12121253; /* Fondo oscuro base */
     background-image: url('Mapa.webp'); /* Agrega tu imagen de fondo */
     background-size: cover;
     background-position: center;
@@ -61,7 +61,7 @@ strong {
 
 /* Preformatted Text Styles */
 pre {
-    background-color: rgba(30, 30, 30, 0.331); /* Fondo oscuro semi-transparente para pre */
+    background-color: rgba(30, 30, 30, 0.247); /* Fondo oscuro semi-transparente para pre */
     padding: 20px;
     border-radius: 10px;
     overflow-x: auto;
@@ -78,7 +78,7 @@ pre {
     margin: 40px auto;
     overflow: hidden;
     padding: 30px;
-    background: rgba(30, 30, 30, 0.338); /* Fondo oscuro semi-transparente */
+    background: rgba(30, 30, 30, 0.352); /* Fondo oscuro semi-transparente */
     border-radius: 15px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Sombra más oscura */
     backdrop-filter: blur(10px); /* Efecto de desenfoque para el fondo */
@@ -108,7 +108,7 @@ button:active {
 
 /* Section Styles */
 .section {
-    background: rgba(44, 44, 44, 0.046); /* Fondo oscuro semi-transparente para secciones */
+    background: rgba(44, 44, 44, 0); /* Fondo oscuro semi-transparente para secciones */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.066); /* Sombra más oscura */
     padding: 25px;

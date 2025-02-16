@@ -307,6 +307,145 @@ T* KD_Tree<T>::obtenerSiguienteTramo(const std::string& routeName, T* tramoActua
     return getNodeByNameAndCoordinates(routeName, lastUbication.getX(), lastUbication.getY());
 }
 
+template <typename T>
+T* KD_Tree<T>::obtenerUbicacionInicial(const std::string& routeName) const {
+    Node<T>* current = root;
+    T* ubicacionInicial = nullptr;
+
+    // Recorre todos los nodos del árbol buscando la ubicación inicial
+    std::function<void(Node<T>*)> buscarUbicacionInicial = [&](Node<T>* node) {
+        if (!node) return;
+
+        T data = node->getData();
+        if (data.getName() == routeName) {
+            bool esInicial = true;
+
+            // Verificar que no sea la ubicación final de otro tramo de la misma ruta
+            std::function<void(Node<T>*)> verificarFinales = [&](Node<T>* verificarNode) {
+                if (!verificarNode) return;
+                if (verificarNode->getData().getName() == routeName &&
+                    verificarNode->getData().getLastUbication().getX() == data.getInitialUbication().getX() &&
+                    verificarNode->getData().getLastUbication().getY() == data.getInitialUbication().getY()) {
+                    esInicial = false;
+                }
+                verificarFinales(verificarNode->getLeft());
+                verificarFinales(verificarNode->getRight());
+            };
+
+            verificarFinales(root);
+
+            if (esInicial) {
+                ubicacionInicial = &node->getData();
+                return;
+            }
+        }
+
+        buscarUbicacionInicial(node->getLeft());
+        buscarUbicacionInicial(node->getRight());
+    };
+
+    buscarUbicacionInicial(current);
+    return ubicacionInicial;
+}
+
+template <typename T>
+T* KD_Tree<T>::obtenerUbicacionFinal(const std::string& routeName) const {
+    Node<T>* current = root;
+    T* ubicacionFinal = nullptr;
+
+    // Recorre todos los nodos del árbol buscando la ubicación final
+    std::function<void(Node<T>*)> buscarUbicacionFinal = [&](Node<T>* node) {
+        if (!node) return;
+
+        T data = node->getData();
+        if (data.getName() == routeName) {
+            bool esFinal = true;
+
+            // Verificar que no sea la ubicación inicial de otro tramo de la misma ruta
+            std::function<void(Node<T>*)> verificarIniciales = [&](Node<T>* verificarNode) {
+                if (!verificarNode) return;
+                if (verificarNode->getData().getName() == routeName &&
+                    verificarNode->getData().getInitialUbication().getX() == data.getLastUbication().getX() &&
+                    verificarNode->getData().getInitialUbication().getY() == data.getLastUbication().getY()) {
+                    esFinal = false;
+                }
+                verificarIniciales(verificarNode->getLeft());
+                verificarIniciales(verificarNode->getRight());
+            };
+
+            verificarIniciales(root);
+
+            if (esFinal) {
+                ubicacionFinal = &node->getData();
+                return;
+            }
+        }
+
+        buscarUbicacionFinal(node->getLeft());
+        buscarUbicacionFinal(node->getRight());
+    };
+
+    buscarUbicacionFinal(current);
+    return ubicacionFinal;
+}
+
+template <typename T>
+void KD_Tree<T>::eliminarRutaCompleta(const std::string& nombreRuta) {
+    // Función recursiva para eliminar todos los nodos de la ruta
+    std::function<Node<T>*(Node<T>*, const std::string&)> eliminarRec = [&](Node<T>* node, const std::string& name) -> Node<T>* {
+        if (node == nullptr) return nullptr;
+
+        // Si el nodo actual pertenece a la ruta, eliminarlo
+        if (node->data.getName() == name) {
+            Node<T>* temp = node;
+            node = nullptr;
+            delete temp;
+            return nullptr;
+        }
+
+        // Recursivamente eliminar en los subárboles
+        node->left = eliminarRec(node->left, name);
+        node->right = eliminarRec(node->right, name);
+        return node;
+    };
+
+    // Eliminar todos los nodos de la ruta del árbol
+    root = eliminarRec(root, nombreRuta);
+
+    // Eliminar la ruta del archivo
+    Route::eliminarRutaDelArchivo(nombreRuta);
+}
+
+template <typename T>
+void KD_Tree<T>::eliminarTramo(const std::string& nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal) {
+    // Función recursiva para eliminar el nodo correspondiente al tramo
+    std::function<Node<T>*(Node<T>*, const std::string&, int, int, int, int)> eliminarTramoRec = [&](Node<T>* node, const std::string& name, int xi, int yi, int xf, int yf) -> Node<T>* {
+        if (node == nullptr) return nullptr;
+
+        // Verificar si el nodo actual es el tramo a eliminar
+        if (node->data.getName() == name &&
+            node->data.getInitialUbication().getX() == xi &&
+            node->data.getInitialUbication().getY() == yi &&
+            node->data.getLastUbication().getX() == xf &&
+            node->data.getLastUbication().getY() == yf) {
+            Node<T>* temp = node;
+            node = nullptr;
+            delete temp;
+            return nullptr;
+        }
+
+        // Recursivamente buscar y eliminar en los subárboles
+        node->left = eliminarTramoRec(node->left, name, xi, yi, xf, yf);
+        node->right = eliminarTramoRec(node->right, name, xi, yi, xf, yf);
+        return node;
+    };
+
+    // Eliminar el tramo del árbol
+    root = eliminarTramoRec(root, nombreRuta, xInicial, yInicial, xFinal, yFinal);
+
+    // Eliminar el tramo del archivo
+    Route::eliminarTramoDelArchivo(nombreRuta, xInicial, yInicial, xFinal, yFinal);
+}
 //----------------------------------------------------------------------------------------------------------
 //----------------------------Impresiones------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------

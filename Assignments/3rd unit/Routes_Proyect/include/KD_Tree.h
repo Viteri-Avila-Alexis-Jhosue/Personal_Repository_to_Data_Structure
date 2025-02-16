@@ -45,6 +45,11 @@ public:
     T* getNodeByNameAndCoordinates(const std::string& name, int x, int y) const; 
     T* getNodeByNameAndLastCoordinates(const std::string& name, int x, int y) const; 
     void aplicarTraficoEntreUbicaciones(const std::string& routeName, int x1, int y1, int x2, int y2, const Trafic& trafic);
+    T* obtenerUbicacionInicial(const std::string& routeName) const;
+    T* obtenerUbicacionFinal(const std::string& routeName) const;
+    void eliminarTramo(const std::string& nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal);
+    void eliminarRutaCompleta(const std::string& nombreRuta);
+
 };
 
 #include "../src/KD_Tree.cpp"

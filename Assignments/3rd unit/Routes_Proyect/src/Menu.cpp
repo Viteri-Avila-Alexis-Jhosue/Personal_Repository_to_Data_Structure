@@ -149,7 +149,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
 
             Ubication previousUbication;
             bool addingRoutes = true;
-            bool rutaCreada = false; 
+            bool rutaCreada = false;
 
             while (addingRoutes)
             {
@@ -229,17 +229,20 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                     // Insertar la ruta en el árbol de rutas
                     routes_tree.insert(newRoute, initialUbication.getX(), initialUbication.getY());
                     previousUbication = lastUbication; // Actualizar la ubicación anterior
-                    rutaCreada = true; 
+                    rutaCreada = true;
                     cout << "\nRuta agregada exitosamente." << endl;
                     system("pause");
                     break;
                 }
                 case 1: // Finalizar ruta
-                { // Finalizar ruta
+                {       // Finalizar ruta
                     addingRoutes = false;
-                    if (rutaCreada) {
+                    if (rutaCreada)
+                    {
                         cout << "Finalizando la creación de la ruta '" << routeName << "'." << endl;
-                    } else {
+                    }
+                    else
+                    {
                         cout << "No se ha creado la ruta '" << routeName << "' porque no se agregó ningún tramo." << endl;
                     }
                     break;
@@ -258,7 +261,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         case 2:
         {
             cout << "Modificar ruta existente" << endl;
-            routeCh_menu(routes_tree);
+            routeCh_menu(size, ubication_tree, routes_tree);
             system("pause");
             break;
         }
@@ -402,7 +405,7 @@ int Menu::auxiliar_menu()
     while (running)
     {
         options.clear();
-        addOption("Ingresar nueva ubicacion");
+        addOption("Ingresar ubicacion");
         addOption("Finalizar Ruta");
         addTitle("\t Seleccione para continuar");
         displayMenu();
@@ -456,18 +459,23 @@ int Menu::level_menu()
     return getSelectedOption() + 1;
 }
 
-void Menu::routeCh_menu(KD_Tree<Route> &routes_tree)
+void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &routes_tree)
 {
     bool running = true;
     Validation validation;
     Route *ruta;
+    Route *initial;
+    Route *last1;
     string routeName;
+    Ubication ubication;
     while (running)
     {
         options.clear();
         addOption(" Cambiar el nombre de la ruta");
         addOption(" Modificar la velocidad en un tramo");
         addOption(" Modificar la distancia entre ubicaciones de un tramo");
+        addOption(" Ampliar ruta");
+        addOption(" Eliminar ruta");
         addOption(" Salir");
         addTitle("\t ¿Qué desea cambiar en la ruta?");
         displayMenu();
@@ -522,9 +530,9 @@ void Menu::routeCh_menu(KD_Tree<Route> &routes_tree)
             }
             else
             {
-                cout<<endl;
+                cout << endl;
                 int x = validation.ingresarInt("Ingrese la coordenada X de la ubicación inicial del tramo: ");
-                cout<<endl;
+                cout << endl;
                 int y = validation.ingresarInt("Ingrese la coordenada Y de la ubicación inicial del tramo: ");
                 Route *tramo = routes_tree.getNodeByNameAndCoordinates(routeName, x, y);
                 cout << "paso";
@@ -603,6 +611,94 @@ void Menu::routeCh_menu(KD_Tree<Route> &routes_tree)
         }
         case 3:
         {
+            cout << "Ampliar ruta" << endl;
+            string routeName = validation.ingresarStringConEspacios("Ingrese el nombre de la ruta a ampliar:  ");
+
+            // Obtener las ubicaciones inicial y final de la ruta
+            initial = routes_tree.obtenerUbicacionInicial(routeName);
+            last1 = routes_tree.obtenerUbicacionFinal(routeName);
+
+            if (initial == nullptr || last1 == nullptr)
+            {
+                cout << "Error: No se encontró la ruta '" << routeName << "' o no es válida." << endl;
+                system("pause");
+                break;
+            }
+
+            cout << "\nLa ubicación desde la cual puede ampliar es:  " << endl;
+            cout << "(" << last1->getLastUbication().getX() << "; " << last1->getLastUbication().getY() << ")" << endl;
+            cout << "O, en el sentido contrario, un tramo hasta:  " << endl;
+            cout << "(" << initial->getInitialUbication().getX() << "; " << initial->getInitialUbication().getY() << ")" << endl;
+            system("pause");
+            // Usar el menú para preguntar desde dónde se desea ampliar
+            int choice = enlarge_route();
+
+            Ubication startUbication;
+            if (choice == 0)
+            {
+                startUbication = initial->getInitialUbication();
+                cout << "Tramo desde ? hasta " << startUbication.getName() << endl;
+            }
+            else if (choice == 1)
+            {
+                startUbication = last1->getLastUbication();
+                cout << "Tramo desde " << startUbication.getName() << "hasta ?" << endl;
+            }
+            else
+            {
+                cout << "Saliendo." << endl;
+                system("pause");
+                break;
+            }
+
+            cout << "Ingrese las coordenadas de la nueva ubicación: " << endl;
+            int newX = ubication.ingresar_coordenada(size, 0);
+            int newY = ubication.ingresar_coordenada(size, 1);
+
+            // Verificar que la ubicación ingresada exista en el árbol de ubicaciones
+            auto newUbicationNode = ubication_tree.findNode(newX, newY);
+            if (newUbicationNode == nullptr)
+            {
+                cout << "Error: No existe una ubicación con las coordenadas (" << newX << ", " << newY << ")" << endl;
+                system("pause");
+                break;
+            }
+
+            Ubication newUbication = newUbicationNode->data;
+
+            // Determinar el sentido de ampliación
+            if (choice == 0)
+            {
+                // Ampliar al inicio
+                int distance = distance_menu();
+                Route newRoute;
+                newRoute.definir_ruta(routeName, distance, newUbication, initial->getInitialUbication(), size);
+                routes_tree.insert(newRoute, newUbication.getX(), newUbication.getY());
+                cout << "Ruta ampliada exitosamente al inicio." << endl;
+            }
+            else if (choice == 1)
+            {
+                // Ampliar al final
+                int distance = distance_menu();
+                Route newRoute;
+                newRoute.definir_ruta(routeName, distance, last1->getLastUbication(), newUbication, size);
+                routes_tree.insert(newRoute, last1->getLastUbication().getX(), last1->getLastUbication().getY());
+                cout << "Ruta ampliada exitosamente al final." << endl;
+            }
+
+            system("pause");
+            break;
+        }
+
+        case 4:
+        {
+            cout << "Eliminar ruta" << endl;
+            delete_route(routes_tree);
+            system("pause");
+            break;
+        }
+        case 5:
+        {
             running = false;
             break;
         }
@@ -614,4 +710,113 @@ void Menu::routeCh_menu(KD_Tree<Route> &routes_tree)
             break;
         }
     }
+}
+void Menu::delete_route(KD_Tree<Route> &routes_tree)
+{
+    Validation validation;
+    bool running = true;
+    while (running)
+    {
+        options.clear();
+        addOption(" Eliminar una ruta completa");
+        addOption(" Eliminar un tramo de una ruta");
+        addOption(" Salir");
+        addTitle(" ");
+        displayMenu();
+        switch (getSelectedOption())
+        {
+        case 0:
+        {
+            cout << "Eliminar una ruta completa" << endl;
+            string routeName = validation.ingresarStringConEspacios("Ingrese el nombre de la ruta a eliminar: ");
+            if (!routes_tree.findNodeByName(routeName))
+            {
+                cout << "Error: No existe una ruta con el nombre '" << routeName << "'" << endl;
+                system("pause");
+                break;
+            }
+            routes_tree.eliminarRutaCompleta(routeName);
+            cout << "Ruta '" << routeName << "' eliminada exitosamente." << endl;
+            system("pause");
+            break;
+        }
+        case 1: // Eliminar un tramo de una ruta
+        {
+            cout << "Eliminar un tramo de una ruta" << endl;
+            string routeName = validation.ingresarStringConEspacios("Ingrese el nombre de la ruta: ");
+            if (!routes_tree.findNodeByName(routeName))
+            {
+                cout << "Error: No existe una ruta con el nombre '" << routeName << "'" << endl;
+                system("pause");
+                break;
+            }
+            Route *initial = routes_tree.obtenerUbicacionInicial(routeName);
+            Route *last1 = routes_tree.obtenerUbicacionFinal(routeName);
+
+            if (initial == nullptr || last1 == nullptr)
+            {
+                cout << "Error: No se pudo obtener la información de la ruta '" << routeName << "'." << endl;
+                system("pause");
+                break;
+            }
+            cout << "\nLos tramos que se pueden eliminar son:\nEl tramo desde:   ";
+            cout << initial->getInitialUbication().getName();
+            cout << " (" << initial->getInitialUbication().getX() << "; " << initial->getInitialUbication().getY() << ")\t";
+            cout << "hasta:   ";
+            cout << initial->getLastUbication().getName();
+            cout << " (" << initial->getLastUbication().getX() << "; " << initial->getLastUbication().getY() << ")" << endl;
+            cout << "El tramo desde:  ";
+            cout << last1->getInitialUbication().getName();
+            cout << " (" << last1->getInitialUbication().getX() << "; " << last1->getInitialUbication().getY() << ")\t";
+            cout << "hasta:  ";
+            cout << last1->getLastUbication().getName();
+            cout << " (" << last1->getLastUbication().getX() << "; " << last1->getLastUbication().getY() << ")" << endl;
+            int xInicial = validation.ingresarInt("Ingrese la coordenada X inicial: ");
+            int yInicial = validation.ingresarInt("\nIngrese la coordenada Y inicial: ");
+            Route *ruta = routes_tree.getNodeByNameAndCoordinates(routeName, xInicial, yInicial);
+            if (!ruta)
+            {
+                cout << "Error: La ubicación con las coordenadas (" << xInicial << ", " << yInicial << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
+                system("pause");
+                break;
+            }
+            else if ((xInicial != initial->getInitialUbication().getX() || yInicial != initial->getInitialUbication().getY()) &&
+                     (xInicial != last1->getInitialUbication().getX() || yInicial != last1->getInitialUbication().getY()))
+            {
+                cout << "Error: La ubicación con las coordenadas (" << xInicial << ", " << yInicial << ") no se puede eliminar de la ruta '" << routeName << "'." << endl;
+                system("pause");
+                break;
+            }
+            routes_tree.eliminarTramo(routeName, xInicial, yInicial, ruta->getLastUbication().getX(), ruta->getLastUbication().getY());
+            cout << "Tramo eliminado exitosamente." << endl;
+            system("pause");
+            break;
+        }
+        case 2:
+        {
+            running = false;
+            break;
+        }
+
+        default:
+            break;
+        }
+    }
+}
+
+int Menu::enlarge_route()
+{
+    bool running = true;
+    while (running)
+    {
+        options.clear();
+        addOption(" Ampliar al inicio");
+        addOption(" Apliar al final");
+        addOption(" No ampliar");
+        addTitle("\t En que sentido desea ampliar?");
+        displayMenu();
+        running = false; // Salir del bucle si se selecciona una opción válida
+    }
+
+    return getSelectedOption();
 }

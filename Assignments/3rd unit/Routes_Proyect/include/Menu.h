@@ -23,7 +23,9 @@ public:
     int auxiliar_menu();
     int distance_menu();
     int level_menu();
-    void routeCh_menu(KD_Tree<Route>& routes_tree);
+    void routeCh_menu(int size,KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree);
+    void delete_route(KD_Tree<Route>& routes_tree);
+    int enlarge_route();
 };
 
 #endif // MENU_H
