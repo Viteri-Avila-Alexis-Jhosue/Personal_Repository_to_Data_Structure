@@ -1,0 +1,34 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build Proyecto Completo con SFML",
+            "command": "g++",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "-I${workspaceFolder}/include",
+                "-IC:\\Users\\Usuario\\Documents\\SFML-2.5.0-windows-gcc-7.3.0-mingw-64-bit\\SFML-2.5.0\\include",  // Incluir SFML
+                "${workspaceFolder}/src/Triangle.cpp",
+                "${workspaceFolder}/src/Validation.cpp",
+                "${workspaceFolder}/src/main.cpp",
+                "-o",
+                "${workspaceFolder}/output/main.exe",
+                "-LC:\\Users\\Usuario\\Documents\\SFML-2.5.0-windows-gcc-7.3.0-mingw-64-bit\\SFML-2.5.0\\lib",  // Ruta a las librerías de SFML
+                "-lsfml-graphics", "-lsfml-window", "-lsfml-system"  // Librerías SFML necesarias
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compilación del proyecto N-Reinas con SFML."
+        }
+    ]
+}

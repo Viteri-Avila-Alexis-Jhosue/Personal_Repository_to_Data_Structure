@@ -1,0 +1,12 @@
+12,1,Hospital
+23,2,Casa
+56,45,Hospital2
+3,4,Papulandia
+56,65,Bar de Moe
+12,23,Segunda casa
+7,78,Casa tres
+67,89,Banios
+45,45,Clinica
+34,78,Luz
+67,67,JUI
+9,0,Lugar
