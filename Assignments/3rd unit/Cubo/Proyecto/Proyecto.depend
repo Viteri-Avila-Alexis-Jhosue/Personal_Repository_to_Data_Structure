@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1739765018 source:c:\users\usuario\downloads\cubo magico\cubo magico\cuborubik.cpp
+	"CuboRubik.h"
+
+1739764721 c:\users\usuario\downloads\cubo magico\cubo magico\cuborubik.h
+	<vector>
+	<iostream>
+	<ctime>
+	<cstdlib>
+
+1739765067 source:c:\users\usuario\downloads\cubo magico\cubo magico\graficador.cpp
+	"Graficador.h"
+
+1739766111 c:\users\usuario\downloads\cubo magico\cubo magico\graficador.h
+	<SFML/Graphics.hpp>
+	"CuboRubik.h"
+
+1739765081 source:c:\users\usuario\downloads\cubo magico\cubo magico\main.cpp
+	"CuboRubik.h"
+	"Graficador.h"
+

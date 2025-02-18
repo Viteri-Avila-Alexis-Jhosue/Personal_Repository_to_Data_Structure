@@ -184,8 +184,11 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                         cout << "\nIngrese las coordenadas de la segunda ubicación: " << endl;
                         int x2 = ubication.ingresar_coordenada(size, 0);
                         int y2 = ubication.ingresar_coordenada(size, 1);
-
-                        // Verificar que la ubicación final exista
+                        if(x2==x1&&y2==y1){
+                            cout<<"\nLa ubicacion no puede ser la misma"<<endl;
+                            system("pause");
+                            break;
+                        }
                         auto lastUbicationNode = ubication_tree.findNode(x2, y2);
                         if (lastUbicationNode == nullptr)
                         {
@@ -207,7 +210,11 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                         int x2 = ubication.ingresar_coordenada(size, 0);
                         int y2 = ubication.ingresar_coordenada(size, 1);
 
-                        // Verificar que la ubicación final exista
+                        if(x2==initialUbication.getX()&&y2==initialUbication.getY()){
+                            cout<<"\nLa ubicacion no puede ser la misma"<<endl;
+                            system("pause");
+                            break;
+                        }
                         auto lastUbicationNode = ubication_tree.findNode(x2, y2);
                         if (lastUbicationNode == nullptr)
                         {
@@ -305,6 +312,11 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                 cout << "Ingrese la segunda Ubicacion: ";
                 a = ubication.ingresar_coordenada(size, 0);
                 b = ubication.ingresar_coordenada(size, 1);
+                if(x==a&&y==b){
+                    cout<<"\nLa ubicacion no puede ser la misma"<<endl;
+                            system("pause");
+                            break;
+                }
 
                 Route *tramoFinal = routes_tree.getNodeByNameAndLastCoordinates(routeName, a, b);
                 if (!tramoFinal)
@@ -358,7 +370,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         case 6:
         {
             cout << "Imprimir rutas" << endl;
-            routes_tree.print_routes();
+            print_routes(routes_tree);
             system("pause");
             break;
         }
@@ -826,4 +838,46 @@ int Menu::enlarge_route()
     }
 
     return getSelectedOption();
+}
+void Menu::print_routes(KD_Tree<Route>& routes_tree) {
+    string routeName;
+    Validation validation;
+    bool running = true;
+    while (running)
+    {
+        options.clear();
+        addOption(" Imprimir Todos lo tramos de todas las rutas");
+        addOption(" Imprimir los tramos de una ruta en particular");
+        addOption(" Salir");
+        addTitle("\t Seleccione los datos que desea observar:");
+        displayMenu();
+        switch (getSelectedOption())
+        {
+        case 0:{
+            cout<<" Imprimir Todos lo tramos de todas las rutas"<<endl;
+            routes_tree.print_routes();
+            system("pause");
+            break;
+        }
+        case 1:{
+            routeName=validation.ingresarStringConEspacios("Ingrese el nombre de la ruta a imprimir:  ");
+            cout<<endl;
+            if (!routes_tree.findNodeByName(routeName))
+            {
+                cout << "Error: No existe una ruta con el nombre '" << routeName << "'" << endl;
+                system("pause");
+                break;
+            }
+            routes_tree.print_routes_name(routeName);
+            system("pause");
+            break;
+        }
+        case 2:{
+            running = false;
+            break;
+        }
+        default:
+            break;
+        }
+    }
 }

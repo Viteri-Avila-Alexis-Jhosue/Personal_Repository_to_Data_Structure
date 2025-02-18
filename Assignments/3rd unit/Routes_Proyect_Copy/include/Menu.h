@@ -26,6 +26,7 @@ public:
     void routeCh_menu(int size,KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree);
     void delete_route(KD_Tree<Route>& routes_tree);
     int enlarge_route();
+    void print_routes(KD_Tree<Route>& routes_tree);
 };
 
 #endif // MENU_H

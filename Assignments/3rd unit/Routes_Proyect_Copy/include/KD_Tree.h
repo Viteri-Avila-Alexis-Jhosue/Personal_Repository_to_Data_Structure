@@ -24,6 +24,7 @@ private:
     void inOrderRec(Node<T>* node) const;
     void print_ubicaciones_rec(Node<T>* node) const;
     void print_routes_rec(Node<T>* node) const;
+    void print_routes_name_rec(Node<T>* node, std::string routeName) const;
     Node<T>* findNodeRec(Node<T>* node, const std::array<int, 2>& coords, int depth) const;
     bool findNodeByNameRec(Node<T>* node, const std::string& name) const;
     T* getNodeByNameRec(Node<T>* node, const std::string& name) const;
@@ -41,6 +42,7 @@ public:
     Node<T>* findNode(int x, int y) const;
     bool findNodeByName(const std::string& name) const;
     void print_routes() const;
+    void print_routes_name(std::string routeName) const;
     T* getNodeByName(const std::string& name) const;
     T* getNodeByNameAndCoordinates(const std::string& name, int x, int y) const; 
     T* getNodeByNameAndLastCoordinates(const std::string& name, int x, int y) const; 

@@ -479,6 +479,7 @@ template <typename T>
 void KD_Tree<T>::print_ubicaciones() const {
     print_ubicaciones_rec(root);
 }
+
 template <typename T>
 void KD_Tree<T>::print_routes_rec(Node<T>* node) const {
     if (node == nullptr) {
@@ -518,4 +519,45 @@ void KD_Tree<T>::print_routes_rec(Node<T>* node) const {
 template <typename T>
 void KD_Tree<T>::print_routes() const {
     print_routes_rec(root);
+}
+
+
+template <typename T>
+void KD_Tree<T>::print_routes_name_rec(Node<T>* node, string routeName) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    // Llamada recursiva al subárbol izquierdo
+    print_routes_name_rec(node->left, routeName);
+    const Route& route = node->data;
+    if(route.getName()==routeName){
+        std::cout << "Ruta: " << route.getName() << "\n"
+              << "  - Inicio: (" << route.getInitialUbication().getX() << ", " << route.getInitialUbication().getY() << ") -> " << route.getInitialUbication().getName() << "\n"
+              << "  - Fin: (" << route.getLastUbication().getX() << ", " << route.getLastUbication().getY() << ") -> " << route.getLastUbication().getName() << "\n"
+              << "  - Distancia: " << route.getDistance() << "\n"
+              << "  - Velocidad: " << route.getSpeed() << "\n";
+
+    // Verificar si hay tráfico antes de imprimirlo
+    const std::vector<Trafic>& trafics = route.getTrafics();
+    if (!trafics.empty()) {
+        std::cout << "  - Trafico:\n";
+        for (const auto& trafic : trafics) {
+            std::cout << "    * Desde: " << trafic.getInitialHour()
+                      << " hasta: " << trafic.getLastHour()
+                      << " - Nivel: " << trafic.getLevel() << "\n";
+        }
+    } else {
+        std::cout << "  - Trafico: No hay tramos de tráfico registrados\n";
+    }
+
+    std::cout << "--------------------------------------------\n";
+    }
+    // Llamada recursiva al subárbol derecho
+    print_routes_name_rec(node->right, routeName);
+}
+
+template <typename T>
+void KD_Tree<T>::print_routes_name(string routeName) const {
+    print_routes_name_rec(root, routeName);
 }
