@@ -1,0 +1,50 @@
+45,23,Mirador del Valle,Lugar panorámico en lo alto de una colina ideal para observar el paisaje natural tomar fotografías y disfrutar de la tranquilidad del entorno alejado del ruido de la ciudad.
+12,67,Estadio Central,Instalación deportiva moderna con capacidad para miles de espectadores equipada con canchas de fútbol pista de atletismo y un centro de entrenamiento de alto rendimiento
+78,12,Centro de Negocios,Edificio de oficinas con múltiples empresas y espacios de coworking para profesionales que buscan un ambiente adecuado para reuniones conferencias y desarrollo de proyectos
+23,45,Parque Acuatico,Complejo de piscinas y toboganes diseñado para el entretenimiento familiar con áreas de descanso restaurantes y juegos acuáticos para todas las edades
+67,56,Plaza Mayor,Espacio público rodeado de tiendas y restaurantes con un ambiente agradable y seguro ideal para paseos eventos culturales y actividades al aire libre
+34,23,Fabrica de Muebles,Instalación industrial dedicada a la producción de muebles de madera y metal equipada con tecnología de vanguardia para la fabricación de piezas de alta calidad
+56,78,Refugio de Montaña,Pequeña cabaña rústica en medio del bosque ideal para descansar y desconectarse del estrés diario rodeada de senderos naturales y vistas espectaculares
+9,34,Taller de Arte,Espacio para la creación de pinturas y esculturas con clases impartidas por artistas locales donde los visitantes pueden aprender y desarrollar su creatividad
+12,89,Centro de Rehabilitacion,Instalación especializada en terapias físicas y recuperación post operatoria con profesionales capacitados y tecnología avanzada para el tratamiento de lesiones
+23,12,Hospital General,Centro de atención médica con servicios de urgencias consultas especializadas y hospitalización equipado con laboratorios farmacias y unidades de cuidados intensivos
+45,78,Universidad Nacional,Institución de educación superior con diversas facultades y un gran campus con bibliotecas laboratorios y residencias estudiantiles para alumnos de todo el país
+34,56,Aeropuerto Internacional,Terminal aérea con vuelos nacionales e internacionales equipada con modernas instalaciones restaurantes tiendas libres de impuestos y un sistema de transporte eficiente
+78,3,Club Deportivo,Complejo con canchas de fútbol baloncesto y gimnasio para entrenamientos profesionales además de espacios recreativos y academias deportivas para todas las edades
+9,67,Farmacia Central,Establecimiento con una amplia variedad de medicamentos y productos de salud con atención las 24 horas y asesoría profesional para el cuidado de los clientes
+29,30,Biblioteca Publica,Espacio de lectura y estudio con una extensa colección de libros documentos digitales y salas de investigación además de eventos literarios y conferencias
+3,23,Zoologico Regional,Parque con diversas especies de animales en un entorno controlado y seguro con programas de conservación visitas guiadas y actividades educativas para niños
+12,34,Centro Comercial,Gran edificio con tiendas de ropa tecnología restaurantes y cines diseñado para brindar una experiencia de compras completa y entretenimiento para toda la familia
+45,67,Estacion de Tren,Terminal ferroviaria con salidas diarias a diferentes ciudades del país equipada con áreas de espera taquillas zonas de carga y acceso a transporte público
+40,40,Casa de Cultura,Institución dedicada a la promoción del arte y la cultura con talleres exposiciones presentaciones teatrales y clases de distintas disciplinas artísticas
+23,56,Camping Aventura,Área natural con espacios para acampar y realizar actividades al aire libre como senderismo pesca y observación de la fauna local en un entorno tranquilo
+56,3,Museo de Historia,Exhibición de artefactos y documentos históricos sobre la región y su desarrollo con salas interactivas recorridos guiados y actividades educativas para visitantes
+34,89,Escuela Tecnica,Centro educativo especializado en formación profesional en distintas áreas con laboratorios talleres y programas de capacitación para el desarrollo de habilidades técnicas
+67,23,Observatorio Astronomico,Instalación para el estudio del cielo con telescopios de gran alcance actividades de observación astronómica y conferencias impartidas por expertos en el campo
+9,56,Hotel Boutique,Alojamiento con un estilo elegante y servicio personalizado para los huéspedes con habitaciones confortables restaurante gourmet y spa de relajación
+12,78,Residencia del Lago,Vivienda junto a un lago con vistas espectaculares y acceso a actividades acuáticas como paseos en bote pesca y natación en aguas cristalinas
+45,34,Bodega Vinicola,Centro de producción de vinos con recorridos guiados degustaciones explicaciones sobre el proceso de fermentación y un restaurante con maridajes exclusivos
+78,67,Salon de Eventos,Espacio amplio para celebraciones reuniones y conferencias empresariales con salones equipados con tecnología audiovisual servicio de catering y personal especializado
+3,45,Clinica Privada,Centro de salud con consultas especializadas diagnósticos de última generación atención de emergencias y un equipo médico altamente capacitado
+56,12,Terminal de Buses,Estación con rutas de transporte hacia diferentes puntos del país equipada con salas de espera taquillas de venta de boletos zonas de comida y tiendas de conveniencia
+67,89,Rancho Campestre,Propiedad rural con áreas de pastoreo actividades recreativas al aire libre visitas guiadas a granjas y una oferta gastronómica con productos orgánicos
+34,1,Panaderia Artesanal,Tienda especializada en pan recién horneado y productos de repostería con recetas artesanales café de especialidad y una sección de postres caseros
+9,23,Centro de Convenciones,Espacio moderno con salas para exposiciones ferias congresos y eventos corporativos equipado con tecnología avanzada y asistencia personalizada
+12,45,Galeria de Arte,Exhibición de obras contemporáneas de artistas locales y nacionales con galerías temáticas talleres interactivos y visitas guiadas para el público
+23,78,Torre de Comunicaciones,Edificio con antenas de transmisión para radio y televisión con tecnología de vanguardia salas de grabación y oficinas administrativas para gestión de medios
+56,45,Puerto Comercial,Área de embarque y desembarque de mercancías con acceso a rutas marítimas zonas de carga y descarga bodegas de almacenamiento y logística de transporte
+3,78,Centro de Desarrollo,Institución que brinda capacitaciones y apoyo a emprendedores y pequeñas empresas con asesoramiento en negocios financiamiento y desarrollo de proyectos
+45,9,Parque Natural,Reserva ecológica con senderos para caminatas observación de fauna y flora cascadas naturales y miradores panorámicos para fotografías únicas
+67,34,Estudio de Grabacion,Instalación equipada con tecnología para la producción de música y sonido con estudios de grabación salas de edición y asesoramiento de profesionales del sector
+12,9,Cabana en el Bosque,Alojamiento rústico rodeado de naturaleza con cabañas de madera chimeneas senderos y actividades recreativas para una experiencia tranquila y relajante
+78,45,Monumento Historico,Estructura conmemorativa que representa un hecho importante en la historia local con un museo interactivo documentos antiguos y exposiciones fotográficas
+23,3,Estadio Olimpico,Complejo deportivo de gran capacidad para competencias nacionales e internacionales con infraestructura moderna áreas de entrenamiento y zonas de espectadores
+56,23,Feria Artesanal,Evento que reúne a artistas y artesanos para exhibir y vender sus productos con talleres en vivo degustaciones gastronómicas y espectáculos culturales
+3,67,Almacen de Suministros,Bodega con venta al por mayor de herramientas materiales y equipos para construcción carpintería mecánica y otras especialidades técnicas
+34,12,Escuela de Musica,Institución educativa enfocada en la enseñanza de instrumentos y teoría musical con profesores especializados ensambles de orquesta y conciertos estudiantiles
+9,78,Centro Ecoturistico,Destino para actividades al aire libre como senderismo ciclismo camping y exploración de ecosistemas en una reserva natural protegida
+67,7,Parque Infantil,Zona recreativa con juegos y áreas de descanso para niños y familias con espacios verdes toboganes columpios y juegos de agua para el verano
+12,56,Cancha de Tenis,Instalación deportiva para partidos y entrenamientos de tenis a nivel profesional con canchas iluminadas vestuarios gradas y escuela de formación
+45,23,Veterinaria Municipal,Centro de atención para mascotas con servicios de consulta vacunación cirugías y venta de productos veterinarios para el cuidado de animales domésticos
+34,78,Universidad Tecnologica,Institución especializada en ingenierías y ciencias aplicadas con laboratorios de investigación programas de innovación y colaboración con empresas tecnológicas
+50,50,Casa,Hogar del usuario(Esto se definio arbitrariamente por el Alexis cuando andaba medio dormido, no deberia poderse ingresar una casa ya que esto no maneja usuario pero bueno, chulla vida)62,60,Motel el cojelon,Hace anios que ocurrio y no lo olvidare. La batalla ya ha empezado en un mundo muy cuadrado Es confuso verdad sin embargo sabes que nada seria igual. Pero la queria tanto que dos esquividis eran un pomni a su lado
