@@ -213,7 +213,7 @@ string Validation::ingresarHora(const string &msj)
             }
             else
             {
-                cout << "\nFormato inválido. Ingrese nuevamente: ";
+                cout << "\nFormato inválido. Ingrese nuevamente: \n";
                 hora.clear();
                 cout << msj;
             }

@@ -18,8 +18,8 @@
 template <typename T>
 class KD_Tree {
 private:
-    void clear(Node<T>* node); // Liberar memoria recursivamente
-    Node<T>* root; // Puntero a la raíz del árbol
+    void clear(Node<T>* node); 
+    Node<T>* root;
     Node<T>* insertRec(Node<T>* node, const T& data, const std::array<int, 2>& coords, int depth);
     void inOrderRec(Node<T>* node) const;
     void print_ubicaciones_rec(Node<T>* node) const;
@@ -34,6 +34,9 @@ private:
     bool validarTramoExistenteRec(Node<T>* node, const std::string& routeName, int xInicial, int yInicial, int xFinal, int yFinal, double distance) const;
     void obtenerUbicacionesRec(Node<T>* node, std::vector<T>& ubicaciones) const;
     void obtenerRutasRec(Node<T>* node, std::vector<T>& rutas) const;
+    Node<T> *eliminarRec(Node<T> *node, const std::string &name);
+    Node<T> *eliminarTramoRec(Node<T> *node, const std::string &name, int xi, int yi, int xf, int yf);
+
 public:
     KD_Tree();
     ~KD_Tree();

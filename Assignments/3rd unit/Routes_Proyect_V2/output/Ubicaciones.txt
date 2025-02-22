@@ -48,3 +48,23 @@
 45,23,Veterinaria Municipal,Centro de atención para mascotas con servicios de consulta vacunación cirugías y venta de productos veterinarios para el cuidado de animales domésticos
 34,78,Universidad Tecnologica,Institución especializada en ingenierías y ciencias aplicadas con laboratorios de investigación programas de innovación y colaboración con empresas tecnológicas
 50,50,Casa,Hogar del usuario(Esto se definio arbitrariamente por el Alexis cuando andaba medio dormido, no deberia poderse ingresar una casa ya que esto no maneja usuario pero bueno, chulla vida)62,60,Motel el cojelon,Hace anios que ocurrio y no lo olvidare. La batalla ya ha empezado en un mundo muy cuadrado Es confuso verdad sin embargo sabes que nada seria igual. Pero la queria tanto que dos esquividis eran un pomni a su lado
+20,30,Motel,Para esas escapadas con la moza llamenos al 1800-Motel El Cojelon
+28,65,ESPE,Universidad de las Fuerzas Armadas ESPE
+55,64,Psiquiatra,Para que se me quiten estas locas ganas de irme a dormir
+50,15,Lugar,Ya se me acabo la creatividad para poner lugares.Inserte texto
+70,25,Motel La luna,Inserte texto gracioso aqui
+42,54,Teatro,Aqui actuan. Que mas van a hacer.Es un teatro
+60,68,Ya no voy a escribir mas nombres,Tampoco descripciones. Estoy metiendo estos datos a mano
+2,2,Hola,Si ve esto. Pongame 20 Profesor. No me quiero quedar
+40,2,Queobo,Like para que fernan lo vea.
+5,12,Inserte texto gracioso,Inserte el remate del chiste
+50,85,Parque del Lago,Un hermoso espacio verde junto a un lago donde los visitantes pueden pasear hacer picnic o disfrutar de actividades al aire libre en un ambiente relajante.
+31,42,Mercado Central,Un vibrante mercado en el corazón de la ciudad donde se pueden encontrar productos frescos artesanías locales y disfrutar de la cultura gastronómica.
+15,20,Playa Sol y Mar,Un destino de playa popular para relajarse bajo el sol nadar en aguas cálidas y practicar deportes acuáticos como el surf y el snorkel.
+55,39,Bosque Encantado,Un área boscosa famosa por su biodiversidad senderos naturales y la sensación mágica que se experimenta al caminar entre los árboles altos y frondosos.
+60,36,Montaña Azul,Un lugar ideal para los amantes del senderismo con impresionantes vistas panorámicas y una variedad de rutas para explorar la naturaleza intacta.
+64,70,Valle de las Sombras,Un misterioso valle rodeado de altas montañas donde el sol apenas llega, creando un ambiente único para la observación de fauna y flora.
+25,22,Reserva Natural del Sur,Un extenso parque natural que alberga especies en peligro de extinción y ofrece diversas rutas de senderismo y miradores para explorar.
+37,65,Ciudadela Antigua,Un sitio histórico con ruinas que datan de siglos atrás, donde se pueden aprender sobre las antiguas civilizaciones y disfrutar de una vista impresionante.
+17,90,Lago Escondido,Un lago sereno y tranquilo rodeado de bosques, ideal para hacer kayak pescar o simplemente disfrutar de un día de descanso junto al agua.
+16,50,Cueva de los Murciélagos,Una formación natural impresionante conocida por su entrada oculta y por ser hogar de miles de murciélagos que salen al atardecer para alimentarse.

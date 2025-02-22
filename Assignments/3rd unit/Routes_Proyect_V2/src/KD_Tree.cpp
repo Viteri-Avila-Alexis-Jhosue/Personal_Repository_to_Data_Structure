@@ -106,12 +106,12 @@ void KD_Tree<T>::load_ubicaciones(const std::string &fileName)
 
         if (std::getline(stream, x_str, ',') &&
             std::getline(stream, y_str, ',') &&
-            std::getline(stream, name, ',')  &&
+            std::getline(stream, name, ',') &&
             std::getline(stream, description, ','))
         {
             int x = std::stoi(x_str);
             int y = std::stoi(y_str);
-            Ubication ubication(x, y, name,description);
+            Ubication ubication(x, y, name, description);
 
             insert(ubication, x, y);
         }
@@ -476,70 +476,122 @@ T *KD_Tree<T>::obtenerUbicacionFinal(const std::string &routeName) const
     buscarUbicacionFinal(current);
     return ubicacionFinal;
 }
-
+// Método recursivo para eliminar una ruta del árbol
 template <typename T>
-void KD_Tree<T>::eliminarRutaCompleta(const std::string &nombreRuta)
-{
-    // Función recursiva para eliminar todos los nodos de la ruta
-    std::function<Node<T> *(Node<T> *, const std::string &)> eliminarRec = [&](Node<T> *node, const std::string &name) -> Node<T> *
-    {
-        if (node == nullptr)
-            return nullptr;
+Node<T> *KD_Tree<T>::eliminarRec(Node<T> *node, const std::string &name) {
+    if (node == nullptr)
+        return nullptr;
 
-        // Si el nodo actual pertenece a la ruta, eliminarlo
-        if (node->data.getName() == name)
-        {
-            Node<T> *temp = node;
-            node = nullptr;
-            delete temp;
+    if (node->data.getName() == name) {
+        // Caso 1: Nodo sin hijos
+        if (node->left == nullptr && node->right == nullptr) {
+            delete node;
             return nullptr;
         }
+        // Caso 2: Nodo con un solo hijo
+        else if (node->left == nullptr) {
+            Node<T> *temp = node->right;
+            delete node;
+            return temp;
+        } else if (node->right == nullptr) {
+            Node<T> *temp = node->left;
+            delete node;
+            return temp;
+        }
+        // Caso 3: Nodo con dos hijos
+        else {
+            // Buscar el nodo más a la derecha del subárbol izquierdo
+            Node<T> *successor = node->left;
+            Node<T> *parent = node;
+            while (successor->right != nullptr) {
+                parent = successor;
+                successor = successor->right;
+            }
 
-        // Recursivamente eliminar en los subárboles
+            node->data = successor->data; // Copiar datos del sucesor
+
+            // Eliminar el sucesor
+            if (parent->right == successor) {
+                parent->right = successor->left;
+            } else {
+                parent->left = successor->left;
+            }
+            delete successor;
+        }
+    } else {
         node->left = eliminarRec(node->left, name);
         node->right = eliminarRec(node->right, name);
-        return node;
-    };
+    }
 
-    // Eliminar todos los nodos de la ruta del árbol
-    root = eliminarRec(root, nombreRuta);
+    return node;
+}
 
-    // Eliminar la ruta del archivo
+// Método para eliminar una ruta completa del árbol
+template <typename T>
+void KD_Tree<T>::eliminarRutaCompleta(const std::string &nombreRuta) {
+    while (findNodeByName(nombreRuta)) {
+        root = eliminarRec(root, nombreRuta);
+    }
     Route::eliminarRutaDelArchivo(nombreRuta);
 }
 
+// Método recursivo para eliminar un tramo específico de una ruta
 template <typename T>
-void KD_Tree<T>::eliminarTramo(const std::string &nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal)
-{
-    // Función recursiva para eliminar el nodo correspondiente al tramo
-    std::function<Node<T> *(Node<T> *, const std::string &, int, int, int, int)> eliminarTramoRec = [&](Node<T> *node, const std::string &name, int xi, int yi, int xf, int yf) -> Node<T> *
-    {
-        if (node == nullptr)
-            return nullptr;
+Node<T> *KD_Tree<T>::eliminarTramoRec(Node<T> *node, const std::string &name, int xi, int yi, int xf, int yf) {
+    if (node == nullptr)
+        return nullptr;
 
-        // Verificar si el nodo actual es el tramo a eliminar
-        if (node->data.getName() == name &&
-            node->data.getInitialUbication().getX() == xi &&
-            node->data.getInitialUbication().getY() == yi &&
-            node->data.getLastUbication().getX() == xf &&
-            node->data.getLastUbication().getY() == yf)
-        {
-            Node<T> *temp = node;
-            node = nullptr;
-            delete temp;
+    if (node->data.getName() == name &&
+        node->data.getInitialUbication().getX() == xi &&
+        node->data.getInitialUbication().getY() == yi &&
+        node->data.getLastUbication().getX() == xf &&
+        node->data.getLastUbication().getY() == yf) {
+        // Caso 1: Nodo sin hijos
+        if (node->left == nullptr && node->right == nullptr) {
+            delete node;
             return nullptr;
         }
+        // Caso 2: Nodo con un solo hijo
+        else if (node->left == nullptr) {
+            Node<T> *temp = node->right;
+            delete node;
+            return temp;
+        } else if (node->right == nullptr) {
+            Node<T> *temp = node->left;
+            delete node;
+            return temp;
+        }
+        // Caso 3: Nodo con dos hijos
+        else {
+            Node<T> *successor = node->left;
+            Node<T> *parent = node;
+            while (successor->right != nullptr) {
+                parent = successor;
+                successor = successor->right;
+            }
 
-        // Recursivamente buscar y eliminar en los subárboles
+            node->data = successor->data; // Copiar datos del sucesor
+
+            // Eliminar el sucesor
+            if (parent->right == successor) {
+                parent->right = successor->left;
+            } else {
+                parent->left = successor->left;
+            }
+            delete successor;
+        }
+    } else {
         node->left = eliminarTramoRec(node->left, name, xi, yi, xf, yf);
         node->right = eliminarTramoRec(node->right, name, xi, yi, xf, yf);
-        return node;
-    };
+    }
 
-    // Eliminar el tramo del árbol
+    return node;
+}
+
+// Método público para eliminar un tramo específico de una ruta
+template <typename T>
+void KD_Tree<T>::eliminarTramo(const std::string &nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal) {
     root = eliminarTramoRec(root, nombreRuta, xInicial, yInicial, xFinal, yFinal);
-
-    // Eliminar el tramo del archivo
     Route::eliminarTramoDelArchivo(nombreRuta, xInicial, yInicial, xFinal, yFinal);
 }
 
@@ -577,8 +629,10 @@ bool KD_Tree<T>::validarTramoExistenteRec(Node<T> *node, const std::string &rout
            validarTramoExistenteRec(node->right, routeName, xInicial, yInicial, xFinal, yFinal, distance);
 }
 template <typename T>
-void KD_Tree<T>::obtenerUbicacionesRec(Node<T>* node, std::vector<T>& ubicaciones) const {
-    if (node == nullptr) return;
+void KD_Tree<T>::obtenerUbicacionesRec(Node<T> *node, std::vector<T> &ubicaciones) const
+{
+    if (node == nullptr)
+        return;
 
     // Recorrido in-order para obtener las ubicaciones en orden
     obtenerUbicacionesRec(node->left, ubicaciones);
@@ -587,15 +641,18 @@ void KD_Tree<T>::obtenerUbicacionesRec(Node<T>* node, std::vector<T>& ubicacione
 }
 
 template <typename T>
-std::vector<T> KD_Tree<T>::obtenerTodasLasUbicaciones() const {
+std::vector<T> KD_Tree<T>::obtenerTodasLasUbicaciones() const
+{
     std::vector<T> ubicaciones;
     obtenerUbicacionesRec(root, ubicaciones);
     return ubicaciones;
 }
 
 template <typename T>
-void KD_Tree<T>::obtenerRutasRec(Node<T>* node, std::vector<T>& rutas) const {
-    if (node == nullptr) return;
+void KD_Tree<T>::obtenerRutasRec(Node<T> *node, std::vector<T> &rutas) const
+{
+    if (node == nullptr)
+        return;
 
     // Recorrido in-order para obtener las rutas en orden
     obtenerRutasRec(node->left, rutas);
@@ -604,7 +661,8 @@ void KD_Tree<T>::obtenerRutasRec(Node<T>* node, std::vector<T>& rutas) const {
 }
 
 template <typename T>
-std::vector<T> KD_Tree<T>::obtenerTodasLasRutas() const {
+std::vector<T> KD_Tree<T>::obtenerTodasLasRutas() const
+{
     std::vector<T> rutas;
     obtenerRutasRec(root, rutas); // `root` es la raíz del árbol KD
     return rutas;
@@ -622,7 +680,7 @@ void KD_Tree<T>::print_ubicaciones_rec(Node<T> *node) const
     }
 
     print_ubicaciones_rec(node->left);
-    std::cout << "(" << node->coords[0] << ", " << node->coords[1] << ") -> " << node->data.getName() <<" -> " <<node->data.getDescription()<< std::endl;
+    std::cout << "(" << node->coords[0] << ", " << node->coords[1] << ") -> " << node->data.getName() << " -> " << node->data.getDescription() << std::endl;
     print_ubicaciones_rec(node->right);
 }
 

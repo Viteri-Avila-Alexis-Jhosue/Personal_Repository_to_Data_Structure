@@ -16,6 +16,7 @@
             <p>El sistema cuenta con las siguientes opciones en el menú principal:</p>
             <ul>
                 <li><strong>Definir nueva ubicación:</strong> Permite agregar nuevas ubicaciones al sistema.</li>
+                <li><strong>Modificar una ubicación:</strong> Permite modificar la ubicacion.</li>
                 <li><strong>Definir nueva ruta:</strong> Permite crear nuevas rutas entre ubicaciones existentes.</li>
                 <li><strong>Modificar ruta existente:</strong> Permite editar rutas ya creadas.</li>
                 <li><strong>Definir niveles de tráfico:</strong> Permite establecer niveles de tráfico para las rutas.</li>
@@ -40,8 +41,17 @@
                 <li><strong>Descripcion:</strong> Descripcion del lugar.</li>
             </ul>
             <p>Las ubicaciones se almacenan en un árbol kd para facilitar su búsqueda y gestión.</p>
+            <h3>2. Editar una ubicacion</h3>
+            <p>En el menú secundario de modificación de ubicaciones, puede:</p>
+            <ul>
+                <li><strong>Cambiar el nombre de la ubicacion.</strong> Ingresar las coordenadas de la ubicacion a cambiar y luego escribir el nuevo nombre.</li>
+                <li><strong>Cambiar la descripcion de la ubicacion.</strong> Permite modificar la descripcion del lugar.</li>
+                <li><strong>Cambiar las coordenadas de la ubicacion.</strong> Hay que ser cuidadosos al cambiar las coordenadas de una ubicacion ya que esto afecta directamente a su ruta asociada. Si cambia la coodenada de una ubicacion esta se desconectara de la ruta, lo que hace que la ruta se conecte al siguiente lugar en la ruta.</li>
+                <li><strong>Eliminar ruta.</strong> Mediante esta funcion usted puede eliminar una ubicacion, pero, obiamente modifica la ruta asociada (de haberla).La ruta no queda desconectada, se conecta a la siguiente ubicacion de la misma ruta.</li>
+           
+            </ul>
 
-            <h3>2. Definir una nueva ruta</h3>
+            <h3>3. Definir una nueva ruta</h3>
             <p>Para crear una nueva ruta, siga estos pasos:</p>
             <ol>
                 <li>
@@ -63,7 +73,7 @@
             </ol>
             <p><strong>Nota:</strong> Asegúrese de que las coordenadas ingresadas correspondan a ubicaciones previamente definidas en el sistema.</p>
 
-            <h3>3. Modificar una ruta existente</h3>
+            <h3>4. Modificar una ruta existente</h3>
             <p>En el menú secundario de modificación de rutas, puede:</p>
             <ul>
                 <li><strong>Cambiar el nombre de la ruta.</strong> Ingresar el nombre actual de la ruta y luego el nuevo nombre.</li>
@@ -74,7 +84,7 @@
            
             </ul>
 
-            <h3>4. Definir niveles de tráfico</h3>
+            <h3>5. Definir niveles de tráfico</h3>
             <p>Para definir niveles de tráfico en una ruta, siga estos pasos:</p>
             <ol>
                 <li>
@@ -99,24 +109,10 @@
             <p><strong>Nota:</strong> Los niveles de tráfico afectan el cálculo de rutas óptimas, especialmente en términos de tiempo estimado de viaje.</p>
             <p><strong>Nota:</strong> Los niveles de tráfico pueden ser sobreescritos por lo que, extablezcalos segun crea conveniente. Use trafico nulo para eliminar todos los intervalos de trafico en un determinado rango de horas.</p>
 
-            <h3>5. Modificar niveles de tráfico</h3>
-            <p>Para modificar los niveles de tráfico existentes, siga estos pasos:</p>
-            <ol>
-                <li>
-                    <strong>Seleccionar la ruta:</strong> Elija la ruta con el nivel de tráfico que desea modificar.
-                </li>
-                <li>
-                    <strong>Seleccionar el tramo:</strong> Especifique el tramo de la ruta que desea ajustar.
-                </li>
-                <li>
-                    <strong>Modificar el horario:</strong> Actualice la hora de inicio y la hora de finalización del tráfico.
-                </li>
-                <li>
-                    <strong>Cambiar el nivel de tráfico:</strong> Ajuste el nivel de tráfico (bajo, medio, alto) según sea necesario.
-                </li>
-            </ol>
+            <h3>6. Imprimir mapa de rutas</h3>
+            <p>Habre una pagina donde muestra el mapa con las ubicaciones y las rutas, cada punto representa una ubicacion, si da click en un punto puede obdervar su nombre y su descripcion. De la misma manera, si da click en una ruta se muestra el nombre de la ruta</p>
 
-            <h3>6. Cálculo de rutas óptimas</h3>
+            <h3>7. Cálculo de rutas óptimas</h3>
             <p>El sistema utiliza algoritmos como Dijkstra para calcular rutas óptimas basadas en:</p>
             <ul>
                 <li><strong>Distancia total.</strong> A veces la ruta más corta no es la más óptima, debido a los niveles de tráfico.</li>
@@ -124,14 +120,32 @@
             </ul>
             <p>También se pueden encontrar rutas alternativas no óptimas utilizando backtracking.</p>
 
-            <h3>7. Gráficas estadísticas</h3>
+            <h3>8. Cálculo de rutas óptimas</h3>
+            <p>El sistema utiliza algoritmos como Dijkstra para calcular rutas óptimas basadas en:</p>
+            <ul>
+                <li><strong>Distancia total.</strong> A veces la ruta más corta no es la más óptima, debido a los niveles de tráfico.</li>
+                <li><strong>Tiempo estimado de viaje.</strong> Esta es la ruta óptima por excelencia.</li>
+            </ul>
+            <p>También se pueden encontrar rutas alternativas no óptimas utilizando backtracking.</p>
+
+            <h3>9. Imprimir tramos de las rutas</h3>
+            <p>Imprime los tramos que conforman una ruta de dos formas:</p>
+            <ul>
+                <li><strong>Todos los tramos de todas las rutas.</strong> Todos los tramos, su velcidad maxima, sus niveles de trafico, sus puntos de anclaje.</li>
+                <li><strong>Ruta en especifico.</strong> Escriba el nombre de la ruta a mostrar y el sistema mostrara todos los tramos de esa ruta.</li>
+            </ul>
+
+            <h3>10. Imprimir ubicaciones</h3>
+            <p> Imprime todos las ubicaciones</p>
+            
+            <h3>11. Gráficas estadísticas</h3>
             <p>El sistema genera gráficas estadísticas utilizando MatLab, incluyendo:</p>
             <ul>
                 <li><strong>Gráficas de barras de rutas posibles (tiempo y distancia).</strong> Solamente de las 5 primeras rutas posibles.</li>
                 <li><strong>Visualización de aristas (calles) y nodos (ubicaciones).</strong> El mapa se representará mediante un grafo.</li>
             </ul>
 
-            <h3>8. Almacenamiento de datos</h3>
+            <h3>12. Almacenamiento de datos</h3>
             <p>Los datos se guardan en archivos de texto (<code>.txt</code>) para:</p>
             <ul>
                 <li><strong>Ubicaciones.</strong> Líneas simples que contienen coordenadas y nombre del lugar.</li>

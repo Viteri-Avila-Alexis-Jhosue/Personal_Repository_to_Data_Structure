@@ -1,154 +1,268 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Plano Interactivo</title>
+    <title>Mapa ciudad imaginaria</title>
     <style>
         body { margin: 0; padding: 0; background-color: black; }
         #plano { width: 1600px; height: 900px; border: 1px solid black; position: relative; background-image: url('mapa3.jpg'); background-size: cover; }
         #capa-oscura { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); }
         .punto { position: absolute; width: 10px; height: 10px; border-radius: 50%; cursor: pointer; z-index: 2; }
         .coordenada { position: absolute; font-size: 12px; color: white; z-index: 2; }
-        .linea { position: absolute; height: 2px; background-color: #808080; transform-origin: 0 0; z-index: 1; }
+        .linea { position: absolute; height: 2px; background-color: #808080; transform-origin: 0 0; z-index: 1; cursor: pointer; }
         #panel { position: fixed; top: 20px; right: 20px; width: 300px; padding: 10px; background: rgba(255, 255, 255, 0.8); border: 1px solid #ccc; display: none; color: black; z-index: 3; }
         #cerrarPanel { position: absolute; top: 5px; right: 5px; cursor: pointer; font-size: 16px; }
+        #leyenda { position: fixed; bottom: 20px; left: 20px; background: rgba(255, 255, 255, 0.8); padding: 10px; border: 1px solid #ccc; z-index: 3; }
+        #cerrarLeyenda { position: absolute; top: 5px; right: 5px; cursor: pointer; font-size: 16px; color: black; }
+        .color-box { display: inline-block; width: 20px; height: 20px; margin-right: 5px; }
     </style>
 </head>
 <body>
     <div id="plano">
         <div id="capa-oscura"></div>
-        <div class="linea" style="left: 100px; top: 188px; width: 189.652px; transform: rotate(-27.646deg);"></div>
-        <div class="linea" style="left: 268px; top: 737px; width: 206.4px; transform: rotate(-6.6774deg);"></div>
-        <div class="linea" style="left: 100px; top: 625px; width: 112px; transform: rotate(0deg);"></div>
-        <div class="linea" style="left: 100px; top: 450px; width: 141.82px; transform: rotate(-37.8396deg);"></div>
-        <div class="linea" style="left: 100px; top: 275px; width: 141.82px; transform: rotate(-37.8396deg);"></div>
-        <div class="linea" style="left: 212px; top: 625px; width: 125.22px; transform: rotate(63.4349deg);"></div>
-        <div class="linea" style="left: 212px; top: 363px; width: 56px; transform: rotate(0deg);"></div>
-        <div class="linea" style="left: 212px; top: 275px; width: 104.307px; transform: rotate(57.5288deg);"></div>
-        <div class="linea" style="left: 268px; top: 275px; width: 56px; transform: rotate(180deg);"></div>
-        <div class="linea" style="left: 268px; top: 363px; width: 269.537px; transform: rotate(-40.486deg);"></div>
-        <div class="linea" style="left: 212px; top: 188px; width: 104.307px; transform: rotate(-57.5288deg);"></div>
-        <div class="linea" style="left: 268px; top: 188px; width: 87px; transform: rotate(90deg);"></div>
-        <div class="linea" style="left: 473px; top: 188px; width: 223.09px; transform: rotate(-23.2323deg);"></div>
-        <div class="linea" style="left: 473px; top: 713px; width: 72px; transform: rotate(90deg);"></div>
-        <div class="linea" style="left: 678px; top: 800px; width: 333.287px; transform: rotate(-51.8235deg);"></div>
-        <div class="linea" style="left: 473px; top: 785px; width: 205.548px; transform: rotate(4.18492deg);"></div>
-        <div class="linea" style="left: 884px; top: 538px; width: 87px; transform: rotate(90deg);"></div>
-        <div class="linea" style="left: 884px; top: 737px; width: 210.545px; transform: rotate(13.1782deg);"></div>
-        <div class="linea" style="left: 1089px; top: 785px; width: 207.483px; transform: rotate(-8.87213deg);"></div>
-        <div class="linea" style="left: 1294px; top: 753px; width: 208.471px; transform: rotate(8.82974deg);"></div>
-        <div class="linea" style="left: 1500px; top: 785px; width: 72px; transform: rotate(-90deg);"></div>
-        <div class="linea" style="left: 1500px; top: 713px; width: 263px; transform: rotate(-90deg);"></div>
-        <div class="linea" style="left: 884px; top: 625px; width: 112px; transform: rotate(90deg);"></div>
-        <div class="linea" style="left: 884px; top: 275px; width: 222.697px; transform: rotate(-22.9959deg);"></div>
-        <div class="linea" style="left: 884px; top: 188px; width: 205px; transform: rotate(0deg);"></div>
-        <div class="linea" style="left: 473px; top: 188px; width: 205px; transform: rotate(0deg);"></div>
-        <div class="linea" style="left: 678px; top: 188px; width: 223.618px; transform: rotate(22.8958deg);"></div>
-        <div class="linea" style="left: 1089px; top: 188px; width: 223.09px; transform: rotate(-23.2323deg);"></div>
-        <div class="linea" style="left: 1089px; top: 188px; width: 269.537px; transform: rotate(40.486deg);"></div>
-        <div class="linea" style="left: 268px; top: 100px; width: 223.09px; transform: rotate(23.2323deg);"></div>
-        <div class="linea" style="left: 268px; top: 100px; width: 88px; transform: rotate(90deg);"></div>
-        <div class="linea" style="left: 678px; top: 100px; width: 224.009px; transform: rotate(23.1314deg);"></div>
-        <div class="linea" style="left: 1294px; top: 100px; width: 270.298px; transform: rotate(40.3484deg);"></div>
-        <div class="punto" style="left: 100px; top: 625px; background-color: #FF0000;" onclick="mostrarInfo('Zoologico Regional', 'Parque con diversas especies de animales en un entorno controlado y seguro con programas de conservación visitas guiadas y actividades educativas para niños')"></div>
-        <div class="coordenada" style="left: 90px; top: 605px;">(3, 23)</div>
-        <div class="punto" style="left: 268px; top: 737px; background-color: #00FF00;" onclick="mostrarInfo('Cabana en el Bosque', 'Alojamiento rústico rodeado de naturaleza con cabañas de madera chimeneas senderos y actividades recreativas para una experiencia tranquila y relajante')"></div>
-        <div class="coordenada" style="left: 258px; top: 717px;">(12, 9)</div>
-        <div class="punto" style="left: 212px; top: 625px; background-color: #0000FF;" onclick="mostrarInfo('Centro de Convenciones', 'Espacio moderno con salas para exposiciones ferias congresos y eventos corporativos equipado con tecnología avanzada y asistencia personalizada')"></div>
-        <div class="coordenada" style="left: 202px; top: 605px;">(9, 23)</div>
-        <div class="punto" style="left: 212px; top: 538px; background-color: #FF00FF;" onclick="mostrarInfo('Taller de Arte', 'Espacio para la creación de pinturas y esculturas con clases impartidas por artistas locales donde los visitantes pueden aprender y desarrollar su creatividad')"></div>
-        <div class="coordenada" style="left: 202px; top: 518px;">(9, 34)</div>
-        <div class="punto" style="left: 100px; top: 450px; background-color: #00FFFF;" onclick="mostrarInfo('Clinica Privada', 'Centro de salud con consultas especializadas diagnósticos de última generación atención de emergencias y un equipo médico altamente capacitado')"></div>
-        <div class="coordenada" style="left: 90px; top: 430px;">(3, 45)</div>
-        <div class="punto" style="left: 212px; top: 363px; background-color: #FFFF00;" onclick="mostrarInfo('Hotel Boutique', 'Alojamiento con un estilo elegante y servicio personalizado para los huéspedes con habitaciones confortables restaurante gourmet y spa de relajación')"></div>
-        <div class="coordenada" style="left: 202px; top: 343px;">(9, 56)</div>
-        <div class="punto" style="left: 268px; top: 538px; background-color: #FFA500;" onclick="mostrarInfo('Centro Comercial', 'Gran edificio con tiendas de ropa tecnología restaurantes y cines diseñado para brindar una experiencia de compras completa y entretenimiento para toda la familia')"></div>
-        <div class="coordenada" style="left: 258px; top: 518px;">(12, 34)</div>
-        <div class="punto" style="left: 268px; top: 450px; background-color: #800080;" onclick="mostrarInfo('Galeria de Arte', 'Exhibición de obras contemporáneas de artistas locales y nacionales con galerías temáticas talleres interactivos y visitas guiadas para el público')"></div>
-        <div class="coordenada" style="left: 258px; top: 430px;">(12, 45)</div>
-        <div class="punto" style="left: 268px; top: 363px; background-color: #FF0000;" onclick="mostrarInfo('Cancha de Tenis', 'Instalación deportiva para partidos y entrenamientos de tenis a nivel profesional con canchas iluminadas vestuarios gradas y escuela de formación')"></div>
-        <div class="coordenada" style="left: 258px; top: 343px;">(12, 56)</div>
-        <div class="punto" style="left: 473px; top: 450px; background-color: #00FF00;" onclick="mostrarInfo('Parque Acuatico', 'Complejo de piscinas y toboganes diseñado para el entretenimiento familiar con áreas de descanso restaurantes y juegos acuáticos para todas las edades')"></div>
-        <div class="coordenada" style="left: 463px; top: 430px;">(23, 45)</div>
-        <div class="punto" style="left: 473px; top: 713px; background-color: #0000FF;" onclick="mostrarInfo('Hospital General', 'Centro de atención médica con servicios de urgencias consultas especializadas y hospitalización equipado con laboratorios farmacias y unidades de cuidados intensivos')"></div>
-        <div class="coordenada" style="left: 463px; top: 693px;">(23, 12)</div>
-        <div class="punto" style="left: 678px; top: 800px; background-color: #FF00FF;" onclick="mostrarInfo('Panaderia Artesanal', 'Tienda especializada en pan recién horneado y productos de repostería con recetas artesanales café de especialidad y una sección de postres caseros')"></div>
-        <div class="coordenada" style="left: 668px; top: 780px;">(34, 1)</div>
-        <div class="punto" style="left: 473px; top: 785px; background-color: #00FFFF;" onclick="mostrarInfo('Estadio Olimpico', 'Complejo deportivo de gran capacidad para competencias nacionales e internacionales con infraestructura moderna áreas de entrenamiento y zonas de espectadores')"></div>
-        <div class="coordenada" style="left: 463px; top: 765px;">(23, 3)</div>
-        <div class="punto" style="left: 678px; top: 713px; background-color: #FFFF00;" onclick="mostrarInfo('Escuela de Musica', 'Institución educativa enfocada en la enseñanza de instrumentos y teoría musical con profesores especializados ensambles de orquesta y conciertos estudiantiles')"></div>
-        <div class="coordenada" style="left: 668px; top: 693px;">(34, 12)</div>
-        <div class="punto" style="left: 678px; top: 625px; background-color: #FFA500;" onclick="mostrarInfo('Fabrica de Muebles', 'Instalación industrial dedicada a la producción de muebles de madera y metal equipada con tecnología de vanguardia para la fabricación de piezas de alta calidad')"></div>
-        <div class="coordenada" style="left: 668px; top: 605px;">(34, 23)</div>
-        <div class="punto" style="left: 585px; top: 570px; background-color: #800080;" onclick="mostrarInfo('Biblioteca Publica', 'Espacio de lectura y estudio con una extensa colección de libros documentos digitales y salas de investigación además de eventos literarios y conferencias')"></div>
-        <div class="coordenada" style="left: 575px; top: 550px;">(29, 30)</div>
-        <div class="punto" style="left: 473px; top: 363px; background-color: #FF0000;" onclick="mostrarInfo('Camping Aventura', 'Área natural con espacios para acampar y realizar actividades al aire libre como senderismo pesca y observación de la fauna local en un entorno tranquilo')"></div>
-        <div class="coordenada" style="left: 463px; top: 343px;">(23, 56)</div>
-        <div class="punto" style="left: 678px; top: 363px; background-color: #00FF00;" onclick="mostrarInfo('Aeropuerto Internacional', 'Terminal aérea con vuelos nacionales e internacionales equipada con modernas instalaciones restaurantes tiendas libres de impuestos y un sistema de transporte eficiente')"></div>
-        <div class="coordenada" style="left: 668px; top: 343px;">(34, 56)</div>
-        <div class="punto" style="left: 790px; top: 490px; background-color: #0000FF;" onclick="mostrarInfo('Casa de Cultura', 'Institución dedicada a la promoción del arte y la cultura con talleres exposiciones presentaciones teatrales y clases de distintas disciplinas artísticas')"></div>
-        <div class="coordenada" style="left: 780px; top: 470px;">(40, 40)</div>
-        <div class="punto" style="left: 268px; top: 275px; background-color: #FF00FF;" onclick="mostrarInfo('Estadio Central', 'Instalación deportiva moderna con capacidad para miles de espectadores equipada con canchas de fútbol pista de atletismo y un centro de entrenamiento de alto rendimiento')"></div>
-        <div class="coordenada" style="left: 258px; top: 255px;">(12, 67)</div>
-        <div class="punto" style="left: 212px; top: 275px; background-color: #00FFFF;" onclick="mostrarInfo('Farmacia Central', 'Establecimiento con una amplia variedad de medicamentos y productos de salud con atención las 24 horas y asesoría profesional para el cuidado de los clientes')"></div>
-        <div class="coordenada" style="left: 202px; top: 255px;">(9, 67)</div>
-        <div class="punto" style="left: 100px; top: 188px; background-color: #FFFF00;" onclick="mostrarInfo('Centro de Desarrollo', 'Institución que brinda capacitaciones y apoyo a emprendedores y pequeñas empresas con asesoramiento en negocios financiamiento y desarrollo de proyectos')"></div>
-        <div class="coordenada" style="left: 90px; top: 168px;">(3, 78)</div>
-        <div class="punto" style="left: 100px; top: 275px; background-color: #FFA500;" onclick="mostrarInfo('Almacen de Suministros', 'Bodega con venta al por mayor de herramientas materiales y equipos para construcción carpintería mecánica y otras especialidades técnicas')"></div>
-        <div class="coordenada" style="left: 90px; top: 255px;">(3, 67)</div>
-        <div class="punto" style="left: 212px; top: 188px; background-color: #800080;" onclick="mostrarInfo('Centro Ecoturistico', 'Destino para actividades al aire libre como senderismo ciclismo camping y exploración de ecosistemas en una reserva natural protegida')"></div>
-        <div class="coordenada" style="left: 202px; top: 168px;">(9, 78)</div>
-        <div class="punto" style="left: 268px; top: 100px; background-color: #FF0000;" onclick="mostrarInfo('Centro de Rehabilitacion', 'Instalación especializada en terapias físicas y recuperación post operatoria con profesionales capacitados y tecnología avanzada para el tratamiento de lesiones')"></div>
-        <div class="coordenada" style="left: 258px; top: 80px;">(12, 89)</div>
-        <div class="punto" style="left: 268px; top: 188px; background-color: #00FF00;" onclick="mostrarInfo('Residencia del Lago', 'Vivienda junto a un lago con vistas espectaculares y acceso a actividades acuáticas como paseos en bote pesca y natación en aguas cristalinas')"></div>
-        <div class="coordenada" style="left: 258px; top: 168px;">(12, 78)</div>
-        <div class="punto" style="left: 473px; top: 188px; background-color: #0000FF;" onclick="mostrarInfo('Torre de Comunicaciones', 'Edificio con antenas de transmisión para radio y televisión con tecnología de vanguardia salas de grabación y oficinas administrativas para gestión de medios')"></div>
-        <div class="coordenada" style="left: 463px; top: 168px;">(23, 78)</div>
-        <div class="punto" style="left: 678px; top: 188px; background-color: #FF00FF;" onclick="mostrarInfo('Universidad Tecnologica', 'Institución especializada en ingenierías y ciencias aplicadas con laboratorios de investigación programas de innovación y colaboración con empresas tecnológicas')"></div>
-        <div class="coordenada" style="left: 668px; top: 168px;">(34, 78)</div>
-        <div class="punto" style="left: 678px; top: 100px; background-color: #00FFFF;" onclick="mostrarInfo('Escuela Tecnica', 'Centro educativo especializado en formación profesional en distintas áreas con laboratorios talleres y programas de capacitación para el desarrollo de habilidades técnicas')"></div>
-        <div class="coordenada" style="left: 668px; top: 80px;">(34, 89)</div>
-        <div class="punto" style="left: 884px; top: 625px; background-color: #FFFF00;" onclick="mostrarInfo('Mirador del Valle', 'Lugar panorámico en lo alto de una colina ideal para observar el paisaje natural tomar fotografías y disfrutar de la tranquilidad del entorno alejado del ruido de la ciudad.')"></div>
-        <div class="coordenada" style="left: 874px; top: 605px;">(45, 23)</div>
-        <div class="punto" style="left: 1089px; top: 785px; background-color: #FFA500;" onclick="mostrarInfo('Museo de Historia', 'Exhibición de artefactos y documentos históricos sobre la región y su desarrollo con salas interactivas recorridos guiados y actividades educativas para visitantes')"></div>
-        <div class="coordenada" style="left: 1079px; top: 765px;">(56, 3)</div>
-        <div class="punto" style="left: 884px; top: 737px; background-color: #800080;" onclick="mostrarInfo('Parque Natural', 'Reserva ecológica con senderos para caminatas observación de fauna y flora cascadas naturales y miradores panorámicos para fotografías únicas')"></div>
-        <div class="coordenada" style="left: 874px; top: 717px;">(45, 9)</div>
-        <div class="punto" style="left: 1294px; top: 753px; background-color: #FF0000;" onclick="mostrarInfo('Parque Infantil', 'Zona recreativa con juegos y áreas de descanso para niños y familias con espacios verdes toboganes columpios y juegos de agua para el verano')"></div>
-        <div class="coordenada" style="left: 1284px; top: 733px;">(67, 7)</div>
-        <div class="punto" style="left: 1500px; top: 785px; background-color: #00FF00;" onclick="mostrarInfo('Club Deportivo', 'Complejo con canchas de fútbol baloncesto y gimnasio para entrenamientos profesionales además de espacios recreativos y academias deportivas para todas las edades')"></div>
+        <div class="linea" id="linea0" style="left: 100px; top: 793px; width: 96.2601px; transform: rotate(-55.1543deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea1" style="left: 118px; top: 281px; width: 139.628px; transform: rotate(-38.0189deg); background-color: #808080;" onclick="mostrarInfoRuta('Eloy Alfaro', 0)"></div>
+        <div class="linea" id="linea2" style="left: 118px; top: 627px; width: 317.796px; transform: rotate(-9.9662deg); background-color: #0000FF;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 1)"></div>
+        <div class="linea" id="linea3" style="left: 118px; top: 627px; width: 110px; transform: rotate(0deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea4" style="left: 118px; top: 454px; width: 205.01px; transform: rotate(-57.5502deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea5" style="left: 118px; top: 454px; width: 140.246px; transform: rotate(38.3408deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea6" style="left: 155px; top: 714px; width: 187.771px; transform: rotate(-67.1219deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea7" style="left: 228px; top: 627px; width: 124.326px; transform: rotate(63.2288deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea8" style="left: 228px; top: 541px; width: 56px; transform: rotate(0deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea9" style="left: 228px; top: 541px; width: 103.465px; transform: rotate(-57.2315deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea10" style="left: 228px; top: 368px; width: 102.626px; transform: rotate(56.9293deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea11" style="left: 228px; top: 281px; width: 103.465px; transform: rotate(57.2315deg); background-color: #808080;" onclick="mostrarInfoRuta('Eloy Alfaro', 0)"></div>
+        <div class="linea" id="linea12" style="left: 118px; top: 281px; width: 140.246px; transform: rotate(38.3408deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea13" style="left: 228px; top: 281px; width: 102.626px; transform: rotate(-56.9293deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea14" style="left: 284px; top: 281px; width: 56px; transform: rotate(180deg); background-color: #808080;" onclick="mostrarInfoRuta('Eloy Alfaro', 0)"></div>
+        <div class="linea" id="linea15" style="left: 284px; top: 738px; width: 203.421px; transform: rotate(-6.77566deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea16" style="left: 339px; top: 651px; width: 159.931px; transform: rotate(23.1986deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea17" style="left: 486px; top: 785px; width: 203.553px; transform: rotate(4.226deg); background-color: #0000FF;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 1)"></div>
+        <div class="linea" id="linea18" style="left: 486px; top: 714px; width: 220.857px; transform: rotate(-23.1986deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea19" style="left: 486px; top: 714px; width: 71px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea20" style="left: 523px; top: 635px; width: 184.694px; transform: rotate(175.03deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea21" style="left: 689px; top: 627px; width: 87px; transform: rotate(90deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea22" style="left: 689px; top: 800px; width: 329.074px; transform: rotate(-51.9112deg); background-color: #0000FF;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 1)"></div>
+        <div class="linea" id="linea23" style="left: 800px; top: 793px; width: 189.789px; transform: rotate(-61.004deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea24" style="left: 892px; top: 738px; width: 207.396px; transform: rotate(13.0982deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea25" style="left: 689px; top: 714px; width: 136.242px; transform: rotate(35.4399deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea26" style="left: 689px; top: 627px; width: 158.827px; transform: rotate(-110.26deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea27" style="left: 892px; top: 627px; width: 111.503px; transform: rotate(34.4027deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea28" style="left: 892px; top: 627px; width: 111px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea29" style="left: 431px; top: 572px; width: 166px; transform: rotate(0deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea30" style="left: 431px; top: 572px; width: 130.188px; transform: rotate(-65.0097deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea31" style="left: 431px; top: 572px; width: 223.707px; transform: rotate(-24.8467deg); background-color: #0000FF;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 1)"></div>
+        <div class="linea" id="linea32" style="left: 597px; top: 572px; width: 107.187px; transform: rotate(30.8721deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea33" style="left: 984px; top: 690px; width: 112.588px; transform: rotate(12.308deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea34" style="left: 1094px; top: 785px; width: 257.241px; transform: rotate(-37.8945deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea35" style="left: 1094px; top: 785px; width: 205.507px; transform: rotate(-8.95813deg); background-color: #FF0000;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 3)"></div>
+        <div class="linea" id="linea36" style="left: 1297px; top: 753px; width: 205.507px; transform: rotate(8.95813deg); background-color: #FF0000;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 3)"></div>
+        <div class="linea" id="linea37" style="left: 1500px; top: 785px; width: 71px; transform: rotate(-90deg); background-color: #FF0000;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 3)"></div>
+        <div class="linea" id="linea38" style="left: 1094px; top: 714px; width: 206.712px; transform: rotate(10.8751deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea39" style="left: 984px; top: 690px; width: 145.344px; transform: rotate(40.8151deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea40" style="left: 1094px; top: 627px; width: 126.764px; transform: rotate(150.199deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea41" style="left: 1297px; top: 627px; width: 57.0088px; transform: rotate(-15.2551deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea42" style="left: 1297px; top: 627px; width: 164.454px; transform: rotate(-141.667deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea43" style="left: 1352px; top: 612px; width: 179.744px; transform: rotate(34.5742deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea44" style="left: 284px; top: 541px; width: 150.233px; transform: rotate(11.9083deg); background-color: #FFA500;" onclick="mostrarInfoRuta('El Inca', 2)"></div>
+        <div class="linea" id="linea45" style="left: 284px; top: 541px; width: 145.619px; transform: rotate(-59.9135deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea46" style="left: 284px; top: 454px; width: 87px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea47" style="left: 284px; top: 454px; width: 82.7647px; transform: rotate(-28.1132deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea48" style="left: 357px; top: 415px; width: 137.295px; transform: rotate(-20.0188deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea49" style="left: 357px; top: 415px; width: 173.566px; transform: rotate(64.7637deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea50" style="left: 486px; top: 454px; width: 184.743px; transform: rotate(78.4468deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea51" style="left: 486px; top: 368px; width: 116.211px; transform: rotate(-37.6588deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea52" style="left: 578px; top: 297px; width: 150.748px; transform: rotate(-42.5805deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea53" style="left: 634px; top: 478px; width: 166.769px; transform: rotate(5.50548deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea54" style="left: 634px; top: 478px; width: 265.58px; transform: rotate(13.7223deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea55" style="left: 689px; top: 368px; width: 89.8109px; transform: rotate(-52.2369deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea56" style="left: 800px; top: 494px; width: 200.242px; transform: rotate(-23.2362deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea57" style="left: 892px; top: 541px; width: 219.545px; transform: rotate(23.0615deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea58" style="left: 892px; top: 541px; width: 86px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Av. Simon Bolivar', 0)"></div>
+        <div class="linea" id="linea59" style="left: 984px; top: 415px; width: 126.621px; transform: rotate(43.4deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea60" style="left: 836px; top: 384px; width: 252.668px; transform: rotate(-18.2198deg); background-color: #FFA500;" onclick="mostrarInfoRuta('Av.Pichincha', 2)"></div>
+        <div class="linea" id="linea61" style="left: 984px; top: 415px; width: 316.509px; transform: rotate(-8.53972deg); background-color: #FF0000;" onclick="mostrarInfoRuta('Panamericana Norte', 3)"></div>
+        <div class="linea" id="linea62" style="left: 578px; top: 297px; width: 131.765px; transform: rotate(32.6046deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea63" style="left: 744px; top: 297px; width: 148.862px; transform: rotate(-6.17018deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea64" style="left: 1076px; top: 305px; width: 97.0824px; transform: rotate(-18.6216deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea65" style="left: 1076px; top: 502px; width: 94.8314px; transform: rotate(14.0362deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea66" style="left: 1094px; top: 454px; width: 116.709px; transform: rotate(-160.478deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea67" style="left: 1297px; top: 541px; width: 86px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea68" style="left: 1297px; top: 541px; width: 89.8109px; transform: rotate(52.2369deg); background-color: #0000FF;" onclick="mostrarInfoRuta('Los Shiris', 1)"></div>
+        <div class="linea" id="linea69" style="left: 1168px; top: 525px; width: 129.988px; transform: rotate(7.07034deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea70" style="left: 1168px; top: 525px; width: 203.199px; transform: rotate(-50.5916deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea71" style="left: 1297px; top: 368px; width: 220.857px; transform: rotate(-23.1986deg); background-color: #808080;" onclick="mostrarInfoRuta('Panamericana Norte', 0)"></div>
+        <div class="linea" id="linea72" style="left: 1500px; top: 454px; width: 220.857px; transform: rotate(156.801deg); background-color: #0000FF;" onclick="mostrarInfoRuta('Los Shiris', 1)"></div>
+        <div class="linea" id="linea73" style="left: 1297px; top: 368px; width: 220.465px; transform: rotate(22.9597deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Capitan Geovanni Calles', 0)"></div>
+        <div class="linea" id="linea74" style="left: 1076px; top: 305px; width: 150.083px; transform: rotate(83.1117deg); background-color: #808080;" onclick="mostrarInfoRuta('Av.Pichincha', 0)"></div>
+        <div class="linea" id="linea75" style="left: 892px; top: 281px; width: 168.36px; transform: rotate(-56.8763deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea76" style="left: 892px; top: 281px; width: 117.239px; transform: rotate(118.532deg); background-color: #FFA500;" onclick="mostrarInfoRuta('Av.Pichincha', 2)"></div>
+        <div class="linea" id="linea77" style="left: 1168px; top: 274px; width: 75.71px; transform: rotate(-12.2005deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea78" style="left: 1500px; top: 281px; width: 173px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea79" style="left: 1242px; top: 258px; width: 259.023px; transform: rotate(5.0943deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea80" style="left: 228px; top: 195px; width: 103.465px; transform: rotate(-57.2315deg); background-color: #808080;" onclick="mostrarInfoRuta('Eloy Alfaro', 0)"></div>
+        <div class="linea" id="linea81" style="left: 118px; top: 195px; width: 187.417px; transform: rotate(-27.6589deg); background-color: #808080;" onclick="mostrarInfoRuta('6 de Octubre', 0)"></div>
+        <div class="linea" id="linea82" style="left: 284px; top: 195px; width: 86px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Eloy Alfaro', 0)"></div>
+        <div class="linea" id="linea83" style="left: 284px; top: 195px; width: 132.246px; transform: rotate(-45.9191deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea84" style="left: 486px; top: 195px; width: 137.361px; transform: rotate(47.9508deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea85" style="left: 689px; top: 195px; width: 87px; transform: rotate(-90deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea86" style="left: 486px; top: 195px; width: 220.857px; transform: rotate(-23.1986deg); background-color: #FF0000;" onclick="mostrarInfoRuta('6 de Octubre', 3)"></div>
+        <div class="linea" id="linea87" style="left: 892px; top: 195px; width: 202px; transform: rotate(0deg); background-color: #808080;" onclick="mostrarInfoRuta('6 de Octubre', 0)"></div>
+        <div class="linea" id="linea88" style="left: 1094px; top: 195px; width: 220.857px; transform: rotate(-23.1986deg); background-color: #FFA500;" onclick="mostrarInfoRuta('6 de Octubre', 2)"></div>
+        <div class="linea" id="linea89" style="left: 984px; top: 140px; width: 188.915px; transform: rotate(60.857deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea90" style="left: 284px; top: 108px; width: 87px; transform: rotate(90deg); background-color: #808080;" onclick="mostrarInfoRuta('Eloy Alfaro', 0)"></div>
+        <div class="linea" id="linea91" style="left: 284px; top: 108px; width: 219.939px; transform: rotate(23.3012deg); background-color: #808080;" onclick="mostrarInfoRuta('6 de Octubre', 0)"></div>
+        <div class="linea" id="linea92" style="left: 689px; top: 108px; width: 266.717px; transform: rotate(40.4382deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="linea" id="linea93" style="left: 689px; top: 108px; width: 220.857px; transform: rotate(23.1986deg); background-color: #FF0000;" onclick="mostrarInfoRuta('6 de Octubre', 3)"></div>
+        <div class="linea" id="linea94" style="left: 1297px; top: 108px; width: 266.717px; transform: rotate(40.4382deg); background-color: #FFA500;" onclick="mostrarInfoRuta('6 de Octubre', 2)"></div>
+        <div class="linea" id="linea95" style="left: 376px; top: 100px; width: 145.344px; transform: rotate(40.8151deg); background-color: #808080;" onclick="mostrarInfoRuta('Los Shiris', 0)"></div>
+        <div class="punto" style="left: 100px; top: 793px; background-color: #FF0000;" onclick="mostrarInfo('Hola', 'Si ve esto. Pongame 20 Profesor. No me quiero quedar')"></div>
+        <div class="coordenada" style="left: 90px; top: 773px;">(2, 2)</div>
+        <div class="punto" style="left: 118px; top: 627px; background-color: #00FF00;" onclick="mostrarInfo('Zoologico Regional', 'Parque con diversas especies de animales en un entorno controlado y seguro con programas de conservación visitas guiadas y actividades educativas para niños')"></div>
+        <div class="coordenada" style="left: 108px; top: 607px;">(3, 23)</div>
+        <div class="punto" style="left: 155px; top: 714px; background-color: #0000FF;" onclick="mostrarInfo('Inserte texto gracioso', 'Inserte el remate del chiste')"></div>
+        <div class="coordenada" style="left: 145px; top: 694px;">(5, 12)</div>
+        <div class="punto" style="left: 284px; top: 738px; background-color: #FF00FF;" onclick="mostrarInfo('Cabana en el Bosque', 'Alojamiento rústico rodeado de naturaleza con cabañas de madera chimeneas senderos y actividades recreativas para una experiencia tranquila y relajante')"></div>
+        <div class="coordenada" style="left: 274px; top: 718px;">(12, 9)</div>
+        <div class="punto" style="left: 339px; top: 651px; background-color: #00FFFF;" onclick="mostrarInfo('Playa Sol y Mar', 'Un destino de playa popular para relajarse bajo el sol nadar en aguas cálidas y practicar deportes acuáticos como el surf y el snorkel.')"></div>
+        <div class="coordenada" style="left: 329px; top: 631px;">(15, 20)</div>
+        <div class="punto" style="left: 228px; top: 627px; background-color: #FFFF00;" onclick="mostrarInfo('Centro de Convenciones', 'Espacio moderno con salas para exposiciones ferias congresos y eventos corporativos equipado con tecnología avanzada y asistencia personalizada')"></div>
+        <div class="coordenada" style="left: 218px; top: 607px;">(9, 23)</div>
+        <div class="punto" style="left: 431px; top: 572px; background-color: #FFA500;" onclick="mostrarInfo('Motel', 'Para esas escapadas con la moza llamenos al 1800-Motel El Cojelon')"></div>
+        <div class="coordenada" style="left: 421px; top: 552px;">(20, 30)</div>
+        <div class="punto" style="left: 228px; top: 541px; background-color: #800080;" onclick="mostrarInfo('Taller de Arte', 'Espacio para la creación de pinturas y esculturas con clases impartidas por artistas locales donde los visitantes pueden aprender y desarrollar su creatividad')"></div>
+        <div class="coordenada" style="left: 218px; top: 521px;">(9, 34)</div>
+        <div class="punto" style="left: 118px; top: 454px; background-color: #FF0000;" onclick="mostrarInfo('Clinica Privada', 'Centro de salud con consultas especializadas diagnósticos de última generación atención de emergencias y un equipo médico altamente capacitado')"></div>
+        <div class="coordenada" style="left: 108px; top: 434px;">(3, 45)</div>
+        <div class="punto" style="left: 228px; top: 368px; background-color: #00FF00;" onclick="mostrarInfo('Hotel Boutique', 'Alojamiento con un estilo elegante y servicio personalizado para los huéspedes con habitaciones confortables restaurante gourmet y spa de relajación')"></div>
+        <div class="coordenada" style="left: 218px; top: 348px;">(9, 56)</div>
+        <div class="punto" style="left: 284px; top: 541px; background-color: #0000FF;" onclick="mostrarInfo('Centro Comercial', 'Gran edificio con tiendas de ropa tecnología restaurantes y cines diseñado para brindar una experiencia de compras completa y entretenimiento para toda la familia')"></div>
+        <div class="coordenada" style="left: 274px; top: 521px;">(12, 34)</div>
+        <div class="punto" style="left: 284px; top: 454px; background-color: #FF00FF;" onclick="mostrarInfo('Galeria de Arte', 'Exhibición de obras contemporáneas de artistas locales y nacionales con galerías temáticas talleres interactivos y visitas guiadas para el público')"></div>
+        <div class="coordenada" style="left: 274px; top: 434px;">(12, 45)</div>
+        <div class="punto" style="left: 284px; top: 368px; background-color: #00FFFF;" onclick="mostrarInfo('Cancha de Tenis', 'Instalación deportiva para partidos y entrenamientos de tenis a nivel profesional con canchas iluminadas vestuarios gradas y escuela de formación')"></div>
+        <div class="coordenada" style="left: 274px; top: 348px;">(12, 56)</div>
+        <div class="punto" style="left: 357px; top: 415px; background-color: #FFFF00;" onclick="mostrarInfo('Cueva de los Murciélagos', 'Una formación natural impresionante conocida por su entrada oculta y por ser hogar de miles de murciélagos que salen al atardecer para alimentarse.')"></div>
+        <div class="coordenada" style="left: 347px; top: 395px;">(16, 50)</div>
+        <div class="punto" style="left: 486px; top: 454px; background-color: #FFA500;" onclick="mostrarInfo('Parque Acuatico', 'Complejo de piscinas y toboganes diseñado para el entretenimiento familiar con áreas de descanso restaurantes y juegos acuáticos para todas las edades')"></div>
+        <div class="coordenada" style="left: 476px; top: 434px;">(23, 45)</div>
+        <div class="punto" style="left: 486px; top: 714px; background-color: #800080;" onclick="mostrarInfo('Hospital General', 'Centro de atención médica con servicios de urgencias consultas especializadas y hospitalización equipado con laboratorios farmacias y unidades de cuidados intensivos')"></div>
+        <div class="coordenada" style="left: 476px; top: 694px;">(23, 12)</div>
+        <div class="punto" style="left: 689px; top: 800px; background-color: #FF0000;" onclick="mostrarInfo('Panaderia Artesanal', 'Tienda especializada en pan recién horneado y productos de repostería con recetas artesanales café de especialidad y una sección de postres caseros')"></div>
+        <div class="coordenada" style="left: 679px; top: 780px;">(34, 1)</div>
+        <div class="punto" style="left: 486px; top: 785px; background-color: #00FF00;" onclick="mostrarInfo('Estadio Olimpico', 'Complejo deportivo de gran capacidad para competencias nacionales e internacionales con infraestructura moderna áreas de entrenamiento y zonas de espectadores')"></div>
+        <div class="coordenada" style="left: 476px; top: 765px;">(23, 3)</div>
+        <div class="punto" style="left: 800px; top: 793px; background-color: #0000FF;" onclick="mostrarInfo('Queobo', 'Like para que fernan lo vea.')"></div>
+        <div class="coordenada" style="left: 790px; top: 773px;">(40, 2)</div>
+        <div class="punto" style="left: 689px; top: 714px; background-color: #FF00FF;" onclick="mostrarInfo('Escuela de Musica', 'Institución educativa enfocada en la enseñanza de instrumentos y teoría musical con profesores especializados ensambles de orquesta y conciertos estudiantiles')"></div>
+        <div class="coordenada" style="left: 679px; top: 694px;">(34, 12)</div>
+        <div class="punto" style="left: 523px; top: 635px; background-color: #00FFFF;" onclick="mostrarInfo('Reserva Natural del Sur', 'Un extenso parque natural que alberga especies en peligro de extinción y ofrece diversas rutas de senderismo y miradores para explorar.')"></div>
+        <div class="coordenada" style="left: 513px; top: 615px;">(25, 22)</div>
+        <div class="punto" style="left: 689px; top: 627px; background-color: #FFFF00;" onclick="mostrarInfo('Fabrica de Muebles', 'Instalación industrial dedicada a la producción de muebles de madera y metal equipada con tecnología de vanguardia para la fabricación de piezas de alta calidad')"></div>
+        <div class="coordenada" style="left: 679px; top: 607px;">(34, 23)</div>
+        <div class="punto" style="left: 597px; top: 572px; background-color: #FFA500;" onclick="mostrarInfo('Biblioteca Publica', 'Espacio de lectura y estudio con una extensa colección de libros documentos digitales y salas de investigación además de eventos literarios y conferencias')"></div>
+        <div class="coordenada" style="left: 587px; top: 552px;">(29, 30)</div>
+        <div class="punto" style="left: 486px; top: 368px; background-color: #800080;" onclick="mostrarInfo('Camping Aventura', 'Área natural con espacios para acampar y realizar actividades al aire libre como senderismo pesca y observación de la fauna local en un entorno tranquilo')"></div>
+        <div class="coordenada" style="left: 476px; top: 348px;">(23, 56)</div>
+        <div class="punto" style="left: 634px; top: 478px; background-color: #FF0000;" onclick="mostrarInfo('Mercado Central', 'Un vibrante mercado en el corazón de la ciudad donde se pueden encontrar productos frescos artesanías locales y disfrutar de la cultura gastronómica.')"></div>
+        <div class="coordenada" style="left: 624px; top: 458px;">(31, 42)</div>
+        <div class="punto" style="left: 578px; top: 297px; background-color: #00FF00;" onclick="mostrarInfo('ESPE', 'Universidad de las Fuerzas Armadas ESPE')"></div>
+        <div class="coordenada" style="left: 568px; top: 277px;">(28, 65)</div>
+        <div class="punto" style="left: 689px; top: 368px; background-color: #0000FF;" onclick="mostrarInfo('Aeropuerto Internacional', 'Terminal aérea con vuelos nacionales e internacionales equipada con modernas instalaciones restaurantes tiendas libres de impuestos y un sistema de transporte eficiente')"></div>
+        <div class="coordenada" style="left: 679px; top: 348px;">(34, 56)</div>
+        <div class="punto" style="left: 800px; top: 494px; background-color: #FF00FF;" onclick="mostrarInfo('Casa de Cultura', 'Institución dedicada a la promoción del arte y la cultura con talleres exposiciones presentaciones teatrales y clases de distintas disciplinas artísticas')"></div>
+        <div class="coordenada" style="left: 790px; top: 474px;">(40, 40)</div>
+        <div class="punto" style="left: 744px; top: 297px; background-color: #00FFFF;" onclick="mostrarInfo('Ciudadela Antigua', 'Un sitio histórico con ruinas que datan de siglos atrás')"></div>
+        <div class="coordenada" style="left: 734px; top: 277px;">(37, 65)</div>
+        <div class="punto" style="left: 836px; top: 384px; background-color: #FFFF00;" onclick="mostrarInfo('Teatro', 'Aqui actuan. Que mas van a hacer.Es un teatro')"></div>
+        <div class="coordenada" style="left: 826px; top: 364px;">(42, 54)</div>
+        <div class="punto" style="left: 284px; top: 281px; background-color: #FFA500;" onclick="mostrarInfo('Estadio Central', 'Instalación deportiva moderna con capacidad para miles de espectadores equipada con canchas de fútbol pista de atletismo y un centro de entrenamiento de alto rendimiento')"></div>
+        <div class="coordenada" style="left: 274px; top: 261px;">(12, 67)</div>
+        <div class="punto" style="left: 228px; top: 281px; background-color: #800080;" onclick="mostrarInfo('Farmacia Central', 'Establecimiento con una amplia variedad de medicamentos y productos de salud con atención las 24 horas y asesoría profesional para el cuidado de los clientes')"></div>
+        <div class="coordenada" style="left: 218px; top: 261px;">(9, 67)</div>
+        <div class="punto" style="left: 118px; top: 195px; background-color: #FF0000;" onclick="mostrarInfo('Centro de Desarrollo', 'Institución que brinda capacitaciones y apoyo a emprendedores y pequeñas empresas con asesoramiento en negocios financiamiento y desarrollo de proyectos')"></div>
+        <div class="coordenada" style="left: 108px; top: 175px;">(3, 78)</div>
+        <div class="punto" style="left: 118px; top: 281px; background-color: #00FF00;" onclick="mostrarInfo('Almacen de Suministros', 'Bodega con venta al por mayor de herramientas materiales y equipos para construcción carpintería mecánica y otras especialidades técnicas')"></div>
+        <div class="coordenada" style="left: 108px; top: 261px;">(3, 67)</div>
+        <div class="punto" style="left: 228px; top: 195px; background-color: #0000FF;" onclick="mostrarInfo('Centro Ecoturistico', 'Destino para actividades al aire libre como senderismo ciclismo camping y exploración de ecosistemas en una reserva natural protegida')"></div>
+        <div class="coordenada" style="left: 218px; top: 175px;">(9, 78)</div>
+        <div class="punto" style="left: 284px; top: 108px; background-color: #FF00FF;" onclick="mostrarInfo('Centro de Rehabilitacion', 'Instalación especializada en terapias físicas y recuperación post operatoria con profesionales capacitados y tecnología avanzada para el tratamiento de lesiones')"></div>
+        <div class="coordenada" style="left: 274px; top: 88px;">(12, 89)</div>
+        <div class="punto" style="left: 284px; top: 195px; background-color: #00FFFF;" onclick="mostrarInfo('Residencia del Lago', 'Vivienda junto a un lago con vistas espectaculares y acceso a actividades acuáticas como paseos en bote pesca y natación en aguas cristalinas')"></div>
+        <div class="coordenada" style="left: 274px; top: 175px;">(12, 78)</div>
+        <div class="punto" style="left: 486px; top: 195px; background-color: #FFFF00;" onclick="mostrarInfo('Torre de Comunicaciones', 'Edificio con antenas de transmisión para radio y televisión con tecnología de vanguardia salas de grabación y oficinas administrativas para gestión de medios')"></div>
+        <div class="coordenada" style="left: 476px; top: 175px;">(23, 78)</div>
+        <div class="punto" style="left: 689px; top: 195px; background-color: #FFA500;" onclick="mostrarInfo('Universidad Tecnologica', 'Institución especializada en ingenierías y ciencias aplicadas con laboratorios de investigación programas de innovación y colaboración con empresas tecnológicas')"></div>
+        <div class="coordenada" style="left: 679px; top: 175px;">(34, 78)</div>
+        <div class="punto" style="left: 689px; top: 108px; background-color: #800080;" onclick="mostrarInfo('Escuela Tecnica', 'Centro educativo especializado en formación profesional en distintas áreas con laboratorios talleres y programas de capacitación para el desarrollo de habilidades técnicas')"></div>
+        <div class="coordenada" style="left: 679px; top: 88px;">(34, 89)</div>
+        <div class="punto" style="left: 376px; top: 100px; background-color: #FF0000;" onclick="mostrarInfo('Lago Escondido', 'Un lago sereno y tranquilo rodeado de bosques')"></div>
+        <div class="coordenada" style="left: 366px; top: 80px;">(17, 90)</div>
+        <div class="punto" style="left: 892px; top: 627px; background-color: #00FF00;" onclick="mostrarInfo('Mirador del Valle', 'Lugar panorámico en lo alto de una colina ideal para observar el paisaje natural tomar fotografías y disfrutar de la tranquilidad del entorno alejado del ruido de la ciudad.')"></div>
+        <div class="coordenada" style="left: 882px; top: 607px;">(45, 23)</div>
+        <div class="punto" style="left: 1094px; top: 785px; background-color: #0000FF;" onclick="mostrarInfo('Museo de Historia', 'Exhibición de artefactos y documentos históricos sobre la región y su desarrollo con salas interactivas recorridos guiados y actividades educativas para visitantes')"></div>
+        <div class="coordenada" style="left: 1084px; top: 765px;">(56, 3)</div>
+        <div class="punto" style="left: 892px; top: 738px; background-color: #FF00FF;" onclick="mostrarInfo('Parque Natural', 'Reserva ecológica con senderos para caminatas observación de fauna y flora cascadas naturales y miradores panorámicos para fotografías únicas')"></div>
+        <div class="coordenada" style="left: 882px; top: 718px;">(45, 9)</div>
+        <div class="punto" style="left: 1297px; top: 753px; background-color: #00FFFF;" onclick="mostrarInfo('Parque Infantil', 'Zona recreativa con juegos y áreas de descanso para niños y familias con espacios verdes toboganes columpios y juegos de agua para el verano')"></div>
+        <div class="coordenada" style="left: 1287px; top: 733px;">(67, 7)</div>
+        <div class="punto" style="left: 1500px; top: 785px; background-color: #FFFF00;" onclick="mostrarInfo('Club Deportivo', 'Complejo con canchas de fútbol baloncesto y gimnasio para entrenamientos profesionales además de espacios recreativos y academias deportivas para todas las edades')"></div>
         <div class="coordenada" style="left: 1490px; top: 765px;">(78, 3)</div>
-        <div class="punto" style="left: 1500px; top: 713px; background-color: #0000FF;" onclick="mostrarInfo('Centro de Negocios', 'Edificio de oficinas con múltiples empresas y espacios de coworking para profesionales que buscan un ambiente adecuado para reuniones conferencias y desarrollo de proyectos')"></div>
-        <div class="coordenada" style="left: 1490px; top: 693px;">(78, 12)</div>
-        <div class="punto" style="left: 884px; top: 275px; background-color: #FF00FF;" onclick="mostrarInfo('Estacion de Tren', 'Terminal ferroviaria con salidas diarias a diferentes ciudades del país equipada con áreas de espera taquillas zonas de carga y acceso a transporte público')"></div>
-        <div class="coordenada" style="left: 874px; top: 255px;">(45, 67)</div>
-        <div class="punto" style="left: 884px; top: 625px; background-color: #00FFFF;" onclick="mostrarInfo('Veterinaria Municipal', 'Centro de atención para mascotas con servicios de consulta vacunación cirugías y venta de productos veterinarios para el cuidado de animales domésticos')"></div>
-        <div class="coordenada" style="left: 874px; top: 605px;">(45, 23)</div>
-        <div class="punto" style="left: 1089px; top: 713px; background-color: #FFFF00;" onclick="mostrarInfo('Terminal de Buses', 'Estación con rutas de transporte hacia diferentes puntos del país equipada con salas de espera taquillas de venta de boletos zonas de comida y tiendas de conveniencia')"></div>
-        <div class="coordenada" style="left: 1079px; top: 693px;">(56, 12)</div>
-        <div class="punto" style="left: 1089px; top: 625px; background-color: #FFA500;" onclick="mostrarInfo('Feria Artesanal', 'Evento que reúne a artistas y artesanos para exhibir y vender sus productos con talleres en vivo degustaciones gastronómicas y espectáculos culturales')"></div>
-        <div class="coordenada" style="left: 1079px; top: 605px;">(56, 23)</div>
-        <div class="punto" style="left: 884px; top: 538px; background-color: #800080;" onclick="mostrarInfo('Bodega Vinicola', 'Centro de producción de vinos con recorridos guiados degustaciones explicaciones sobre el proceso de fermentación y un restaurante con maridajes exclusivos')"></div>
-        <div class="coordenada" style="left: 874px; top: 518px;">(45, 34)</div>
-        <div class="punto" style="left: 977px; top: 411px; background-color: #FF0000;" onclick="mostrarInfo('Casa', 'Hogar del usuario(Esto se definio arbitrariamente por el Alexis cuando andaba medio dormido')"></div>
-        <div class="coordenada" style="left: 967px; top: 391px;">(50, 50)</div>
-        <div class="punto" style="left: 1089px; top: 450px; background-color: #00FF00;" onclick="mostrarInfo('Puerto Comercial', 'Área de embarque y desembarque de mercancías con acceso a rutas marítimas zonas de carga y descarga bodegas de almacenamiento y logística de transporte')"></div>
-        <div class="coordenada" style="left: 1079px; top: 430px;">(56, 45)</div>
-        <div class="punto" style="left: 1089px; top: 188px; background-color: #0000FF;" onclick="mostrarInfo('Refugio de Montaña', 'Pequeña cabaña rústica en medio del bosque ideal para descansar y desconectarse del estrés diario rodeada de senderos naturales y vistas espectaculares')"></div>
-        <div class="coordenada" style="left: 1079px; top: 168px;">(56, 78)</div>
-        <div class="punto" style="left: 884px; top: 188px; background-color: #FF00FF;" onclick="mostrarInfo('Universidad Nacional', 'Institución de educación superior con diversas facultades y un gran campus con bibliotecas laboratorios y residencias estudiantiles para alumnos de todo el país')"></div>
-        <div class="coordenada" style="left: 874px; top: 168px;">(45, 78)</div>
-        <div class="punto" style="left: 1294px; top: 363px; background-color: #00FFFF;" onclick="mostrarInfo('Plaza Mayor', 'Espacio público rodeado de tiendas y restaurantes con un ambiente agradable y seguro ideal para paseos eventos culturales y actividades al aire libre')"></div>
-        <div class="coordenada" style="left: 1284px; top: 343px;">(67, 56)</div>
-        <div class="punto" style="left: 1294px; top: 625px; background-color: #FFFF00;" onclick="mostrarInfo('Observatorio Astronomico', 'Instalación para el estudio del cielo con telescopios de gran alcance actividades de observación astronómica y conferencias impartidas por expertos en el campo')"></div>
-        <div class="coordenada" style="left: 1284px; top: 605px;">(67, 23)</div>
-        <div class="punto" style="left: 1294px; top: 538px; background-color: #FFA500;" onclick="mostrarInfo('Estudio de Grabacion', 'Instalación equipada con tecnología para la producción de música y sonido con estudios de grabación salas de edición y asesoramiento de profesionales del sector')"></div>
-        <div class="coordenada" style="left: 1284px; top: 518px;">(67, 34)</div>
-        <div class="punto" style="left: 1294px; top: 100px; background-color: #800080;" onclick="mostrarInfo('Rancho Campestre', 'Propiedad rural con áreas de pastoreo actividades recreativas al aire libre visitas guiadas a granjas y una oferta gastronómica con productos orgánicos')"></div>
-        <div class="coordenada" style="left: 1284px; top: 80px;">(67, 89)</div>
-        <div class="punto" style="left: 1500px; top: 275px; background-color: #FF0000;" onclick="mostrarInfo('Salon de Eventos', 'Espacio amplio para celebraciones reuniones y conferencias empresariales con salones equipados con tecnología audiovisual servicio de catering y personal especializado')"></div>
-        <div class="coordenada" style="left: 1490px; top: 255px;">(78, 67)</div>
-        <div class="punto" style="left: 1500px; top: 450px; background-color: #00FF00;" onclick="mostrarInfo('Monumento Historico', 'Estructura conmemorativa que representa un hecho importante en la historia local con un museo interactivo documentos antiguos y exposiciones fotográficas')"></div>
-        <div class="coordenada" style="left: 1490px; top: 430px;">(78, 45)</div>
+        <div class="punto" style="left: 1500px; top: 714px; background-color: #FFA500;" onclick="mostrarInfo('Centro de Negocios', 'Edificio de oficinas con múltiples empresas y espacios de coworking para profesionales que buscan un ambiente adecuado para reuniones conferencias y desarrollo de proyectos')"></div>
+        <div class="coordenada" style="left: 1490px; top: 694px;">(78, 12)</div>
+        <div class="punto" style="left: 892px; top: 281px; background-color: #800080;" onclick="mostrarInfo('Estacion de Tren', 'Terminal ferroviaria con salidas diarias a diferentes ciudades del país equipada con áreas de espera taquillas zonas de carga y acceso a transporte público')"></div>
+        <div class="coordenada" style="left: 882px; top: 261px;">(45, 67)</div>
+        <div class="punto" style="left: 984px; top: 690px; background-color: #FF0000;" onclick="mostrarInfo('Lugar', 'Ya se me acabo la creatividad para poner lugares.Inserte texto')"></div>
+        <div class="coordenada" style="left: 974px; top: 670px;">(50, 15)</div>
+        <div class="punto" style="left: 892px; top: 627px; background-color: #00FF00;" onclick="mostrarInfo('Veterinaria Municipal', 'Centro de atención para mascotas con servicios de consulta vacunación cirugías y venta de productos veterinarios para el cuidado de animales domésticos')"></div>
+        <div class="coordenada" style="left: 882px; top: 607px;">(45, 23)</div>
+        <div class="punto" style="left: 1094px; top: 714px; background-color: #0000FF;" onclick="mostrarInfo('Terminal de Buses', 'Estación con rutas de transporte hacia diferentes puntos del país equipada con salas de espera taquillas de venta de boletos zonas de comida y tiendas de conveniencia')"></div>
+        <div class="coordenada" style="left: 1084px; top: 694px;">(56, 12)</div>
+        <div class="punto" style="left: 1094px; top: 627px; background-color: #FF00FF;" onclick="mostrarInfo('Feria Artesanal', 'Evento que reúne a artistas y artesanos para exhibir y vender sus productos con talleres en vivo degustaciones gastronómicas y espectáculos culturales')"></div>
+        <div class="coordenada" style="left: 1084px; top: 607px;">(56, 23)</div>
+        <div class="punto" style="left: 892px; top: 541px; background-color: #00FFFF;" onclick="mostrarInfo('Bodega Vinicola', 'Centro de producción de vinos con recorridos guiados degustaciones explicaciones sobre el proceso de fermentación y un restaurante con maridajes exclusivos')"></div>
+        <div class="coordenada" style="left: 882px; top: 521px;">(45, 34)</div>
+        <div class="punto" style="left: 1076px; top: 502px; background-color: #FFFF00;" onclick="mostrarInfo('Bosque Encantado', 'Un área boscosa famosa por su biodiversidad senderos naturales y la sensación mágica que se experimenta al caminar entre los árboles altos y frondosos.')"></div>
+        <div class="coordenada" style="left: 1066px; top: 482px;">(55, 39)</div>
+        <div class="punto" style="left: 984px; top: 415px; background-color: #FFA500;" onclick="mostrarInfo('Casa', 'Hogar del usuario(Esto se definio arbitrariamente por el Alexis cuando andaba medio dormido')"></div>
+        <div class="coordenada" style="left: 974px; top: 395px;">(50, 50)</div>
+        <div class="punto" style="left: 1076px; top: 305px; background-color: #800080;" onclick="mostrarInfo('Psiquiatra', 'Para que se me quiten estas locas ganas de irme a dormir')"></div>
+        <div class="coordenada" style="left: 1066px; top: 285px;">(55, 64)</div>
+        <div class="punto" style="left: 1094px; top: 454px; background-color: #FF0000;" onclick="mostrarInfo('Puerto Comercial', 'Área de embarque y desembarque de mercancías con acceso a rutas marítimas zonas de carga y descarga bodegas de almacenamiento y logística de transporte')"></div>
+        <div class="coordenada" style="left: 1084px; top: 434px;">(56, 45)</div>
+        <div class="punto" style="left: 1168px; top: 525px; background-color: #00FF00;" onclick="mostrarInfo('Montaña Azul', 'Un lugar ideal para los amantes del senderismo con impresionantes vistas panorámicas y una variedad de rutas para explorar la naturaleza intacta.')"></div>
+        <div class="coordenada" style="left: 1158px; top: 505px;">(60, 36)</div>
+        <div class="punto" style="left: 1168px; top: 274px; background-color: #0000FF;" onclick="mostrarInfo('Ya no voy a escribir mas nombres', 'Tampoco descripciones. Estoy metiendo estos datos a mano')"></div>
+        <div class="coordenada" style="left: 1158px; top: 254px;">(60, 68)</div>
+        <div class="punto" style="left: 1242px; top: 258px; background-color: #FF00FF;" onclick="mostrarInfo('Valle de las Sombras', 'Un misterioso valle rodeado de altas montañas donde el sol apenas llega')"></div>
+        <div class="coordenada" style="left: 1232px; top: 238px;">(64, 70)</div>
+        <div class="punto" style="left: 1094px; top: 195px; background-color: #00FFFF;" onclick="mostrarInfo('Refugio de Montaña', 'Pequeña cabaña rústica en medio del bosque ideal para descansar y desconectarse del estrés diario rodeada de senderos naturales y vistas espectaculares')"></div>
+        <div class="coordenada" style="left: 1084px; top: 175px;">(56, 78)</div>
+        <div class="punto" style="left: 892px; top: 195px; background-color: #FFFF00;" onclick="mostrarInfo('Universidad Nacional', 'Institución de educación superior con diversas facultades y un gran campus con bibliotecas laboratorios y residencias estudiantiles para alumnos de todo el país')"></div>
+        <div class="coordenada" style="left: 882px; top: 175px;">(45, 78)</div>
+        <div class="punto" style="left: 984px; top: 140px; background-color: #FFA500;" onclick="mostrarInfo('Parque del Lago', 'Un hermoso espacio verde junto a un lago donde los visitantes pueden pasear hacer picnic o disfrutar de actividades al aire libre en un ambiente relajante.')"></div>
+        <div class="coordenada" style="left: 974px; top: 120px;">(50, 85)</div>
+        <div class="punto" style="left: 1297px; top: 368px; background-color: #800080;" onclick="mostrarInfo('Plaza Mayor', 'Espacio público rodeado de tiendas y restaurantes con un ambiente agradable y seguro ideal para paseos eventos culturales y actividades al aire libre')"></div>
+        <div class="coordenada" style="left: 1287px; top: 348px;">(67, 56)</div>
+        <div class="punto" style="left: 1297px; top: 627px; background-color: #FF0000;" onclick="mostrarInfo('Observatorio Astronomico', 'Instalación para el estudio del cielo con telescopios de gran alcance actividades de observación astronómica y conferencias impartidas por expertos en el campo')"></div>
+        <div class="coordenada" style="left: 1287px; top: 607px;">(67, 23)</div>
+        <div class="punto" style="left: 1297px; top: 541px; background-color: #00FF00;" onclick="mostrarInfo('Estudio de Grabacion', 'Instalación equipada con tecnología para la producción de música y sonido con estudios de grabación salas de edición y asesoramiento de profesionales del sector')"></div>
+        <div class="coordenada" style="left: 1287px; top: 521px;">(67, 34)</div>
+        <div class="punto" style="left: 1352px; top: 612px; background-color: #0000FF;" onclick="mostrarInfo('Motel La luna', 'Inserte texto gracioso aqui')"></div>
+        <div class="coordenada" style="left: 1342px; top: 592px;">(70, 25)</div>
+        <div class="punto" style="left: 1297px; top: 108px; background-color: #FF00FF;" onclick="mostrarInfo('Rancho Campestre', 'Propiedad rural con áreas de pastoreo actividades recreativas al aire libre visitas guiadas a granjas y una oferta gastronómica con productos orgánicos')"></div>
+        <div class="coordenada" style="left: 1287px; top: 88px;">(67, 89)</div>
+        <div class="punto" style="left: 1500px; top: 281px; background-color: #00FFFF;" onclick="mostrarInfo('Salon de Eventos', 'Espacio amplio para celebraciones reuniones y conferencias empresariales con salones equipados con tecnología audiovisual servicio de catering y personal especializado')"></div>
+        <div class="coordenada" style="left: 1490px; top: 261px;">(78, 67)</div>
+        <div class="punto" style="left: 1500px; top: 454px; background-color: #FFFF00;" onclick="mostrarInfo('Monumento Historico', 'Estructura conmemorativa que representa un hecho importante en la historia local con un museo interactivo documentos antiguos y exposiciones fotográficas')"></div>
+        <div class="coordenada" style="left: 1490px; top: 434px;">(78, 45)</div>
+    </div>
+    <div id="leyenda">
+        <span id="cerrarLeyenda" onclick="cerrarLeyenda()">×</span>
+        <h3>Niveles de Tráfico</h3>
+        <div><span class="color-box" style="background-color: #FF0000;"></span>Tráfico alto</div>
+        <div><span class="color-box" style="background-color: #FFA500;"></span>Tráfico medio</div>
+        <div><span class="color-box" style="background-color: #0000FF;"></span>Tráfico bajo</div>
+        <div><span class="color-box" style="background-color: #808080;"></span>Sin tráfico</div>
     </div>
     <div id="panel">
         <span id="cerrarPanel" onclick="cerrarPanel()">×</span>
@@ -161,8 +275,20 @@
             document.getElementById('descripcion').innerText = descripcion;
             document.getElementById('panel').style.display = 'block';
         }
+        function mostrarInfoRuta(nombreRuta, nivelTrafico) {
+            document.getElementById('nombre').innerText = nombreRuta;
+            if (nivelTrafico > 0) {
+                document.getElementById('descripcion').innerText = 'Nivel de tráfico: ' + nivelTrafico;
+            } else {
+                document.getElementById('descripcion').innerText = 'Sin tráfico en este tramo.';
+            }
+            document.getElementById('panel').style.display = 'block';
+        }
         function cerrarPanel() {
             document.getElementById('panel').style.display = 'none';
+        }
+        function cerrarLeyenda() {
+            document.getElementById('leyenda').style.display = 'none';
         }
     </script>
 </body>

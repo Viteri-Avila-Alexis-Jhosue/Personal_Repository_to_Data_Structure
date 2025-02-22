@@ -15,6 +15,7 @@
                 "${workspaceFolder}/src/Trafic.cpp",
                 "${workspaceFolder}/src/Validation.cpp",
                 "${workspaceFolder}/src/Graficador.cpp",
+                "${workspaceFolder}/src/Grafo.cpp",
                 "-o",
                 "${workspaceFolder}/output/main.exe",
             ],
