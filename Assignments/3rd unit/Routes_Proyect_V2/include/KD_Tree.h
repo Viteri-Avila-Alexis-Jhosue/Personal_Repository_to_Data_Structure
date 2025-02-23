@@ -36,7 +36,10 @@ private:
     void obtenerRutasRec(Node<T>* node, std::vector<T>& rutas) const;
     Node<T> *eliminarRec(Node<T> *node, const std::string &name);
     Node<T> *eliminarTramoRec(Node<T> *node, const std::string &name, int xi, int yi, int xf, int yf);
-
+    void verificarBidireccionalidadRec(Node<T>* node, KD_Tree<T>& nuevoArbol) const;
+    Node<T>* obtenerNodoPorNombreUbicacionRec(Node<T>* node, const std::string& nombreUbicacion)const ; 
+    void updateUbicationNameRec(Node<T>* node, const std::string& oldName, const std::string& newName);
+ 
 public:
     KD_Tree();
     ~KD_Tree();
@@ -60,6 +63,9 @@ public:
     bool validarTramoExistente(const std::string& routeName, int xInicial, int yInicial, int xFinal, int yFinal, double distance) const;
     std::vector<T> obtenerTodasLasUbicaciones() const;
     std::vector<T> obtenerTodasLasRutas() const;
+    KD_Tree<T> crearArbolBidireccional() const;
+    Node<T>* obtenerNodoPorNombreUbicacion(const std::string& nombreUbicacion) const;
+    void updateUbicationName(const std::string& oldName, const std::string& newName);
 };
 
 #include "../src/KD_Tree.cpp"

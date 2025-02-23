@@ -29,11 +29,12 @@ public:
     void setX(int x);
     void setY(int y);
     void setName(const std::string& name);
-    void setDescrption(const std::string& description);
+    void setDescription(const std::string& description);
 
     int ingresar_coordenada(int size, int coord);
     void ingresar_ubicacion(std::string name, int x, int y,std::string description);
     void guardar_en_archivo();
+    static void eliminarUbicacion(const std::string& nombreUbicacion);
 };
 
 #endif // UBICATION_H

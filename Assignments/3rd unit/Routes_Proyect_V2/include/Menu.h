@@ -28,6 +28,8 @@ public:
     int enlarge_route();
     void print_routes(KD_Tree<Route>& routes_tree);
     void ubicationCh_menu(int size,KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree);
+    void impresiones_menu(KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree);
+    void calculos_menu(KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree);
 };
 
 #endif // MENU_H

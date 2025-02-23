@@ -667,9 +667,6 @@ std::vector<T> KD_Tree<T>::obtenerTodasLasRutas() const
     obtenerRutasRec(root, rutas); // `root` es la raíz del árbol KD
     return rutas;
 }
-//----------------------------------------------------------------------------------------------------------
-//----------------------------Impresiones------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------
 
 template <typename T>
 void KD_Tree<T>::print_ubicaciones_rec(Node<T> *node) const
@@ -784,4 +781,113 @@ template <typename T>
 void KD_Tree<T>::print_routes_name(string routeName) const
 {
     print_routes_name_rec(root, routeName);
+}
+
+template <typename T>
+void KD_Tree<T>::verificarBidireccionalidadRec(Node<T>* node, KD_Tree<T>& nuevoArbol) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    // Obtener la ruta actual
+    T rutaActual = node->data;
+
+    // Insertar la ruta actual en el nuevo árbol
+    nuevoArbol.insert(rutaActual, rutaActual.getInitialUbication().getX(), rutaActual.getInitialUbication().getY());
+
+    // Verificar si existe la ruta inversa
+    std::string inicio = rutaActual.getInitialUbication().getName();
+    std::string fin = rutaActual.getLastUbication().getName();
+    bool existeInversa = false;
+
+    // Buscar la ruta inversa en el árbol original
+    for (const auto& ruta : obtenerTodasLasRutas()) {
+        if (ruta.getInitialUbication().getName() == fin && ruta.getLastUbication().getName() == inicio) {
+            existeInversa = true;
+            break;
+        }
+    }
+
+    // Si no existe la ruta inversa, crearla y agregarla al nuevo árbol
+    if (!existeInversa) {
+        T rutaInversa = rutaActual;
+        rutaInversa.setInitialUbication(rutaActual.getLastUbication());
+        rutaInversa.setLastUbication(rutaActual.getInitialUbication());
+        nuevoArbol.insert(rutaInversa, rutaInversa.getInitialUbication().getX(), rutaInversa.getInitialUbication().getY());
+    }
+
+    // Recorrer los subárboles
+    verificarBidireccionalidadRec(node->left, nuevoArbol);
+    verificarBidireccionalidadRec(node->right, nuevoArbol);
+}
+
+// Implementación de la función para crear un nuevo árbol de rutas con bidireccionalidad
+template <typename T>
+KD_Tree<T> KD_Tree<T>::crearArbolBidireccional() const {
+    KD_Tree<T> nuevoArbol;
+
+    // Llamar a la función recursiva para verificar y agregar rutas inversas
+    verificarBidireccionalidadRec(root, nuevoArbol);
+
+    return nuevoArbol;
+}
+
+template <typename T>
+Node<T>* KD_Tree<T>::obtenerNodoPorNombreUbicacionRec(Node<T>* node, const std::string& nombreUbicacion) const {
+    if (node == nullptr) {
+        return nullptr; // Si el nodo es nulo, no se encontró la ubicación
+    }
+
+    // Verificar si el nodo actual contiene la ubicación buscada
+    T data = node->data;
+    if (data.getInitialUbication().getName() == nombreUbicacion || data.getLastUbication().getName() == nombreUbicacion) {
+        return node; // Devolver el nodo si coincide
+    }
+
+    // Buscar en los subárboles
+    Node<T>* resultadoIzquierdo = obtenerNodoPorNombreUbicacionRec(node->left, nombreUbicacion);
+    if (resultadoIzquierdo != nullptr) {
+        return resultadoIzquierdo; // Si se encontró en el subárbol izquierdo, devolverlo
+    }
+
+    Node<T>* resultadoDerecho = obtenerNodoPorNombreUbicacionRec(node->right, nombreUbicacion);
+    return resultadoDerecho; // Devolver el resultado del subárbol derecho (puede ser nullptr)
+}
+
+// Implementación de la función pública
+template <typename T>
+Node<T>* KD_Tree<T>::obtenerNodoPorNombreUbicacion(const std::string& nombreUbicacion) const {
+    return obtenerNodoPorNombreUbicacionRec(root, nombreUbicacion);
+}
+
+template <typename T>
+void KD_Tree<T>::updateUbicationName(const std::string& oldName, const std::string& newName) {
+    updateUbicationNameRec(root, oldName, newName);
+}
+
+template <typename T>
+void KD_Tree<T>::updateUbicationNameRec(Node<T>* node, const std::string& oldName, const std::string& newName) {
+    if (!node) return;
+
+    T& tramo = node->data; // Usamos el dato genérico T
+
+    // Si la ubicación inicial coincide con el nombre antiguo, actualizar
+    if (tramo.getInitialUbication().getName() == oldName) {
+        tramo.eliminarTramoDelArchivo(tramo.getName(), tramo.getInitialUbication().getX(), tramo.getInitialUbication().getY(), 
+                                    tramo.getLastUbication().getX(), tramo.getLastUbication().getY());
+                                    tramo.setInitialUbication(Ubication(tramo.getInitialUbication().getX(), tramo.getInitialUbication().getY(), newName));
+                                    tramo.guardar_en_archivo();
+    }
+
+    // Si la ubicación final coincide con el nombre antiguo, actualizar
+    if (tramo.getLastUbication().getName() == oldName) {
+        tramo.eliminarTramoDelArchivo(tramo.getName(), tramo.getInitialUbication().getX(), tramo.getInitialUbication().getY(), 
+                                      tramo.getLastUbication().getX(), tramo.getLastUbication().getY());
+                                      tramo.setLastUbication(Ubication(tramo.getLastUbication().getX(), tramo.getLastUbication().getY(), newName));
+                                    tramo.guardar_en_archivo();
+    }
+
+    // Llamadas recursivas para recorrer el árbol
+    updateUbicationNameRec(node->left, oldName, newName);
+    updateUbicationNameRec(node->right, oldName, newName);
 }

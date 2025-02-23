@@ -158,6 +158,39 @@ string Validation::ingresarString(const char *msj) {
     delete[] cad;  
     return cadena1;
 }
+
+string Validation::ingresarStringConEspacios(const char* msj) {
+    char* cad = new char[1]; 
+    char c;
+    int i = 0;
+    string cadena1;
+    printf("%s", msj);
+    
+    while (true) {
+        c = getch();
+        if (c == 13 && i > 0) {  // Confirmar entrada solo si hay al menos un carácter
+            break;
+        } else if (isalpha(c) || isdigit(c) || isspace(c) || c == '.' || c == '"' || c == '\'' || c == '-') {  
+            // Permitir letras, números, espacios, punto, comillas y guion medio
+            if (i == 0 && (isspace(c) || c == '.' || c == '"' || c == '\'' || c == '-')) {
+                // Ignorar espacios, puntos, comillas o guiones si son el primer carácter
+                continue;
+            }
+            printf("%c", c);
+            cad[i++] = c;
+            cad = (char*)realloc(cad, (i + 1) * sizeof(char));  
+        } else if (c == 8 && i > 0) {  // Manejar retroceso solo si hay caracteres a borrar
+            printf("\b \b");
+            i--;
+        }
+    }
+    
+    cad[i] = '\0';  
+    cadena1 = cad;  
+    delete[] cad;  
+    return cadena1;  
+}
+
 string Validation::ingresarHora(const string &msj)
 {
     string hora;
@@ -199,14 +232,23 @@ string Validation::ingresarHora(const string &msj)
         {
             if (hora.length() == 8 && regex_match(hora, pattern))
             {
-                // Validar el rango directamente
-                if (hora >= "00:00:00" && hora <= "23:59:59")
+                // Extraer horas, minutos y segundos
+                int hh = stoi(hora.substr(0, 2)); // Horas
+                int mm = stoi(hora.substr(3, 2)); // Minutos
+                int ss = stoi(hora.substr(6, 2)); // Segundos
+
+                // Validar rangos específicos
+                if (hh >= 0 && hh <= 23 && mm >= 0 && mm <= 59 && ss >= 0 && ss <= 59)
                 {
-                    break; // Hora válida y dentro del rango
+                    break; // Hora válida
                 }
                 else
                 {
-                    cout << "\nHora fuera de rango (00:00:00 - 23:59:59). Ingrese nuevamente: ";
+                    cout << "\nHora inválida. Asegúrese de que:\n"
+                         << "- Horas estén entre 00 y 23.\n"
+                         << "- Minutos estén entre 00 y 59.\n"
+                         << "- Segundos estén entre 00 y 59.\n"
+                         << "Ingrese nuevamente: ";
                     hora.clear();
                     cout << msj;
                 }
@@ -226,36 +268,4 @@ string Validation::ingresarHora(const string &msj)
 
     cout << endl;
     return hora;
-}
-
-string Validation::ingresarStringConEspacios(const char* msj) {
-    char* cad = new char[1]; 
-    char c;
-    int i = 0;
-    string cadena1;
-    printf("%s", msj);
-    
-    while (true) {
-        c = getch();
-        if (c == 13 && i > 0) {  // Confirmar entrada solo si hay al menos un carácter
-            break;
-        } else if (isalpha(c) || isdigit(c) || isspace(c) || c == '.' || c == '"' || c == '\'' || c == '-') {  
-            // Permitir letras, números, espacios, punto, comillas y guion medio
-            if (i == 0 && (isspace(c) || c == '.' || c == '"' || c == '\'' || c == '-')) {
-                // Ignorar espacios, puntos, comillas o guiones si son el primer carácter
-                continue;
-            }
-            printf("%c", c);
-            cad[i++] = c;
-            cad = (char*)realloc(cad, (i + 1) * sizeof(char));  
-        } else if (c == 8 && i > 0) {  // Manejar retroceso solo si hay caracteres a borrar
-            printf("\b \b");
-            i--;
-        }
-    }
-    
-    cad[i] = '\0';  
-    cadena1 = cad;  
-    delete[] cad;  
-    return cadena1;  
 }

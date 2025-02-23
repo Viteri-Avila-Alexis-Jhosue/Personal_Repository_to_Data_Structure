@@ -59,11 +59,8 @@ Panamericana Norte,23,45,Parque Acuatico,25,22,Reserva Natural del Sur,23.08,90
 Panamericana Norte,25,22,Reserva Natural del Sur,15,20,Playa Sol y Mar,10.19,90
 Panamericana Norte,15,20,Playa Sol y Mar,23,12,Hospital General,11.31,90
 Panamericana Norte,23,12,Hospital General,34,23,Fabrica de Muebles,15.55,90
-Panamericana Norte,34,23,Fabrica de Muebles,31,42,Mercado Central,19.23,90
-Panamericana Norte,31,42,Mercado Central,40,40,Casa de Cultura,9.21,90
 Panamericana Norte,40,40,Casa de Cultura,50,50,Casa,14.14,90
 Panamericana Norte,67,56,Plaza Mayor,78,67,Salon de Eventos,15.55,90
-Av.Capitan Geovanni Calles,31,42,Mercado Central,45,34,Bodega Vinicola,16.12,89
 Av.Capitan Geovanni Calles,45,34,Bodega Vinicola,56,23,Feria Artesanal,15.55,90
 Av.Capitan Geovanni Calles,56,23,Feria Artesanal,50,15,Lugar,10,90
 Av.Capitan Geovanni Calles,50,15,Lugar,56,3,Museo de Historia,13.41,90
@@ -74,7 +71,6 @@ Av.Capitan Geovanni Calles,67,56,Plaza Mayor,78,45,Monumento Historico,15.55,78
 6 de Octubre,23,78,Torre de Comunicaciones,34,89,Escuela Tecnica,15.55,67,06:00:00,10:00:00,3
 6 de Octubre,34,89,Escuela Tecnica,45,78,Universidad Nacional,15.55,56,06:00:00,10:00:00,3
 Av.Capitan Geovanni Calles,3,23,Zoologico Regional,20,30,Motel,18.38,67,09:30:00,10:30:00,1
-Av.Capitan Geovanni Calles,20,30,Motel,31,42,Mercado Central,16.27,78,09:30:00,10:30:00,1
 Panamericana Norte,50,50,Casa,67,56,Plaza Mayor,18.02,90,07:00:00,10:30:00,3
 6 de Octubre,56,78,Refugio de Montaña,67,89,Rancho Campestre,15.55,67,06:00:00,11:00:00,2
 6 de Octubre,67,89,Rancho Campestre,78,67,Salon de Eventos,24.59,90,06:00:00,11:00:00,2
@@ -94,3 +90,7 @@ Av. Simon Bolivar,23,12,Hospital General,23,3,Estadio Olimpico,9,90
 Av. Simon Bolivar,45,34,Bodega Vinicola,45,23,Mirador del Valle,11,78
 Av. Simon Bolivar,45,23,Mirador del Valle,45,9,Parque Natural,14,120
 Av. Simon Bolivar,45,9,Parque Natural,56,3,Museo de Historia,12.52,90
+Panamericana Norte,34,23,Fabrica de Muebles,31,42,Mercadillo,19.23,90
+Av.Capitan Geovanni Calles,20,30,Motel,31,42,Mercadillo,16.27,78,09:30:00,10:30:00,1
+Panamericana Norte,31,42,Mercadillo,40,40,Casa de Cultura,9.21,90
+Av.Capitan Geovanni Calles,31,42,Mercadillo,45,34,Bodega Vinicola,16.12,89
