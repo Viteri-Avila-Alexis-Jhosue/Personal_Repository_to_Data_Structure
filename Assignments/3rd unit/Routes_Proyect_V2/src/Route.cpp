@@ -63,9 +63,9 @@ void Route::definir_ruta(std::string name, double distance, Ubication initial, U
     if (distance == 1) {
         // Ingresar distancia personalizada
         do {
-            distance = validation.ingresarDouble("Ingrese la distancia personalizada");
+            distance = validation.ingresarDouble("Ingrese la distancia personalizada:  ");
             if (distance > 2 * size) {
-                std::cout << "Error: La distancia no puede ser mayor a " << 2 * size << ". Inténtalo de nuevo." << std::endl;
+                std::cout << "\nError: La distancia no puede ser mayor a " << 2 * size << ". Inténtalo de nuevo." << std::endl;
             }
         } while (distance > 2 * size);
     } else {
@@ -80,7 +80,7 @@ void Route::definir_ruta(std::string name, double distance, Ubication initial, U
     do {
         speed = validation.ingresarDouble("Ingrese la velocidad (0 < velocidad <= 150):   ");
         if (speed <= 0 || speed > 150) {
-            std::cout << "Error: La velocidad debe estar en el rango (0, 150]. Inténtalo de nuevo." << std::endl;
+            std::cout << "\nError: La velocidad debe estar en el rango (0, 150]. Inténtalo de nuevo." << std::endl;
         }
     } while (speed <= 0 || speed > 150);
 
@@ -92,7 +92,7 @@ void Route::guardar_en_archivo() {
     // Abrir el archivo en modo "append" (agregar al final)
     std::ofstream file("output//Rutas.txt", std::ios::app);
     if (!file.is_open()) {
-        std::cerr << "Error: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
+        std::cerr << "\nError: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
         return;
     }
 
@@ -122,7 +122,7 @@ void Route::guardar_en_archivo() {
 bool Route::eliminarRutaDelArchivo(const std::string& nombreRuta) {
     std::ifstream inputFile("output//Rutas.txt");
     if (!inputFile.is_open()) {
-        std::cerr << "Error: No se pudo abrir el archivo de Rutas para leer." << std::endl;
+        std::cerr << "\nError: No se pudo abrir el archivo de Rutas para leer." << std::endl;
         return false;
     }
 
@@ -141,7 +141,7 @@ bool Route::eliminarRutaDelArchivo(const std::string& nombreRuta) {
     // Escribir las líneas restantes de vuelta al archivo
     std::ofstream outputFile("output//Rutas.txt", std::ios::trunc); // Abrir en modo truncar (sobrescribir)
     if (!outputFile.is_open()) {
-        std::cerr << "Error: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
+        std::cerr << "\nError: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
         return false;
     }
 
@@ -156,7 +156,7 @@ bool Route::eliminarRutaDelArchivo(const std::string& nombreRuta) {
 bool Route::eliminarTramoDelArchivo(const std::string& nombreRuta, int xInicial, int yInicial, int xFinal, int yFinal) {
     std::ifstream inputFile("output//Rutas.txt");
     if (!inputFile.is_open()) {
-        std::cerr << "Error: No se pudo abrir el archivo de Rutas para leer." << std::endl;
+        std::cerr << "\nError: No se pudo abrir el archivo de Rutas para leer." << std::endl;
         return false;
     }
 
@@ -176,7 +176,7 @@ bool Route::eliminarTramoDelArchivo(const std::string& nombreRuta, int xInicial,
 
         // Verificar si la línea tiene al menos 7 elementos (ruta, x1, y1, destino, x2, y2, destino final)
         if (datos.size() < 7) {
-            std::cerr << "Error: Formato incorrecto en la línea -> " << linea << std::endl;
+            std::cerr << "\nError: Formato incorrecto en la línea -> " << linea << std::endl;
             continue;  // Ignorar líneas con formato incorrecto
         }
 
@@ -197,7 +197,7 @@ bool Route::eliminarTramoDelArchivo(const std::string& nombreRuta, int xInicial,
     // Escribir las líneas restantes de vuelta al archivo
     std::ofstream outputFile("output//Rutas.txt", std::ios::trunc);
     if (!outputFile.is_open()) {
-        std::cerr << "Error: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
+        std::cerr << "\nError: No se pudo abrir el archivo de Rutas para escribir." << std::endl;
         return false;
     }
 

@@ -48,7 +48,6 @@
 45,23,Veterinaria Municipal,Centro de atención para mascotas con servicios de consulta vacunación cirugías y venta de productos veterinarios para el cuidado de animales domésticos
 34,78,Universidad Tecnologica,Institución especializada en ingenierías y ciencias aplicadas con laboratorios de investigación programas de innovación y colaboración con empresas tecnológicas
 50,50,Casa,Hogar del usuario(Esto se definio arbitrariamente por el Alexis cuando andaba medio dormido, no deberia poderse ingresar una casa ya que esto no maneja usuario pero bueno, chulla vida)62,60,Motel el cojelon,Hace anios que ocurrio y no lo olvidare. La batalla ya ha empezado en un mundo muy cuadrado Es confuso verdad sin embargo sabes que nada seria igual. Pero la queria tanto que dos esquividis eran un pomni a su lado
-20,30,Motel,Para esas escapadas con la moza llamenos al 1800-Motel El Cojelon
 28,65,ESPE,Universidad de las Fuerzas Armadas ESPE
 55,64,Psiquiatra,Para que se me quiten estas locas ganas de irme a dormir
 50,15,Lugar,Ya se me acabo la creatividad para poner lugares.Inserte texto
@@ -68,3 +67,5 @@
 17,90,Lago Escondido,Un lago sereno y tranquilo rodeado de bosques, ideal para hacer kayak pescar o simplemente disfrutar de un día de descanso junto al agua.
 16,50,Cueva de los Murciélagos,Una formación natural impresionante conocida por su entrada oculta y por ser hogar de miles de murciélagos que salen al atardecer para alimentarse.
 31,42,Mercadillo,Un vibrante mercado en el corazón de la ciudad donde se pueden encontrar productos frescos artesanías locales y disfrutar de la cultura gastronómica.
+75,30,Universidad Central Del Ecuador,Dicen que por aqui es que roban 
+20,30,Motelazo,Para esas escapadas con la moza llamenos al 1800-Motel El Cojelon

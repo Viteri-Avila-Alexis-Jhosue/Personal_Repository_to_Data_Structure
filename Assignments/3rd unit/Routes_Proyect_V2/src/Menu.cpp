@@ -119,14 +119,14 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         {
         case 0:
         {
-            cout << "Definir nueva ubicacion" << endl;
+            cout << "Definir nueva ubicacion";
             x = ubication.ingresar_coordenada(size, 0);
             y = ubication.ingresar_coordenada(size, 1);
 
             // Verificar si ya existe una ubicación con las coordenadas dadas
             if (ubication_tree.findNode(x, y) != nullptr)
             {
-                cout << "Error: Ya existe una ubicacion con las coordenadas (" << x << ", " << y << ")" << endl;
+                cout << "/nError: Ya existe una ubicacion con las coordenadas (" << x << ", " << y << ")" << endl;
             }
             else
             {
@@ -148,13 +148,13 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         }
         case 2:
         {
-            cout << "Definir nueva ruta" << endl;
+            cout << "Definir nueva ruta";
             string routeName = validation.ingresarStringConEspacios("\nIngrese el nombre de la ruta: ");
 
             // Verificar si ya existe una ruta con el mismo nombre
             if (routes_tree.findNodeByName(routeName))
             {
-                cout << "Error: Ya existe una ruta con el nombre '" << routeName << "'" << endl;
+                cout << "\nError: Ya existe una ruta con el nombre '" << routeName << "'" << endl;
                 system("pause");
                 break;
             }
@@ -178,7 +178,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                     if (previousUbication.getName() == "")
                     {
                         // Primera ubicación
-                        cout << "Ingrese las coordenadas de la primera ubicación: " << endl;
+                        cout << "Ingrese las coordenadas de la primera ubicación: ";
                         int x1 = ubication.ingresar_coordenada(size, 0);
                         int y1 = ubication.ingresar_coordenada(size, 1);
 
@@ -186,14 +186,14 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                         auto initialUbicationNode = ubication_tree.findNode(x1, y1);
                         if (initialUbicationNode == nullptr)
                         {
-                            cout << "Error: No existe una ubicación con las coordenadas (" << x1 << ", " << y1 << ")" << endl;
+                            cout << "\nError: No existe una ubicación con las coordenadas (" << x1 << ", " << y1 << ")" << endl;
                             system("pause");
                             break;
                         }
 
                         initialUbication = initialUbicationNode->data;
 
-                        cout << "\nIngrese las coordenadas de la segunda ubicación: " << endl;
+                        cout << "\nIngrese las coordenadas de la segunda ubicación: ";
                         int x2 = ubication.ingresar_coordenada(size, 0);
                         int y2 = ubication.ingresar_coordenada(size, 1);
                         if (x2 == x1 && y2 == y1)
@@ -205,7 +205,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                         auto lastUbicationNode = ubication_tree.findNode(x2, y2);
                         if (lastUbicationNode == nullptr)
                         {
-                            cout << "Error: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
+                            cout << "\nError: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
                             system("pause");
                             break;
                         }
@@ -219,7 +219,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                         initialUbication = initialUbicationNode->data;
 
                         cout << "Tramo desde " << initialUbication.getName() << " hasta: ?" << endl;
-                        cout << "Ingrese las coordenadas de la segunda ubicación: " << endl;
+                        cout << "Ingrese las coordenadas de la segunda ubicación: ";
                         int x2 = ubication.ingresar_coordenada(size, 0);
                         int y2 = ubication.ingresar_coordenada(size, 1);
 
@@ -232,7 +232,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                         auto lastUbicationNode = ubication_tree.findNode(x2, y2);
                         if (lastUbicationNode == nullptr)
                         {
-                            cout << "Error: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
+                            cout << "\nError: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
                             system("pause");
                             break;
                         }
@@ -248,7 +248,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                     newRoute.definir_ruta(routeName, distance, initialUbication, lastUbication, size);
                     if (routes_tree.validarTramoExistente(routeName, initialUbication.getX(), initialUbication.getY(), lastUbication.getX(), lastUbication.getY(), newRoute.getDistance()))
                     {
-                        cout << "Error: Ya existe un tramo con las mismas coordenadas y distancia en otra ruta." << endl;
+                        cout << "\nError: Ya existe un tramo con las mismas coordenadas y distancia en otra ruta." << endl;
                         system("pause");
                         break;
                     }
@@ -258,7 +258,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                     routes_tree.insert(newRoute, initialUbication.getX(), initialUbication.getY());
                     previousUbication = lastUbication; // Actualizar la ubicación anterior
                     rutaCreada = true;
-                    cout << "\nRuta agregada exitosamente." << endl;
+                    cout << "\nTramo de la ruta agregado exitosamente." << endl;
                     system("pause");
                     break;
                 }
@@ -321,7 +321,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                 ruta = routes_tree.getNodeByNameAndCoordinates(routeName, x, y);
                 if (!ruta)
                 {
-                    cout << "Error: La ubicación con las coordenadas (" << x << ", " << y << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
+                    cout << "\nError: La ubicación con las coordenadas (" << x << ", " << y << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
                 }
                 else
                 {
@@ -343,7 +343,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
                 Route *tramoFinal = routes_tree.getNodeByNameAndLastCoordinates(routeName, a, b);
                 if (!tramoFinal)
                 {
-                    cout << "Error: La ubicación con las coordenadas (" << a << ", " << b << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
+                    cout << "\nError: La ubicación con las coordenadas (" << a << ", " << b << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
                 }
                 else
                 {
@@ -361,7 +361,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
 
                 if (initial_hour >= last_hour)
                 {
-                    cout << "Error: La hora de inicio debe ser anterior a la hora de finalización. Inténtelo de nuevo." << endl;
+                    cout << "\nError: La hora de inicio debe ser anterior a la hora de finalización. Inténtelo de nuevo." << endl;
                 }
             } while (initial_hour >= last_hour);
             // Solicitar el nivel de tráfico
@@ -378,7 +378,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
             }
             catch (const std::exception &e)
             {
-                cout << "Error: " << e.what() << endl;
+                cout << "\nError: " << e.what() << endl;
             }
 
             system("pause");
@@ -449,7 +449,7 @@ int Menu::auxiliar_menu()
     {
         options.clear();
         addOption("Ingresar ubicacion");
-        addOption("Finalizar Ruta");
+        addOption("Finalizar");
         addTitle("\t Seleccione para continuar");
         displayMenu();
 
@@ -499,7 +499,7 @@ int Menu::level_menu()
         displayMenu();
         if (getSelectedOption() < 0 || getSelectedOption() > 3)
         {
-            cout << "Error: Opcion no valida" << endl;
+            cout << "\nError: Opcion no valida" << endl;
             system("pause");
         }
         else
@@ -655,7 +655,7 @@ void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Ro
                         nuevaDistancia = validation.ingresarDouble("Ingrese la nueva distancia entre las ubicaciones : ");
                         if (nuevaDistancia < distanciaMinima)
                         {
-                            cout << "Error: La distancia no puede ser menor que la distancia recta (" << distanciaMinima << ")." << endl;
+                            cout << "\nError: La distancia no puede ser menor que la distancia recta (" << distanciaMinima << ")." << endl;
                         }
                     } while (nuevaDistancia < distanciaMinima);
 
@@ -679,7 +679,7 @@ void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Ro
 
             if (initial == nullptr || last1 == nullptr)
             {
-                cout << "Error: No se encontró la ruta '" << routeName << "' o no es válida." << endl;
+                cout << "\nError: No se encontró la ruta '" << routeName << "' o no es válida." << endl;
                 system("pause");
                 break;
             }
@@ -710,7 +710,7 @@ void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Ro
                 break;
             }
 
-            cout << "Ingrese las coordenadas de la nueva ubicación: " << endl;
+            cout << "Ingrese las coordenadas de la nueva ubicación: ";
             int newX = ubication.ingresar_coordenada(size, 0);
             int newY = ubication.ingresar_coordenada(size, 1);
             if (newX == startUbication.getX() && newY == startUbication.getY())
@@ -723,7 +723,7 @@ void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Ro
             auto newUbicationNode = ubication_tree.findNode(newX, newY);
             if (newUbicationNode == nullptr)
             {
-                cout << "Error: No existe una ubicación con las coordenadas (" << newX << ", " << newY << ")" << endl;
+                cout << "\nError: No existe una ubicación con las coordenadas (" << newX << ", " << newY << ")" << endl;
                 system("pause");
                 break;
             }
@@ -739,7 +739,7 @@ void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Ro
                 newRoute.definir_ruta(routeName, distance, newUbication, initial->getInitialUbication(), size);
                 if (routes_tree.validarTramoExistente(routeName, newUbication.getX(), newUbication.getY(), initial->getInitialUbication().getX(), initial->getInitialUbication().getY(), newRoute.getDistance()))
                 {
-                    cout << "Error: Ya existe un tramo con las mismas coordenadas y distancia en otra ruta." << endl;
+                    cout << "\nError: Ya existe un tramo con las mismas coordenadas y distancia en otra ruta." << endl;
                     system("pause");
                     break;
                 }
@@ -755,7 +755,7 @@ void Menu::routeCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<Ro
                 newRoute.definir_ruta(routeName, distance, last1->getLastUbication(), newUbication, size);
                 if (routes_tree.validarTramoExistente(routeName, last1->getLastUbication().getX(), last1->getLastUbication().getY(), newUbication.getX(), newUbication.getY(), newRoute.getDistance()))
                 {
-                    cout << "Error: Ya existe un tramo con las mismas coordenadas y distancia en otra ruta." << endl;
+                    cout << "\nError: Ya existe un tramo con las mismas coordenadas y distancia en otra ruta." << endl;
                     system("pause");
                     break;
                 }
@@ -809,7 +809,7 @@ void Menu::delete_route(KD_Tree<Route> &routes_tree)
             string routeName = validation.ingresarStringConEspacios("Ingrese el nombre de la ruta a eliminar: ");
             if (!routes_tree.findNodeByName(routeName))
             {
-                cout << "Error: No existe una ruta con el nombre '" << routeName << "'" << endl;
+                cout << "\nError: No existe una ruta con el nombre '" << routeName << "'" << endl;
                 system("pause");
                 break;
             }
@@ -824,7 +824,7 @@ void Menu::delete_route(KD_Tree<Route> &routes_tree)
             string routeName = validation.ingresarStringConEspacios("Ingrese el nombre de la ruta: ");
             if (!routes_tree.findNodeByName(routeName))
             {
-                cout << "Error: No existe una ruta con el nombre '" << routeName << "'" << endl;
+                cout << "\nError: No existe una ruta con el nombre '" << routeName << "'" << endl;
                 system("pause");
                 break;
             }
@@ -833,7 +833,7 @@ void Menu::delete_route(KD_Tree<Route> &routes_tree)
 
             if (initial == nullptr || last1 == nullptr)
             {
-                cout << "Error: No se pudo obtener la información de la ruta '" << routeName << "'." << endl;
+                cout << "\nError: No se pudo obtener la información de la ruta '" << routeName << "'." << endl;
                 system("pause");
                 break;
             }
@@ -854,14 +854,14 @@ void Menu::delete_route(KD_Tree<Route> &routes_tree)
             Route *ruta = routes_tree.getNodeByNameAndCoordinates(routeName, xInicial, yInicial);
             if (!ruta)
             {
-                cout << "Error: La ubicación con las coordenadas (" << xInicial << ", " << yInicial << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
+                cout << "\nError: La ubicación con las coordenadas (" << xInicial << ", " << yInicial << ") no coincide con ningún tramo de la ruta '" << routeName << "'." << endl;
                 system("pause");
                 break;
             }
             else if ((xInicial != initial->getInitialUbication().getX() || yInicial != initial->getInitialUbication().getY()) &&
                      (xInicial != last1->getInitialUbication().getX() || yInicial != last1->getInitialUbication().getY()))
             {
-                cout << "Error: La ubicación con las coordenadas (" << xInicial << ", " << yInicial << ") no se puede eliminar de la ruta '" << routeName << "'." << endl;
+                cout << "\nError: La ubicación con las coordenadas (" << xInicial << ", " << yInicial << ") no se puede eliminar de la ruta '" << routeName << "'." << endl;
                 system("pause");
                 break;
             }
@@ -926,7 +926,7 @@ void Menu::print_routes(KD_Tree<Route> &routes_tree)
             cout << endl;
             if (!routes_tree.findNodeByName(routeName))
             {
-                cout << "Error: No existe una ruta con el nombre '" << routeName << "'" << endl;
+                cout << "\nError: No existe una ruta con el nombre '" << routeName << "'" << endl;
                 system("pause");
                 break;
             }
@@ -984,7 +984,7 @@ void Menu::ubicationCh_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tre
             cout << "Coordenadas:\t" << ubication1.getX() << ";" << ubication1.getY() << endl;
             cout << "Descripcion:\t" << ubication1.getDescription() << endl;
             string newName = validation.ingresarStringConEspacios("Ingrese el nuevo nombre de la ubicacion: ");
-            cout<<endl; 
+            cout << endl;
             ubication_tree.findNode(x, y)->data.eliminarUbicacion(ubication1.getName());
             ubication1.setName(newName);
             ubication_tree.findNode(x, y)->data = ubication1;
@@ -1059,7 +1059,7 @@ void Menu::impresiones_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &
                 break;
             }
             Graficador graficador;
-            std::string imagenFondo = "waifu2.jpg";
+            std::string imagenFondo = "mapa3.jpg";
             std::string archivo = "resources/plano_interactivo.html";
             graficador.generarPlanoInteractivo(archivo, ubicaciones, rutas, imagenFondo);
             graficador.abrirPlanoEnNavegador(archivo);
@@ -1079,7 +1079,7 @@ void Menu::impresiones_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &
             }
             string hora = validation.ingresarHora("Ingrese la hora en la cual quiere consultar el trafico:  ");
             Graficador graficador;
-            std::string imagenFondo = "waifu2.jpg";
+            std::string imagenFondo = "mapa3.jpg";
             std::string archivo = "resources/plano_interactivo.html";
             graficador.generarPlanoInteractivo_trafico(archivo, ubicaciones, rutas, imagenFondo, hora);
             graficador.abrirPlanoEnNavegador(archivo);
@@ -1096,7 +1096,6 @@ void Menu::impresiones_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &
 }
 void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &routes_tree)
 {
-    KD_Tree<Route> routes_tree2 = routes_tree.crearArbolBidireccional();
     Validation validation;
     int x1, y1, x2, y2;
     bool running = true;
@@ -1105,8 +1104,8 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
         options.clear();
         addOption(" Calcular ruta optima entre dos puntos en terminos de tiempo");
         addOption(" Calcular ruta optima entre dos puntos en terminos de distancia");
-        addOption(" Calcular ruta optima visitando varias ubicaciones en terminos de tiempo");
-        addOption(" Calcular ruta optima visitando varias ubicaciones en terminos de distancia");
+        addOption(" Calcular ruta optima visitando varias ubicaciones en terminos de tiempo y volviendo al mismo lugar");
+        addOption(" Calcular ruta optima visitando varias ubicaciones en terminos de distancia y volviendo al mismo lugar");
         addOption(" Salir");
         addTitle("\t Seleccione el calculo que desea realizar:");
         displayMenu();
@@ -1114,6 +1113,7 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
         {
         case 0:
         {
+            KD_Tree<Route> routes_tree2 = routes_tree.crearArbolBidireccional();
             Graficador graficador;
             vector<Ubication> ubicaciones = ubication_tree.obtenerTodasLasUbicaciones();
             vector<Route> rutas = routes_tree2.obtenerTodasLasRutas();
@@ -1123,11 +1123,11 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
             Grafo grafo(ubication_tree, routes_tree2);
             string horaSalida = validation.ingresarHora("Ingrese la hora de salida: ");
             do
-            {   
+            {
                 x1 = validation.ingresarInt("Ingrese la coordenada X de la ubicacion inicial: ");
-                cout<<endl;
+                cout << endl;
                 y1 = validation.ingresarInt("Ingrese la coordenada Y de la ubicacion inicial: ");
-                cout<<endl;
+                cout << endl;
                 ubication_tree.findNode(x1, y1);
                 if (ubication_tree.findNode(x1, y1) == nullptr)
                 {
@@ -1135,21 +1135,22 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
                 }
             } while (ubication_tree.findNode(x1, y1) == nullptr);
             initialUbication = ubication_tree.findNode(x1, y1)->data;
-            do{
+            do
+            {
                 x2 = validation.ingresarInt("Ingrese la coordenada X de la ubicacion final: ");
-                cout<<endl;
+                cout << endl;
                 y2 = validation.ingresarInt("Ingrese la coordenada Y de la ubicacion final: ");
-                cout<<endl;
+                cout << endl;
                 ubication_tree.findNode(x2, y2);
                 if (ubication_tree.findNode(x2, y2) == nullptr)
                 {
-                    cout << "Error: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
+                    cout << "\nError: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
                 }
-            }while(ubication_tree.findNode(x2, y2) == nullptr);
+            } while (ubication_tree.findNode(x2, y2) == nullptr);
             lastUbication = ubication_tree.findNode(x2, y2)->data;
-            string archivo="resources/mapa.html";
-            string imagenFondo = "waifu2.jpg";
-            vector<Route> rutaMasCorta = grafo.dijkstraTiempo(initialUbication.getName(),lastUbication.getName(), horaSalida);
+            string archivo = "resources/mapa.html";
+            string imagenFondo = "mapa3.jpg";
+            vector<Route> rutaMasCorta = grafo.dijkstraTiempo(initialUbication.getName(), lastUbication.getName(), horaSalida);
             graficador.generarPlanoInteractivo_rutaT(archivo, ubicaciones, rutas, imagenFondo, rutaMasCorta);
             graficador.abrirPlanoEnNavegador(archivo);
             system("pause");
@@ -1157,6 +1158,7 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
         }
         case 1:
         {
+            KD_Tree<Route> routes_tree2 = routes_tree.crearArbolBidireccional();
             Graficador graficador;
             vector<Ubication> ubicaciones = ubication_tree.obtenerTodasLasUbicaciones();
             vector<Route> rutas = routes_tree2.obtenerTodasLasRutas();
@@ -1165,11 +1167,11 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
             cout << " Calcular ruta optima entre dos puntos en terminos de distancia" << endl;
             Grafo grafo(ubication_tree, routes_tree2);
             do
-            {   
+            {
                 x1 = validation.ingresarInt("Ingrese la coordenada X de la ubicacion inicial: ");
-                cout<<endl;
+                cout << endl;
                 y1 = validation.ingresarInt("Ingrese la coordenada Y de la ubicacion inicial: ");
-                cout<<endl;
+                cout << endl;
                 ubication_tree.findNode(x1, y1);
                 if (ubication_tree.findNode(x1, y1) == nullptr)
                 {
@@ -1177,21 +1179,22 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
                 }
             } while (ubication_tree.findNode(x1, y1) == nullptr);
             initialUbication = ubication_tree.findNode(x1, y1)->data;
-            do{
+            do
+            {
                 x2 = validation.ingresarInt("Ingrese la coordenada X de la ubicacion final: ");
-                cout<<endl;
+                cout << endl;
                 y2 = validation.ingresarInt("Ingrese la coordenada Y de la ubicacion final: ");
-                cout<<endl;
+                cout << endl;
                 ubication_tree.findNode(x2, y2);
                 if (ubication_tree.findNode(x2, y2) == nullptr)
                 {
-                    cout << "Error: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
+                    cout << "\nError: No existe una ubicación con las coordenadas (" << x2 << ", " << y2 << ")" << endl;
                 }
-            }while(ubication_tree.findNode(x2, y2) == nullptr);
+            } while (ubication_tree.findNode(x2, y2) == nullptr);
             lastUbication = ubication_tree.findNode(x2, y2)->data;
-            string archivo="resources/mapa.html";
-            string imagenFondo = "waifu2.jpg";
-            vector<Route> rutaMasCorta = grafo.dijkstraD(initialUbication.getName(),lastUbication.getName());
+            string archivo = "resources/mapa.html";
+            string imagenFondo = "mapa3.jpg";
+            vector<Route> rutaMasCorta = grafo.dijkstraD(initialUbication.getName(), lastUbication.getName());
             graficador.generarPlanoInteractivo_rutaT(archivo, ubicaciones, rutas, imagenFondo, rutaMasCorta);
             graficador.abrirPlanoEnNavegador(archivo);
             system("pause");
@@ -1199,13 +1202,138 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
         }
         case 2:
         {
+            KD_Tree<Route> routes_tree2 = routes_tree.crearArbolBidireccional();
+            Graficador graficador;
+            vector<Ubication> ubicaciones = ubication_tree.obtenerTodasLasUbicaciones();
+            vector<Route> rutas = routes_tree2.obtenerTodasLasRutas();
             cout << " Calcular ruta optima visitando varias ubicaciones en terminos de tiempo" << endl;
+            Grafo grafo(ubication_tree, routes_tree2);
+            string horaSalida = validation.ingresarHora("Ingrese la hora de salida: ");
+
+            // Solicitar las ubicaciones a visitar
+            vector<string> puntos;
+            while (true)
+            {
+                int opcion = auxiliar_menu(); // Mostrar el menú auxiliar
+                if (opcion == 0)
+                {
+                    // Ingresar nueva ubicación
+                    int x = validation.ingresarInt("Ingrese la coordenada X de la ubicación: ");
+                    cout << endl;
+                    int y = validation.ingresarInt("Ingrese la coordenada Y de la ubicación: ");
+                    Node<Ubication> *nodo = ubication_tree.findNode(x, y);
+                    if (nodo == nullptr)
+                    {
+                        cout << "\nError: No existe una ubicación con las coordenadas (" << x << ", " << y << ").\n";
+                        system("pause");
+                    }
+                    else
+                    {
+                        puntos.push_back(nodo->data.getName()); // Agregar el nombre de la ubicación
+                        cout << "\nUbicación '" << nodo->data.getName() << "' agregada.\n";
+                        system("pause");
+                    }
+                }
+                else if (opcion == 1)
+                {
+                    // Finalizar la entrada de ubicaciones
+                    if (puntos.size() < 2)
+                    {
+                        cout << "\nError: Se necesitan al menos dos ubicaciones para calcular una ruta.\n";
+                        system("pause");
+                        // No salimos del bucle, volvemos a mostrar el menú auxiliar
+                    }
+                    else
+                    {
+                        break; // Salir del bucle si hay suficientes ubicaciones
+                    }
+                }
+            }
+
+            // Calcular la ruta óptima
+            vector<Route> rutaOptima = grafo.calcularRutaOptimaVariosPuntos(puntos, horaSalida);
+
+            // Graficar la ruta óptima
+            if (!rutaOptima.empty())
+            {
+                string archivo = "resources/mapa.html";
+                string imagenFondo = "mapa3.jpg";
+                graficador.generarPlanoInteractivo_rutaT(archivo, ubicaciones, rutas, imagenFondo, rutaOptima);
+                graficador.abrirPlanoEnNavegador(archivo);
+            }
+            else
+            {
+                cout << "No se pudo calcular una ruta válida.\n";
+            }
+
             system("pause");
             break;
         }
         case 3:
         {
+            KD_Tree<Route> routes_tree2 = routes_tree.crearArbolBidireccional();
+            Graficador graficador;
+            vector<Ubication> ubicaciones = ubication_tree.obtenerTodasLasUbicaciones();
+            vector<Route> rutas = routes_tree2.obtenerTodasLasRutas();
             cout << " Calcular ruta optima visitando varias ubicaciones en terminos de distancia" << endl;
+            Grafo grafo(ubication_tree, routes_tree2);
+
+            // Solicitar las ubicaciones a visitar
+            vector<string> puntos;
+            while (true)
+            {
+                int opcion = auxiliar_menu(); // Mostrar el menú auxiliar
+                if (opcion == 0)
+                {
+                    // Ingresar nueva ubicación
+                    int x = validation.ingresarInt("Ingrese la coordenada X de la ubicación: ");
+                    cout << endl;
+                    int y = validation.ingresarInt("Ingrese la coordenada Y de la ubicación: ");
+                    Node<Ubication> *nodo = ubication_tree.findNode(x, y);
+                    if (nodo == nullptr)
+                    {
+                        cout << "\nError: No existe una ubicación con las coordenadas (" << x << ", " << y << ").\n";
+                        system("pause");
+                    }
+                    else
+                    {
+                        puntos.push_back(nodo->data.getName()); // Agregar el nombre de la ubicación
+                        cout << "\nUbicación '" << nodo->data.getName() << "' agregada.\n";
+                        system("pause");
+                    }
+                }
+                else if (opcion == 1)
+                {
+                    // Finalizar la entrada de ubicaciones
+                    if (puntos.size() < 2)
+                    {
+                        cout << "\nError: Se necesitan al menos dos ubicaciones para calcular una ruta.\n";
+                        system("pause");
+                        // No salimos del bucle, volvemos a mostrar el menú auxiliar
+                    }
+                    else
+                    {
+                        break; // Salir del bucle si hay suficientes ubicaciones
+                    }
+                }
+            }
+
+            // Calcular la ruta óptima
+            vector<Route> rutaOptima = grafo.calcularRutaOptimaVariosPuntosDistancia(puntos);
+
+            // Graficar la ruta óptima
+            if (!rutaOptima.empty())
+            {
+                string archivo = "resources/mapa.html";
+                string imagenFondo = "mapa3.jpg";
+                graficador.generarPlanoInteractivo_rutaT(archivo, ubicaciones, rutas, imagenFondo, rutaOptima);
+                graficador.abrirPlanoEnNavegador(archivo);
+            }
+            else
+            {
+                cout << "No se pudo calcular una ruta válida.\n";
+            }
+
             system("pause");
             break;
         }

@@ -6,6 +6,9 @@
 #include <math.h>
 #include <iomanip> // Para formatear la hora
 #include <sstream>
+#include <set>
+#include <utility> // Para std::pair
+#include <string>  // Para std::string
 
 Graficador::Graficador() {}
 
@@ -358,7 +361,7 @@ void Graficador::generarPlanoInteractivo_rutaT(
     const std::vector<Ubication> &ubicaciones,
     const std::vector<Route> &rutas,
     const std::string &imagenFondo,
-    const std::vector<Route>& rutaOptima) // Ahora recibe un vector de Route
+    const std::vector<Route>& rutaOptima)
 {
     std::ofstream htmlFile(archivoHTML);
 
@@ -444,8 +447,14 @@ void Graficador::generarPlanoInteractivo_rutaT(
                 }
             }
 
+            // Desplazamiento perpendicular para rutas bidireccionales
+            double desplazamiento = 0.30; // Desplazamiento reducido a 2 píxeles
+            double anguloRadianes = angulo * M_PI / 180.0;
+            double dxDesplazamiento = -desplazamiento * sin(anguloRadianes);
+            double dyDesplazamiento = desplazamiento * cos(anguloRadianes);
+
             // Dibujar la línea con el color correspondiente
-            htmlFile << "        <div class=\"" << (esOptima ? "linea-optima" : "linea") << "\" id=\"linea" << i << "\" style=\"left: " << x1 << "px; top: " << y1 << "px; width: " << longitud << "px; transform: rotate(" << angulo << "deg);\""
+            htmlFile << "        <div class=\"" << (esOptima ? "linea-optima" : "linea") << "\" id=\"linea" << i << "\" style=\"left: " << x1 + dxDesplazamiento << "px; top: " << y1 + dyDesplazamiento << "px; width: " << longitud << "px; transform: rotate(" << angulo << "deg);\""
                      << " onclick=\"mostrarInfoRuta('" << "Ruta:  " << ruta.getName() << "')\"></div>" << std::endl;
         }
 

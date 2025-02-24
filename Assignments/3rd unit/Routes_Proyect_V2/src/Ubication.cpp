@@ -63,7 +63,7 @@ int Ubication::ingresar_coordenada(int size, int coord)
         a = validaciones.ingresarInt("");
         if (a >= size || a < 0)
         {
-            cout << "\nCoordenada fuera del rango, ingrese un valor entre 0 y " << size - 1 << " " << endl;
+            cout << "\nCoordenada fuera del rango, ingrese un valor entre 0 y " << size - 1 << " ";
         }
     } while (a >= size || a < 0);
     return a;
@@ -140,6 +140,4 @@ void Ubication::eliminarUbicacion(const std::string &nombreUbicacion)
         archivoSalida << l << "\n";
     }
     archivoSalida.close();
-
-    std::cout << "Ubicación '" << nombreUbicacion << "' eliminada correctamente.\n";
 }
