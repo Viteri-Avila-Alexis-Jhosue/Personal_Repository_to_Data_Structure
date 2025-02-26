@@ -16,7 +16,6 @@ El Inca,34,23,Fabrica de Muebles,34,12,Escuela de Musica,11,90,09:00:00,10:00:00
 El Inca,34,12,Escuela de Musica,40,2,Queobo,11.66,90,09:00:00,10:00:00,2,13:00:00,14:00:00,1
 El Inca,40,2,Queobo,45,23,Mirador del Valle,21.58,90,09:00:00,10:00:00,2,13:00:00,14:00:00,1
 El Inca,45,23,Mirador del Valle,50,15,Lugar,9.43,89,09:00:00,10:00:00,2,13:00:00,14:00:00,1
-Los Shiris,3,45,Clinica Privada,9,67,Farmacia Central,22.8,89
 Los Shiris,9,67,Farmacia Central,12,78,Residencia del Lago,11.4,90
 Los Shiris,12,78,Residencia del Lago,17,90,Lago Escondido,13,90
 Los Shiris,17,90,Lago Escondido,23,78,Torre de Comunicaciones,13.41,90
@@ -114,3 +113,4 @@ Av.La Prensa,29,30,Biblioteca Publica,40,40,Casa de Cultura,14.86,1
 Av.La Prensa,78,12,Centro de Negocios,75,30,Universidad Central Del Ecuador,18.24,90,01:00:00,13:00:00,3
 El Inca,9,34,Taller de Arte,12,34,Centro Comercial,3,90
 El Inca,12,34,Centro Comercial,20,30,Motelazo,8.94,90
+Los Shiris,3,45,Clinica Privada,9,67,Farmacia Central,22.8,89,09:00:00,12:00:00,3

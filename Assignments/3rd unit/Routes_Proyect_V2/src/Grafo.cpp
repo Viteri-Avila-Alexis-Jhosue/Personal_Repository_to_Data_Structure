@@ -504,6 +504,7 @@ std::vector<Route> Grafo::calcularRutaOptimaVariosPuntosDistancia(const std::vec
 
     return rutaOptima;
 }
+
 std::vector<Route> Grafo::calcularRutaOptimaVariosPuntos(const std::vector<std::string> &puntos, const std::string &horaSalida) const
 {
     if (puntos.size() < 2)

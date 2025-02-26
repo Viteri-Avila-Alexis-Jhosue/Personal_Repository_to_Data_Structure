@@ -97,6 +97,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
     int x, y, continuador, cosa, a, b, level;
     Ubication ubication;
     Validation validation;
+    Route *route;
     while (running)
     {
         options.clear();
@@ -109,7 +110,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         addOption("Calculo de rutas optimas");
         addOption("Imprimir tramos de rutas");
         addOption("Imprimir ubicaciones");
-        addOption("Calculo de la ruta optima");
+        addOption("Grafica estadistica de trafico (Ruta)");
         addOption("Ayuda");
         addOption("Salir");
         addTitle("\t Gestor de rutas");
@@ -414,7 +415,16 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         }
         case 9:
         {
-            cout << "Calculo de la ruta optima" << endl;
+            cout << " Grafica estadistica del trafico en una ruta: " << endl;
+            validation.ingresarStringConEspacios("Ingrese el nombre de la ruta: ");
+            route=routes_tree.getNodeByName(name);
+            if (!route)
+            {
+                cout << "\nNo se encontró la ruta con el nombre: '" << name << "'." << endl;
+                system("pause");
+                break;
+            }
+            
             system("pause");
             break;
         }
@@ -1241,7 +1251,7 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
                     {
                         cout << "\nError: Se necesitan al menos dos ubicaciones para calcular una ruta.\n";
                         system("pause");
-                        // No salimos del bucle, volvemos a mostrar el menú auxiliar
+                        break;
                     }
                     else
                     {
@@ -1309,7 +1319,7 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
                     {
                         cout << "\nError: Se necesitan al menos dos ubicaciones para calcular una ruta.\n";
                         system("pause");
-                        // No salimos del bucle, volvemos a mostrar el menú auxiliar
+                        break;// No salimos del bucle, volvemos a mostrar el menú auxiliar
                     }
                     else
                     {
