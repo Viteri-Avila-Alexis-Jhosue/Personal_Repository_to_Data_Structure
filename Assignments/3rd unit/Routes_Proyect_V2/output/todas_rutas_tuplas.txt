@@ -1,0 +1,240 @@
+Eloy Alfaro, 00:00:00, 0
+Eloy Alfaro, 01:00:00, 0
+Eloy Alfaro, 02:00:00, 0
+Eloy Alfaro, 03:00:00, 0
+Eloy Alfaro, 04:00:00, 0
+Eloy Alfaro, 05:00:00, 0
+Eloy Alfaro, 06:00:00, 0
+Eloy Alfaro, 07:00:00, 0
+Eloy Alfaro, 08:00:00, 0
+Eloy Alfaro, 09:00:00, 0
+Eloy Alfaro, 10:00:00, 0
+Eloy Alfaro, 11:00:00, 0
+Eloy Alfaro, 12:00:00, 0
+Eloy Alfaro, 13:00:00, 0
+Eloy Alfaro, 14:00:00, 0
+Eloy Alfaro, 15:00:00, 0
+Eloy Alfaro, 16:00:00, 0
+Eloy Alfaro, 17:00:00, 0
+Eloy Alfaro, 18:00:00, 0
+Eloy Alfaro, 19:00:00, 0
+Eloy Alfaro, 20:00:00, 0
+Eloy Alfaro, 21:00:00, 0
+Eloy Alfaro, 22:00:00, 0
+Eloy Alfaro, 23:00:00, 0
+El Inca, 00:00:00, 0
+El Inca, 01:00:00, 0
+El Inca, 02:00:00, 0
+El Inca, 03:00:00, 0
+El Inca, 04:00:00, 0
+El Inca, 05:00:00, 0
+El Inca, 06:00:00, 0
+El Inca, 07:00:00, 4.9707
+El Inca, 08:00:00, 4.9707
+El Inca, 09:00:00, 60.7612
+El Inca, 10:00:00, 60.7612
+El Inca, 11:00:00, 0
+El Inca, 12:00:00, 0
+El Inca, 13:00:00, 17.6249
+El Inca, 14:00:00, 17.6249
+El Inca, 15:00:00, 0
+El Inca, 16:00:00, 0
+El Inca, 17:00:00, 0
+El Inca, 18:00:00, 0
+El Inca, 19:00:00, 0
+El Inca, 20:00:00, 0
+El Inca, 21:00:00, 0
+El Inca, 22:00:00, 0
+El Inca, 23:00:00, 0
+Av.Pichincha, 00:00:00, 0
+Av.Pichincha, 01:00:00, 0
+Av.Pichincha, 02:00:00, 0
+Av.Pichincha, 03:00:00, 0
+Av.Pichincha, 04:00:00, 0
+Av.Pichincha, 05:00:00, 0
+Av.Pichincha, 06:00:00, 0
+Av.Pichincha, 07:00:00, 9.39385
+Av.Pichincha, 08:00:00, 9.39385
+Av.Pichincha, 09:00:00, 9.39385
+Av.Pichincha, 10:00:00, 9.39385
+Av.Pichincha, 11:00:00, 9.39385
+Av.Pichincha, 12:00:00, 9.39385
+Av.Pichincha, 13:00:00, 0
+Av.Pichincha, 14:00:00, 0
+Av.Pichincha, 15:00:00, 0
+Av.Pichincha, 16:00:00, 0
+Av.Pichincha, 17:00:00, 0
+Av.Pichincha, 18:00:00, 0
+Av.Pichincha, 19:00:00, 0
+Av.Pichincha, 20:00:00, 0
+Av.Pichincha, 21:00:00, 0
+Av.Pichincha, 22:00:00, 0
+Av.Pichincha, 23:00:00, 0
+Av. Simon Bolivar, 00:00:00, 0
+Av. Simon Bolivar, 01:00:00, 0
+Av. Simon Bolivar, 02:00:00, 0
+Av. Simon Bolivar, 03:00:00, 0
+Av. Simon Bolivar, 04:00:00, 0
+Av. Simon Bolivar, 05:00:00, 0
+Av. Simon Bolivar, 06:00:00, 0
+Av. Simon Bolivar, 07:00:00, 0
+Av. Simon Bolivar, 08:00:00, 0
+Av. Simon Bolivar, 09:00:00, 30.4745
+Av. Simon Bolivar, 10:00:00, 30.4745
+Av. Simon Bolivar, 11:00:00, 0
+Av. Simon Bolivar, 12:00:00, 0
+Av. Simon Bolivar, 13:00:00, 29.3058
+Av. Simon Bolivar, 14:00:00, 29.3058
+Av. Simon Bolivar, 15:00:00, 0
+Av. Simon Bolivar, 16:00:00, 0
+Av. Simon Bolivar, 17:00:00, 0
+Av. Simon Bolivar, 18:00:00, 0
+Av. Simon Bolivar, 19:00:00, 0
+Av. Simon Bolivar, 20:00:00, 0
+Av. Simon Bolivar, 21:00:00, 0
+Av. Simon Bolivar, 22:00:00, 0
+Av. Simon Bolivar, 23:00:00, 0
+Av.Capitan Geovanni Calles, 00:00:00, 0
+Av.Capitan Geovanni Calles, 01:00:00, 0
+Av.Capitan Geovanni Calles, 02:00:00, 0
+Av.Capitan Geovanni Calles, 03:00:00, 0
+Av.Capitan Geovanni Calles, 04:00:00, 0
+Av.Capitan Geovanni Calles, 05:00:00, 0
+Av.Capitan Geovanni Calles, 06:00:00, 0
+Av.Capitan Geovanni Calles, 07:00:00, 19.7452
+Av.Capitan Geovanni Calles, 08:00:00, 19.7452
+Av.Capitan Geovanni Calles, 09:00:00, 0
+Av.Capitan Geovanni Calles, 10:00:00, 7.04097
+Av.Capitan Geovanni Calles, 11:00:00, 0
+Av.Capitan Geovanni Calles, 12:00:00, 19.3063
+Av.Capitan Geovanni Calles, 13:00:00, 19.3063
+Av.Capitan Geovanni Calles, 14:00:00, 19.3063
+Av.Capitan Geovanni Calles, 15:00:00, 0
+Av.Capitan Geovanni Calles, 16:00:00, 0
+Av.Capitan Geovanni Calles, 17:00:00, 0
+Av.Capitan Geovanni Calles, 18:00:00, 0
+Av.Capitan Geovanni Calles, 19:00:00, 0
+Av.Capitan Geovanni Calles, 20:00:00, 0
+Av.Capitan Geovanni Calles, 21:00:00, 0
+Av.Capitan Geovanni Calles, 22:00:00, 0
+Av.Capitan Geovanni Calles, 23:00:00, 0
+Amazonas, 00:00:00, 0
+Amazonas, 01:00:00, 0
+Amazonas, 02:00:00, 0
+Amazonas, 03:00:00, 0
+Amazonas, 04:00:00, 0
+Amazonas, 05:00:00, 0
+Amazonas, 06:00:00, 0
+Amazonas, 07:00:00, 0
+Amazonas, 08:00:00, 9.09885
+Amazonas, 09:00:00, 0
+Amazonas, 10:00:00, 0
+Amazonas, 11:00:00, 0
+Amazonas, 12:00:00, 0
+Amazonas, 13:00:00, 29.0609
+Amazonas, 14:00:00, 29.0609
+Amazonas, 15:00:00, 0
+Amazonas, 16:00:00, 0
+Amazonas, 17:00:00, 0
+Amazonas, 18:00:00, 0
+Amazonas, 19:00:00, 0
+Amazonas, 20:00:00, 0
+Amazonas, 21:00:00, 0
+Amazonas, 22:00:00, 0
+Amazonas, 23:00:00, 0
+Los Shiris, 00:00:00, 0
+Los Shiris, 01:00:00, 0
+Los Shiris, 02:00:00, 0
+Los Shiris, 03:00:00, 0
+Los Shiris, 04:00:00, 0
+Los Shiris, 05:00:00, 0
+Los Shiris, 06:00:00, 6.08836
+Los Shiris, 07:00:00, 6.08836
+Los Shiris, 08:00:00, 9.61024
+Los Shiris, 09:00:00, 19.2346
+Los Shiris, 10:00:00, 19.2346
+Los Shiris, 11:00:00, 15.7127
+Los Shiris, 12:00:00, 15.7127
+Los Shiris, 13:00:00, 0
+Los Shiris, 14:00:00, 0
+Los Shiris, 15:00:00, 0
+Los Shiris, 16:00:00, 0
+Los Shiris, 17:00:00, 0
+Los Shiris, 18:00:00, 0
+Los Shiris, 19:00:00, 0
+Los Shiris, 20:00:00, 0
+Los Shiris, 21:00:00, 0
+Los Shiris, 22:00:00, 0
+Los Shiris, 23:00:00, 0
+Panamericana Norte, 00:00:00, 0
+Panamericana Norte, 01:00:00, 0
+Panamericana Norte, 02:00:00, 0
+Panamericana Norte, 03:00:00, 0
+Panamericana Norte, 04:00:00, 0
+Panamericana Norte, 05:00:00, 0
+Panamericana Norte, 06:00:00, 0
+Panamericana Norte, 07:00:00, 15.0138
+Panamericana Norte, 08:00:00, 15.0138
+Panamericana Norte, 09:00:00, 15.0138
+Panamericana Norte, 10:00:00, 8.90844
+Panamericana Norte, 11:00:00, 0
+Panamericana Norte, 12:00:00, 0
+Panamericana Norte, 13:00:00, 0
+Panamericana Norte, 14:00:00, 0
+Panamericana Norte, 15:00:00, 0
+Panamericana Norte, 16:00:00, 0
+Panamericana Norte, 17:00:00, 0
+Panamericana Norte, 18:00:00, 0
+Panamericana Norte, 19:00:00, 0
+Panamericana Norte, 20:00:00, 0
+Panamericana Norte, 21:00:00, 0
+Panamericana Norte, 22:00:00, 0
+Panamericana Norte, 23:00:00, 0
+Av.La Prensa, 00:00:00, 0
+Av.La Prensa, 01:00:00, 9.74463
+Av.La Prensa, 02:00:00, 9.74463
+Av.La Prensa, 03:00:00, 9.74463
+Av.La Prensa, 04:00:00, 9.74463
+Av.La Prensa, 05:00:00, 9.74463
+Av.La Prensa, 06:00:00, 9.74463
+Av.La Prensa, 07:00:00, 9.74463
+Av.La Prensa, 08:00:00, 9.74463
+Av.La Prensa, 09:00:00, 9.74463
+Av.La Prensa, 10:00:00, 9.74463
+Av.La Prensa, 11:00:00, 9.74463
+Av.La Prensa, 12:00:00, 9.74463
+Av.La Prensa, 13:00:00, 30.8509
+Av.La Prensa, 14:00:00, 21.1062
+Av.La Prensa, 15:00:00, 0
+Av.La Prensa, 16:00:00, 0
+Av.La Prensa, 17:00:00, 0
+Av.La Prensa, 18:00:00, 0
+Av.La Prensa, 19:00:00, 0
+Av.La Prensa, 20:00:00, 0
+Av.La Prensa, 21:00:00, 0
+Av.La Prensa, 22:00:00, 0
+Av.La Prensa, 23:00:00, 0
+6 de Octubre, 00:00:00, 0
+6 de Octubre, 01:00:00, 0
+6 de Octubre, 02:00:00, 0
+6 de Octubre, 03:00:00, 0
+6 de Octubre, 04:00:00, 0
+6 de Octubre, 05:00:00, 0
+6 de Octubre, 06:00:00, 51.6607
+6 de Octubre, 07:00:00, 51.6607
+6 de Octubre, 08:00:00, 51.6607
+6 de Octubre, 09:00:00, 51.6607
+6 de Octubre, 10:00:00, 51.6607
+6 de Octubre, 11:00:00, 23.8929
+6 de Octubre, 12:00:00, 13.8839
+6 de Octubre, 13:00:00, 13.8839
+6 de Octubre, 14:00:00, 0
+6 de Octubre, 15:00:00, 0
+6 de Octubre, 16:00:00, 0
+6 de Octubre, 17:00:00, 0
+6 de Octubre, 18:00:00, 0
+6 de Octubre, 19:00:00, 0
+6 de Octubre, 20:00:00, 0
+6 de Octubre, 21:00:00, 0
+6 de Octubre, 22:00:00, 0
+6 de Octubre, 23:00:00, 0

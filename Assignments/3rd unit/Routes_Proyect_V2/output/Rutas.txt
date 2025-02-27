@@ -9,7 +9,6 @@ Eloy Alfaro,12,89,Centro de Rehabilitacion,12,78,Residencia del Lago,11,90
 6 de Octubre,45,78,Universidad Nacional,56,78,Refugio de Montaña,11,90
 El Inca,2,2,Hola,5,12,Inserte texto gracioso,10.44,90,09:00:00,10:00:00,2
 El Inca,5,12,Inserte texto gracioso,9,34,Taller de Arte,22.36,90,09:00:00,10:00:00,2
-El Inca,50,15,Lugar,56,12,Terminal de Buses,6.7,90,09:00:00,10:00:00,2
 El Inca,56,12,Terminal de Buses,67,7,Parque Infantil,12.08,90,09:00:00,10:00:00,2
 El Inca,29,30,Biblioteca Publica,34,23,Fabrica de Muebles,8.6,90,09:00:00,10:00:00,2,13:00:00,14:00:00,1
 El Inca,34,23,Fabrica de Muebles,34,12,Escuela de Musica,11,90,09:00:00,10:00:00,2,13:00:00,14:00:00,1
@@ -22,8 +21,6 @@ Los Shiris,17,90,Lago Escondido,23,78,Torre de Comunicaciones,13.41,90
 Los Shiris,23,78,Torre de Comunicaciones,28,65,ESPE,13.92,90
 Los Shiris,28,65,ESPE,34,78,Universidad Tecnologica,14.31,90
 Los Shiris,34,78,Universidad Tecnologica,34,89,Escuela Tecnica,11,90
-Los Shiris,34,89,Escuela Tecnica,45,67,Estacion de Tren,24.59,90
-Los Shiris,45,67,Estacion de Tren,50,85,Parque del Lago,18.68,90
 Los Shiris,50,85,Parque del Lago,55,64,Psiquiatra,21.58,90
 Los Shiris,55,64,Psiquiatra,60,68,Ya no voy a escribir mas nombres,6.4,90
 Los Shiris,60,68,Ya no voy a escribir mas nombres,64,70,Valle de las Sombras,4.47,90
@@ -50,12 +47,8 @@ Panamericana Norte,3,67,Almacen de Suministros,9,56,Hotel Boutique,12.52,90
 Panamericana Norte,9,56,Hotel Boutique,12,45,Galeria de Arte,11.4,90
 Panamericana Norte,12,45,Galeria de Arte,16,50,Cueva de los Murciélagos,6.4,90
 Panamericana Norte,23,45,Parque Acuatico,25,22,Reserva Natural del Sur,23.08,90
-Panamericana Norte,25,22,Reserva Natural del Sur,15,20,Playa Sol y Mar,10.19,90
-Panamericana Norte,15,20,Playa Sol y Mar,23,12,Hospital General,11.31,90
-Panamericana Norte,23,12,Hospital General,34,23,Fabrica de Muebles,15.55,90
 Panamericana Norte,40,40,Casa de Cultura,50,50,Casa,14.14,90
 Panamericana Norte,67,56,Plaza Mayor,78,67,Salon de Eventos,15.55,90
-Av.Capitan Geovanni Calles,45,34,Bodega Vinicola,56,23,Feria Artesanal,15.55,90
 Av.Capitan Geovanni Calles,56,23,Feria Artesanal,50,15,Lugar,10,90
 Av.Capitan Geovanni Calles,50,15,Lugar,56,3,Museo de Historia,13.41,90
 Av.Capitan Geovanni Calles,56,3,Museo de Historia,67,23,Observatorio Astronomico,22.82,90
@@ -65,43 +58,30 @@ Av.Capitan Geovanni Calles,67,56,Plaza Mayor,78,45,Monumento Historico,15.55,90
 6 de Octubre,23,78,Torre de Comunicaciones,34,89,Escuela Tecnica,15.55,90,06:00:00,10:00:00,3
 6 de Octubre,34,89,Escuela Tecnica,45,78,Universidad Nacional,15.55,90,06:00:00,10:00:00,3
 Panamericana Norte,50,50,Casa,67,56,Plaza Mayor,18.02,90,07:00:00,10:30:00,3
-6 de Octubre,56,78,Refugio de Montaña,67,89,Rancho Campestre,15.55,90,06:00:00,11:00:00,2
 6 de Octubre,67,89,Rancho Campestre,78,67,Salon de Eventos,24.59,90,06:00:00,11:00:00,2
 Av.Pichincha,45,67,Estacion de Tren,42,54,Teatro,13.34,90,07:00:00,12:00:00,2
 Av.Pichincha,42,54,Teatro,55,64,Psiquiatra,16.4,90,07:00:00,12:00:00,2
 Los Shiris,78,45,Monumento Historico,67,34,Estudio de Grabacion,15.55,90,07:30:00,10:30:00,1
 Los Shiris,67,34,Estudio de Grabacion,70,25,Motel La luna,9.48,88,07:30:00,10:30:00,1
 Av. Simon Bolivar,3,23,Zoologico Regional,9,23,Centro de Convenciones,6,90
-Av. Simon Bolivar,9,23,Centro de Convenciones,12,9,Cabana en el Bosque,14.31,89
-Av. Simon Bolivar,12,9,Cabana en el Bosque,23,12,Hospital General,11.4,90
-Av. Simon Bolivar,23,3,Estadio Olimpico,34,1,Panaderia Artesanal,11.18,78,09:00:00,10:00:00,1
 Av. Simon Bolivar,34,1,Panaderia Artesanal,45,34,Bodega Vinicola,34.78,90,09:00:00,10:00:00,1
 Av. Simon Bolivar,56,3,Museo de Historia,67,7,Parque Infantil,11.7,90,09:00:00,10:00:00,3
 Av. Simon Bolivar,67,7,Parque Infantil,78,3,Club Deportivo,11.7,78,09:00:00,10:00:00,3
 Av. Simon Bolivar,78,3,Club Deportivo,78,12,Centro de Negocios,9,90,09:00:00,10:00:00,3
-Av. Simon Bolivar,23,12,Hospital General,23,3,Estadio Olimpico,9,90
 Av. Simon Bolivar,45,34,Bodega Vinicola,45,23,Mirador del Valle,11,78
 Av. Simon Bolivar,45,23,Mirador del Valle,45,9,Parque Natural,14,90
 Av. Simon Bolivar,45,9,Parque Natural,56,3,Museo de Historia,12.52,90
 Panamericana Norte,34,23,Fabrica de Muebles,31,42,Mercadillo,19.23,90
 Panamericana Norte,31,42,Mercadillo,40,40,Casa de Cultura,9.21,90
-Av.Capitan Geovanni Calles,31,42,Mercadillo,45,34,Bodega Vinicola,16.12,89
 Av.Capitan Geovanni Calles,3,23,Zoologico Regional,20,30,Motelazo,18.38,90,09:30:00,10:30:00,1
 El Inca,20,30,Motelazo,29,30,Biblioteca Publica,9,90,09:00:00,10:00:00,2,13:00:00,14:00:00,1
 Panamericana Norte,20,30,Motelazo,23,45,Parque Acuatico,15.29,90
-Av.Capitan Geovanni Calles,20,30,Motelazo,31,42,Mercadillo,16.27,78,09:30:00,10:30:00,1
 Panamericana Norte,16,50,Cueva de los Murciélagos,20,30,Motelazo,20.39,90
 Amazonas,3,23,Zoologico Regional,9,56,Hotel Boutique,33.54,90
-Amazonas,9,56,Hotel Boutique,12,56,Cancha de Tenis,3,90
-Amazonas,12,56,Cancha de Tenis,28,65,ESPE,18.35,90
-Amazonas,28,65,ESPE,45,78,Universidad Nacional,21.4,90
-Amazonas,45,78,Universidad Nacional,50,50,Casa,28.44,90
 Amazonas,50,50,Casa,45,34,Bodega Vinicola,16.76,90
 Amazonas,45,34,Bodega Vinicola,55,39,Bosque Encantado,11.18,90
 Amazonas,55,39,Bosque Encantado,78,45,Monumento Historico,23.76,90
-Av.La Prensa,23,56,Camping Aventura,29,30,Biblioteca Publica,26.68,90
 Av.La Prensa,12,67,Estadio Central,23,56,Camping Aventura,15.55,90
-Av.La Prensa,40,40,Casa de Cultura,45,23,Mirador del Valle,17.72,90
 Av.La Prensa,45,23,Mirador del Valle,55,39,Bosque Encantado,18.86,90
 Av.La Prensa,55,39,Bosque Encantado,56,23,Feria Artesanal,16.03,90
 Av.La Prensa,56,23,Feria Artesanal,67,23,Observatorio Astronomico,11,90
@@ -109,8 +89,28 @@ Av.La Prensa,67,23,Observatorio Astronomico,78,12,Centro de Negocios,15.55,90
 Av.La Prensa,75,30,Universidad Central Del Ecuador,78,45,Monumento Historico,15.29,90
 Av.La Prensa,3,78,Centro de Desarrollo,9,78,Centro Ecoturistico,6,90
 Av.La Prensa,9,78,Centro Ecoturistico,12,67,Estadio Central,11.4,90
-Av.La Prensa,29,30,Biblioteca Publica,40,40,Casa de Cultura,14.86,1
 Av.La Prensa,78,12,Centro de Negocios,75,30,Universidad Central Del Ecuador,18.24,90,01:00:00,13:00:00,3
 El Inca,9,34,Taller de Arte,12,34,Centro Comercial,3,90
 El Inca,12,34,Centro Comercial,20,30,Motelazo,8.94,90
 Los Shiris,3,45,Clinica Privada,9,67,Farmacia Central,22.8,89,09:00:00,12:00:00,3
+Amazonas,9,56,Hotel Boutique,12,56,Cancha de Tenis,3,90,07:30:00,08:00:00,2
+Av.Capitan Geovanni Calles,20,30,Motelazo,31,42,Mercadillo,16.27,78,07:00:00,08:30:00,3,09:30:00,10:30:00,1
+Panamericana Norte,25,22,Reserva Natural del Sur,15,20,Playa Sol y Mar,10.19,90,06:45:00,09:00:00,1
+Panamericana Norte,15,20,Playa Sol y Mar,23,12,Hospital General,11.31,90,06:45:00,09:00:00,1
+Panamericana Norte,23,12,Hospital General,34,23,Fabrica de Muebles,15.55,90,06:45:00,09:00:00,1
+El Inca,50,15,Lugar,56,12,Terminal de Buses,6.7,90,06:30:00,08:45:00,3,09:00:00,10:00:00,2
+Los Shiris,34,89,Escuela Tecnica,45,67,Estacion de Tren,24.59,90,06:00:00,12:00:00,1
+Los Shiris,45,67,Estacion de Tren,50,85,Parque del Lago,18.68,90,06:00:00,12:00:00,1
+Amazonas,12,56,Cancha de Tenis,28,65,ESPE,18.35,90,07:30:00,08:00:00,2,12:30:00,14:00:00,2
+Amazonas,28,65,ESPE,45,78,Universidad Nacional,21.4,90,12:30:00,14:00:00,2
+Amazonas,45,78,Universidad Nacional,50,50,Casa,28.44,90,12:30:00,14:00:00,2
+Av.Capitan Geovanni Calles,31,42,Mercadillo,45,34,Bodega Vinicola,16.12,89,07:00:00,08:30:00,3,12:00:00,14:30:00,3
+Av.Capitan Geovanni Calles,45,34,Bodega Vinicola,56,23,Feria Artesanal,15.55,90,12:00:00,14:30:00,3
+Av. Simon Bolivar,9,23,Centro de Convenciones,12,9,Cabana en el Bosque,14.31,89,12:45:00,14:00:00,3
+Av. Simon Bolivar,12,9,Cabana en el Bosque,23,12,Hospital General,11.4,90,12:45:00,14:00:00,3
+Av. Simon Bolivar,23,12,Hospital General,23,3,Estadio Olimpico,9,90,12:45:00,14:00:00,3
+Av. Simon Bolivar,23,3,Estadio Olimpico,34,1,Panaderia Artesanal,11.18,78,09:00:00,10:00:00,1,12:45:00,14:00:00,3
+6 de Octubre,56,78,Refugio de Montaña,67,89,Rancho Campestre,15.55,90,06:00:00,11:00:00,2,12:00:00,13:45:00,3
+Av.La Prensa,23,56,Camping Aventura,29,30,Biblioteca Publica,26.68,90,12:30:00,14:30:00,2
+Av.La Prensa,29,30,Biblioteca Publica,40,40,Casa de Cultura,14.86,1,12:30:00,14:30:00,2
+Av.La Prensa,40,40,Casa de Cultura,45,23,Mirador del Valle,17.72,90,12:30:00,14:30:00,2

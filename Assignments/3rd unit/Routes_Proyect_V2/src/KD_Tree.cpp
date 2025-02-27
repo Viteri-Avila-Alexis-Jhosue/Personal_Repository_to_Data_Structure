@@ -18,6 +18,7 @@
 #include <random>
 #include <queue>
 #include <map>
+#include <filesystem>
 using namespace std;
 
 template <typename T>
@@ -890,4 +891,120 @@ void KD_Tree<T>::updateUbicationNameRec(Node<T>* node, const std::string& oldNam
     // Llamadas recursivas para recorrer el árbol
     updateUbicationNameRec(node->left, oldName, newName);
     updateUbicationNameRec(node->right, oldName, newName);
+}
+
+template <typename T>
+double KD_Tree<T>::get_trafico_total(const std::string& hora, const std::string& route_name) const {
+    double sumatorio_distancia_nivel_trafico = 0.0;
+    double sumatorio_distancias = 0.0;
+
+    // Función recursiva para recorrer el árbol y calcular los sumatorios
+    std::function<void(Node<T>*)> calcularSumatorios = [&](Node<T>* node) {
+        if (!node) return;
+
+        const T& route = node->data;
+        if (route.getName() == route_name) {
+            double distancia = route.getDistance();
+            sumatorio_distancias += distancia;
+
+            // Calcular el nivel de tráfico en la hora especificada
+            const std::vector<Trafic>& trafics = route.getTrafics();
+            for (const auto& trafic : trafics) {
+                if (trafic.getInitialHour() <= hora && hora <= trafic.getLastHour()) {
+                    sumatorio_distancia_nivel_trafico += distancia * trafic.getLevel();
+                    break;
+                }
+            }
+        }
+        calcularSumatorios(node->left);
+        calcularSumatorios(node->right);
+    };
+
+    // Iniciar el cálculo desde la raíz
+    calcularSumatorios(root);
+
+    // Aplicar la fórmula para calcular el tráfico total
+    if (sumatorio_distancias == 0.0) {
+        return 0.0; // Evitar división por cero
+    }
+    return (sumatorio_distancia_nivel_trafico * 100) / (3 * sumatorio_distancias);
+}
+template <typename T>
+std::vector<std::tuple<std::string, double>> KD_Tree<T>::get_trafico_por_horas(const std::string& route_name) const {
+    std::vector<std::tuple<std::string, double>> trafico_por_horas;
+    std::vector<std::string> horas = {
+        "00:00:00", "01:00:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00",
+        "06:00:00", "07:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00",
+        "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00",
+        "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"
+    };
+
+    for (const auto& hora : horas) {
+        double trafico = get_trafico_total(hora, route_name);
+        trafico_por_horas.emplace_back(hora, trafico);
+    }
+
+    return trafico_por_horas;
+}
+#include <filesystem>
+
+template <typename T>
+void KD_Tree<T>::guardar_trafico_por_horas(const std::string& route_name) const {
+    // Crear la carpeta output si no existe
+    std::filesystem::create_directory("output");
+
+    // Abrir el archivo en la carpeta output
+    std::ofstream file("output/tuplas.txt");
+    if (!file.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo tuplas.txt para escribir." << std::endl;
+        return;
+    }
+
+    // Obtener el tráfico por horas
+    auto trafico_por_horas = get_trafico_por_horas(route_name);
+
+    // Escribir las tuplas en el archivo
+    for (const auto& [hora, trafico] : trafico_por_horas) {
+        file << hora << ", " << trafico << "\n";
+    }
+
+    file.close();
+}
+
+template <typename T>
+void KD_Tree<T>::guardar_trafico_todas_rutas() const {
+    // Crear la carpeta output si no existe
+    std::filesystem::create_directory("output");
+
+    // Abrir el archivo en la carpeta output
+    std::ofstream file("output/todas_rutas_tuplas.txt");
+    if (!file.is_open()) {
+        std::cerr << "Error: No se pudo abrir el archivo todas_rutas_tuplas.txt para escribir." << std::endl;
+        return;
+    }
+
+    // Usar un set para evitar duplicados
+    std::set<std::string> rutasProcesadas;
+
+    // Función recursiva para recorrer el árbol y escribir las tuplas en el archivo
+    std::function<void(Node<T>*)> recorrerYGuardar = [&](Node<T>* node) {
+        if (!node) return;
+
+        const T& ruta = node->data;
+        if (rutasProcesadas.find(ruta.getName()) == rutasProcesadas.end()) {
+            rutasProcesadas.insert(ruta.getName());
+            auto trafico_por_horas = get_trafico_por_horas(ruta.getName());
+            for (const auto& [hora, trafico] : trafico_por_horas) {
+                file << ruta.getName() << ", " << hora << ", " << trafico << "\n";
+            }
+        }
+
+        recorrerYGuardar(node->left);
+        recorrerYGuardar(node->right);
+    };
+
+    // Iniciar el recorrido desde la raíz
+    recorrerYGuardar(root);
+
+    file.close();
 }

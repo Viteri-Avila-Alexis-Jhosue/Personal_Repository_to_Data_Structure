@@ -66,6 +66,11 @@ public:
     KD_Tree<T> crearArbolBidireccional() const;
     Node<T>* obtenerNodoPorNombreUbicacion(const std::string& nombreUbicacion) const;
     void updateUbicationName(const std::string& oldName, const std::string& newName);
+    double get_trafico_total(const std::string& hora, const std::string& route_name) const;
+    std::vector<std::tuple<std::string, double>> get_trafico_por_horas(const std::string& route_name) const;
+    void guardar_trafico_por_horas(const std::string& route_name) const;
+    void guardar_trafico_todas_rutas() const;
+
 };
 
 #include "../src/KD_Tree.cpp"

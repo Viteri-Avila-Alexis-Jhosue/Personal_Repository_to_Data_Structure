@@ -415,16 +415,7 @@ void Menu::principal_menu(int size, KD_Tree<Ubication> &ubication_tree, KD_Tree<
         }
         case 9:
         {
-            cout << " Grafica estadistica del trafico en una ruta: " << endl;
-            validation.ingresarStringConEspacios("Ingrese el nombre de la ruta: ");
-            route=routes_tree.getNodeByName(name);
-            if (!route)
-            {
-                cout << "\nNo se encontró la ruta con el nombre: '" << name << "'." << endl;
-                system("pause");
-                break;
-            }
-            
+            matlab_menu(ubication_tree, routes_tree);
             system("pause");
             break;
         }
@@ -1348,6 +1339,52 @@ void Menu::calculos_menu(KD_Tree<Ubication> &ubication_tree, KD_Tree<Route> &rou
             break;
         }
         case 4:
+        {
+            running = false;
+            break;
+        }
+        }
+    }
+}
+
+void Menu::matlab_menu(KD_Tree<Ubication>& ubication_tree,KD_Tree<Route>& routes_tree){
+    bool running = true;
+    string name;
+    Route* route;
+    Validation validation;
+    while (running)
+    {
+        options.clear();
+        addOption(" Graficar el nivel de trafico de una ruta");
+        addOption(" Graficar el nivel de trafico de todas las rutas");
+        addOption(" Salir");
+        addTitle("\t Seleccione la grafica que desea observar:");
+        displayMenu();
+        switch (getSelectedOption())
+        {
+        case 0:
+        {
+            cout << " Graficar el nivel de trafico de una ruta" << endl;
+            name=validation.ingresarStringConEspacios("Ingrese el nombre de la ruta: ");
+            route=routes_tree.getNodeByName(name);
+            if (!route)
+            {
+                cout << "\nNo se encontró la ruta con el nombre: '" << name << "'." << endl;
+                system("pause");
+                break;
+            }
+            routes_tree.guardar_trafico_por_horas(name);
+            system("pause");
+            break;
+        }
+        case 1:
+        {
+            cout << " Graficar el nivel de trafico de todas las rutas" << endl;
+            routes_tree.guardar_trafico_todas_rutas();
+            system("pause");
+            break;
+        }
+        case 2:
         {
             running = false;
             break;
